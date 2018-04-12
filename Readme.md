@@ -1,12 +1,12 @@
-#Lab Management Database
+#GC
 Please make sure to install nodejs in your machine. Please refer to [node.js](http://nodejs.org/) to download nodejs.
 
-## Building LMD
+## Building GC
 * Run `npm install bower -g`
 * Run `npm install gulp -g` 
 * Run `npm install`
 * Run `bower install`
-* Open `LabManagementDatabase.sln` solution in **visual studio**
+* Open `GiftCertApp.sln` solution in **visual studio**
 * Please configure the app config in  `APP_DATA/config/[MACHINE_NAME].json`
 * Run `gulp build` or `gulp dev` 
 * Run the solution by pressing `ctrl+F5`
@@ -17,10 +17,10 @@ Please make sure to install nodejs in your machine. Please refer to [node.js](ht
 ## Sample config file
 ```
 {
-	"connectionString": "Server=server;Database=LabManagementDatabase;Trusted_Connection=True;",
+	"connectionString": "Server=server;Database=GCDB;Trusted_Connection=True;",
 	"AdConnectionString": "Server=server;Database=Param;Trusted_Connection=True;",
 	"BaseUrl": "http://localhost:50174/",
-	"EmailServiceAccount": "noreply@infineon.com"
+	"EmailServiceAccount": "noreply@gc.com"
 }
 ```
  
