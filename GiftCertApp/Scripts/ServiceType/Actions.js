@@ -13,8 +13,7 @@ export function insertNewItemAndHandle(item, callback) {
   return (dispatch) => {
       api.addNewServiceType(item.toJS(), (data) => {      
           data.ok = data.status == 201 ? true : false;
-          data.payload = data.data;
-          debugger;
+          data.payload = data.data;          
           if(data.ok) {
             const newItem = item.set('id', data.payload.id)
             dispatch(addNewItem(newItem))
@@ -36,14 +35,16 @@ function addNewItem(item) {
 
 export function modifyItemAndHandle(item, callback) {
   return (dispatch) => {
-    api.updateDeviceType(item.toJS(), (data) => {
-      if(data.ok) {
-        dispatch(modifyItem(item))
-      } else {
-        toastr.error("Failed to save changes. Please try again.")
-      }
+      api.updateServiceType(item.toJS(), (data) => {         
+           data.ok = data.status == 204 ? true : false;
+        
+          if(data.ok) {
+            dispatch(modifyItem(item))
+          } else {
+            toastr.error("Failed to save changes. Please try again.")
+          }
 
-      callback(data.ok)
+          callback(data.ok)
     })
   }
 }

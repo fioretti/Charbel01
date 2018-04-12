@@ -12,8 +12,7 @@ export default function (state = initialState, action) {
         return state.set('list', action.list)
       }
     case INSERT_ITEM:
-      {
-              debugger;
+      {              
         const list = state.get('list')
         return state.set('list', list.push(action.item))
       }

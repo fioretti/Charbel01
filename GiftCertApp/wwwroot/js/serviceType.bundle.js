@@ -2394,7 +2394,6 @@
 	    api.addNewServiceType(item.toJS(), function (data) {
 	      data.ok = data.status == 201 ? true : false;
 	      data.payload = data.data;
-	      debugger;
 	      if (data.ok) {
 	        var newItem = item.set('id', data.payload.id);
 	        dispatch(addNewItem(newItem));
@@ -2416,7 +2415,9 @@
 
 	function modifyItemAndHandle(item, callback) {
 	  return function (dispatch) {
-	    api.updateDeviceType(item.toJS(), function (data) {
+	    api.updateServiceType(item.toJS(), function (data) {
+	      data.ok = data.status == 204 ? true : false;
+
 	      if (data.ok) {
 	        dispatch(modifyItem(item));
 	      } else {
@@ -2457,7 +2458,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.addNewServiceType = undefined;
+	exports.updateServiceType = exports.addNewServiceType = undefined;
 	exports.checkPartNumber = checkPartNumber;
 	exports.getSubRequestType = getSubRequestType;
 	exports.getDeviceType = getDeviceType;
@@ -2552,7 +2553,6 @@
 	exports.addNewSubRequestType = addNewSubRequestType;
 	exports.updateRequestType = updateRequestType;
 	exports.updateSubRequestType = updateSubRequestType;
-	exports.updateServiceType = updateServiceType;
 	exports.addNewTargetLab = addNewTargetLab;
 	exports.updateTargetLab = updateTargetLab;
 	exports.getMyTestInfo = getMyTestInfo;
@@ -2981,18 +2981,13 @@
 	  $.post('RequestTypeAdmin/UpdateSubRequestType', { subRequestType: subRequestType }).done(callback);
 	}
 
-	//export function addNewServiceType(serviceType, callback) {
-	//    $.post('ServiceType/Insert', { serviceType: serviceType})
-	//    .done(callback)
-	//}
-
 	var addNewServiceType = exports.addNewServiceType = function addNewServiceType(serviceType, callback) {
 	  return _axios2.default.post('/api/ServiceType', serviceType).then(callback);
 	};
 
-	function updateServiceType(serviceType, callback) {
-	  $.post('DeviceTypeAdmin/Update', { serviceType: serviceType }).done(callback);
-	}
+	var updateServiceType = exports.updateServiceType = function updateServiceType(serviceType, callback) {
+	  return _axios2.default.put('/api/ServiceType/' + serviceType.id, serviceType).then(callback);
+	};
 
 	function addNewTargetLab(targetLab, callback) {
 	  $.post('TargetLabAdmin/Insert', { targetLab: targetLab }).done(callback);
@@ -4542,7 +4537,6 @@
 	      }
 	    case _ActionTypes.INSERT_ITEM:
 	      {
-	        debugger;
 	        var list = state.get('list');
 	        return state.set('list', list.push(action.item));
 	      }

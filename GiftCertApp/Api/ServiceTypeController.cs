@@ -60,6 +60,9 @@ namespace GiftCertApp.Api
             {
                 return BadRequest();
             }
+            
+            servicesType.ModifiedDate = DateTime.Now;
+            servicesType.LastModifiedBy = "leila";
 
             _context.Entry(servicesType).State = EntityState.Modified;
 

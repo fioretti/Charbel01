@@ -502,21 +502,15 @@ export function updateSubRequestType(subRequestType, callback) {
     .done(callback)
 }
 
-//export function addNewServiceType(serviceType, callback) {
-//    $.post('ServiceType/Insert', { serviceType: serviceType})
-//    .done(callback)
-//}
-
 export const addNewServiceType = (serviceType, callback) => {
     return axios.post('/api/ServiceType',  serviceType )
         .then(callback);
 };
 
-
-export function updateServiceType(serviceType, callback) {
-  $.post('DeviceTypeAdmin/Update', {serviceType: serviceType})
-    .done(callback)
-}
+export const updateServiceType = (serviceType, callback) => {
+    return axios.put('/api/ServiceType/' + serviceType.id, serviceType)
+        .then(callback);
+};
 
 
 export function addNewTargetLab(targetLab, callback) {
