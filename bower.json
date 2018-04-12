@@ -1,0 +1,20 @@
+{
+  "name": "gc",
+  "description": "GiftCertApp",
+  "main": "index.js",
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "eonasdan-bootstrap-datetimepicker": "^4.17.37",
+    "bootstrap-daterangepicker": "https://github.com/dangrossman/bootstrap-daterangepicker.git#2.1.24",
+	"clockPicker": "https://github.com/weareoutman/clockpicker.git"
+  }
+}

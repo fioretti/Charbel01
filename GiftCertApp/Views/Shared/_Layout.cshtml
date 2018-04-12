@@ -1,0 +1,210 @@
+﻿@using GiftCertApp.Controllers
+@using GiftCertApp.Helpers
+@using GiftCertApp.Models
+@using GiftCertApp.Models.General
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - Gift Cert Tracking Tool</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="@Url.Content("~/")" />
+
+    <link rel="stylesheet" href="@Url.Content("~/css/lmd.css")" />
+</head>
+<body>
+    @{
+    var isUserAdmin = true;
+    var canCreateNewRequest = true;
+    var canExecuteTest = true;
+    var canAcceptRequest = true;
+    var canWipLoading = true;
+    var canPerformQualityAcceptance = true;
+    var canPerformQualityReview = true;
+    var canPerformDatasheetAcceptance = true;
+    var canPerformDatasheetProcess = true;
+    var canAccessAllProjects = true;
+    var canPerformTechnicianSchedule = true;
+    var canPerformEquipmentCapacity = true;
+
+    var jsonSerializerSettings = new JsonSerializerSettings
+    {
+      ContractResolver = new CamelCasePropertyNamesContractResolver()
+    };
+    }
+
+    @if (isUserAdmin)
+	{
+    <input type="hidden" id="isUserAdmin" value="@JsonConvert.SerializeObject(true, jsonSerializerSettings)" />
+	}
+    <div>
+
+        <div>
+            <div class="MainHeadDiv">
+                <div class="ifx_head_logo_div">
+                    <img src="@Url.Content("~/Images/logo-desktop-de.png")" width="100%">
+                </div>
+                <div class="ifx_head_title_div">Gift Cert Tracking Tool</div>
+                <div class="ifx_head_navigation_div">
+                    @{
+					var fullName = "Chelito Manayon";
+                    }
+                    <div class="lmd-navigation-user-name">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        @fullName
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-default">
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    @if (canCreateNewRequest)
+				{
+                    <li> <a href="@Url.Action("Index", "TestRequestForm", new { id = "" })">New Request</a> </li>
+				}
+
+                    <li id="navOverview"> <a href="@Url.Action("Index", "MyRequests")">My Requests</a> </li>
+
+                    @if (canAcceptRequest)
+		    {
+                    <li> <a href="@Url.Action("Index", "RequestsToAccept")">Requests to be Accepted</a> </li>
+		    }
+
+                    @if (canExecuteTest)
+		    {
+                    <li> <a href="@Url.Action("Index", "MyTests")">My Tests</a> </li>
+		    }
+
+                    @if (canWipLoading)
+		    {
+                    <li> <a href="@Url.Action("Index", "WipProjects")">WiP / Loading</a> </li>
+		    }
+
+                    @if (canPerformQualityAcceptance)
+		    {
+                    <li> <a href="@Url.Action("Index", "QualityAcceptance")">Quality Review Data Acceptance</a> </li>
+		    }
+
+                    @if (canPerformQualityReview)
+		    {
+                    <li> <a href="@Url.Action("Index", "QualityReview")">My Quality Reviews</a> </li>
+		    }
+
+                    @if (canPerformDatasheetAcceptance)
+		    {
+                    <li> <a href="@Url.Action("Index", "DatasheetAcceptance")">Datasheet Acceptance</a> </li>
+		    }
+
+                    @if (canPerformDatasheetProcess)
+		    {
+                    <li> <a href="@Url.Action("Index", "DatasheetProcessing")">Datasheet Processing</a> </li>
+		    }
+
+                    @if (canAccessAllProjects)
+		    {
+                    <li> <a href="@Url.Action("Index", "Home")">All Projects</a> </li>
+		    }
+
+                    @if (canPerformTechnicianSchedule || canExecuteTest || isUserAdmin)
+		    {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @if (canPerformTechnicianSchedule || canExecuteTest)
+				      {
+                            <li> <a href="@Url.Action("Index", "TechSchedule")">Technician Schedule</a> </li>
+				      }
+
+                            @if (canPerformEquipmentCapacity)
+				      {
+                            <li> <a href="@Url.Action("Index", "EquipmentCapacity")">Equipment Capacity</a> </li>
+				      }
+
+                            @if (isUserAdmin)
+              {
+                            <li> <a href="@Url.Action("Index", "SubTypeTable")">Sub-Type Table</a> </li>
+                            <li> <a href="@Url.Action("Index", "User")">User Administration</a> </li>
+                            <li> <a href="@Url.Action("Index", "Role")">Role Administration</a> </li>
+                            <li> <a href="@Url.Action("Index", "TestAdmin")">Test Administration</a> </li>
+                            <li> <a href="@Url.Action("Index", "TestConditionAdmin")">Test Condition Administration</a> </li>
+                            <li> <a href="@Url.Action("Index", "DeviceCharacteristicAdmin")">Device Administration</a> </li>
+                            <li> <a href="@Url.Action("Index", "DivisionAdmin")">DIV/BL/PL/Segment Administration</a> </li>
+                            <li> <a href="@Url.Action("Index", "RequestTypeAdmin")">Request Type Administration</a> </li>
+                            <li> <a href="@Url.Action("Index", "DeviceTypeAdmin")">Device Type Administration</a> </li>
+                            <li> <a href="@Url.Action("Index", "TargetLabAdmin")">Target Lab Administration</a> </li>
+                            <li> <a href="@Url.Action("Index", "PackageTypeAdmin")">Package Type Administration</a> </li>
+                            <li> <a href="@Url.Action("Index", "ChannelsAdministration")">Channel Administration</a> </li>
+              }
+                        </ul>
+                    </li>
+		    }
+                </ul>
+            </div>
+        </nav>
+
+        <div>
+            <div>
+                @RenderBody()
+            </div>
+        </div>
+
+        <div>
+            <br>
+        </div>
+
+        @{
+		var version = typeof(HomeController).Assembly.GetName().Version.ToString();
+        }
+
+        <div>
+            <span></span>
+            <div class="MainFooterDiv">
+                <div class="ifx_footer_text">
+                    <div>Gift Cert Tracking Tool @version</div>
+                    <div>&copy; @DateTime.Now.Year - Marco Polo Cebu</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="@Url.Content("~/js/lmd.js")"></script>
+
+    @RenderSection("scripts", required: false)
+
+    <script>
+        $(document).ready(function () {
+            var baseUrl = $('base').attr('href');
+            var url = window.location.pathname;
+
+            // baseUrl: 'LabManagementDev/'
+            // currentUrl: 'LabManagementDev'
+            // missing by 1 mean, the current url missing the last '/'
+            // which will automatically redirect to default page
+            if ((baseUrl.length - url.length) == 1) {
+                $('#navOverview').addClass('active');
+                return;
+            }
+
+            var substr = url.split('/');
+            var urlaspx = substr[substr.length - 1]
+
+            $('.nav').find('.active').removeClass('active');
+
+            if (urlaspx === "") {
+                $('#navOverview').addClass('active');
+            } else {
+                $('.nav li a').each(function () {
+                    if (this.href.indexOf(urlaspx) >= 0) {
+                        $(this).parent().addClass('active');
+                    }
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>

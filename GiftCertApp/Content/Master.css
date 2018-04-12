@@ -1,0 +1,457 @@
+﻿@font-face {
+    font-family:'Source Sans Pro';
+    font-style:normal;
+    font-weight:300;
+    src:local('Source Sans Pro Light'), local('SourceSansPro-Light'), url(../fonts/SourceSansPro-Light.woff) format('woff');
+}
+@font-face {
+    font-family:'Source Sans Pro';
+    font-style:normal;
+    font-weight:700;
+    src:local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(../fonts/SourceSansPro-Bold.woff) format('woff');
+}
+@font-face {
+    font-family:'Source Sans Pro';
+    font-style:italic;
+    font-weight:900;
+    src:local('Source Sans Pro Black Italic'), local('SourceSansPro-BlackIt'), url(../fonts/SourceSansPro-Italic.woff) format('woff');
+}
+@font-face {
+    font-family:'Source Sans Pro';
+    font-style:normal;
+    font-weight:200;
+    src:local('Source Sans Pro ExtraLight'), local('SourceSansPro-ExtraLight'), url(../fonts/SourceSansPro-ExtraLight.woff) format('woff');
+}
+@font-face {
+    font-family:'Source Sans Pro';
+    font-style:normal;
+    font-weight:400;
+    src:local('Source Sans Pro'), local('SourceSansPro-Regular'), url(../fonts/SourceSansPro-Regular.woff) format('woff');
+}
+@font-face {
+    font-family:'Source Sans Pro';
+    font-style:italic;
+    font-weight:300;
+    src:local('Source Sans Pro Light Italic'), local('SourceSansPro-LightIt'), url(../fonts/SourceSansPro-LightItalic.woff) format('woff');
+}
+@font-face {
+    font-family:'Source Sans Pro';
+    font-style:italic;
+    font-weight:700;
+    src:local('Source Sans Pro Bold Italic'), local('SourceSansPro-BoldIt'), url(../fonts/SourceSansPro-BoldItalic.woff) format('woff');
+}
+@font-face {
+    font-family:'Source Sans Pro';
+    font-style:italic;
+    font-weight:600;
+    src:local('Source Sans Pro Semibold Italic'), local('SourceSansPro-SemiboldIt'), url(../fonts/SourceSansPro-SemiboldItalic.ttf) format('woff');
+}
+@font-face {
+    font-family:'Source Sans Pro';
+    font-style:italic;
+    font-weight:200;
+    src:local('Source Sans Pro ExtraLight Italic'), local('SourceSansPro-ExtraLightIt'), url(../fonts/SourceSansPro-ExtraLightItalic.woff) format('woff');
+}
+@font-face {
+    font-family:'Source Sans Pro';
+    font-style:italic;
+    font-weight:400;
+    src:local('Source Sans Pro Italic'), local('SourceSansPro-It'), url(../fonts/SourceSansPro-Italic.woff) format('woff');
+}
+@font-face {
+    font-family:'Source Sans Pro';
+    font-style:normal;
+    font-weight:900;
+    src:local('Source Sans Pro Black'), local('SourceSansPro-Black'), url(../fonts/SourceSansPro-Black.woff) format('woff');
+}
+@font-face {
+    font-family:'Source Sans Pro';
+    font-style:normal;
+    font-weight:600;
+    src:local('Source Sans Pro Semibold'), local('SourceSansPro-Semibold'), url(../fonts/SourceSansPro-Semibold.woff) format('woff');
+}
+
+.Border {
+    border:1px solid red;
+}
+
+.BorderBlue {
+    border:1px solid Blue;
+}
+
+.MainHeadDiv {
+    position: relative;
+    display: block;
+    height:100px;
+    text-align: left;
+}
+
+.MainContentDiv {
+    position: relative;
+    display: block;
+    text-align: left;
+    padding:0px;
+}
+
+.MainFooterDiv {
+    position: relative;
+    display: block;
+    background-color: #928285;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.ifx_head_logo_div {
+    position: absolute;
+    left:20px;
+    top:25px;
+    width:114px;
+    height:51px;
+
+    cursor:pointer;
+}
+
+.ifx_head_title_div {
+    position: absolute;
+    left:165px;
+    top:30px;
+    height:45px;
+    font-family:'Source Sans Pro';
+    font-size: 30px;
+    color: #005da9;
+}
+
+.ifx_head_navigation_div {
+    position: absolute;
+    right:20px;
+    bottom: 25px;
+    width:540px;
+    height:25px;
+    font-size: 20px;
+}
+
+.ifx_head_navigation_item {
+    position: relative;
+    margin-left: 10px;
+    float:right;
+    cursor:pointer;
+    font-family:'Source Sans Pro';
+    color: #005da9;
+}
+
+.ifx_head_navigation_item:hover {
+    color: red;
+}
+
+.ifx_head_searchfield_div {
+    position: absolute;
+    display: block;
+    right:20px;
+    top:50px;
+    width:240px;
+    height:30px;
+
+    background: rgb(233, 230, 231);
+    border-radius: 15px 15px 15px 15px;
+    -moz-border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+}
+
+.ifx_head_searchfield_div input {
+    position: relative;
+    display: inline-block;
+    background-color:transparent;
+    /*border:1px solid red;*/
+    border:none;
+    height:26px;
+    width: 190px;
+    top:0px;
+    left:10px;
+}
+
+.ifx_head_searchfield_div button {
+    position: relative;
+    display: inline-block;
+    /*border:1px solid red;*/
+    border:none;
+    padding:0px;
+    font-size: 18px;
+    right:-10px;
+    top:3px;
+    width:25px;
+    height:25px;
+    color: #005da9;
+    background-color: transparent;
+    cursor:pointer;
+}
+
+.ifx_head_searchfield_div button:hover {
+    color:red;
+}
+
+.ifx_main_tab_content {
+    width: 100%;
+    min-width: 800px;
+    max-width: 1280px;
+    position: relative;
+    height: auto;
+    display:block;
+    vertical-align: top;
+}
+
+.ifx_main_tab_content_right_container {
+    position: relative;
+    display:inline-block;
+    width:20%;
+    vertical-align: top;
+    z-index: 20000;
+}
+
+.ifx_main_tab_content_left_container {
+    position: relative;
+    display:inline-block;
+    margin-left: -3px;
+    width:79%;
+    min-height:50px;
+    vertical-align: top;
+}
+
+.ifx_main_tab_content_right_container_menu_item {
+    width: 100%;
+    border:1px solid #adadad;
+    margin-bottom: 6px;
+
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    cursor:pointer;
+    background-color: #efefef;
+}
+
+.ifx_main_tab_content_right_container_menu_item:first-child {
+    margin-top: 15px;
+}
+
+.ifx_main_tab_content_right_container_menu_item:last-child {
+    margin-bottom:15px;
+}
+
+.ifx_main_tab_content_right_container_menu_item:hover {
+    background-color: #ffffff;
+}
+
+.ifx_main_tab_content_right_container_menu_item.active {
+    border-right: 1px solid white;
+    background-color: white;
+}
+
+.ifx_main_tab_content_right_container_menu_item_title {
+    display: block;
+    margin:14px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-family:'Source Sans Pro';
+    font-size: 16px;
+    color: #005da9;
+    font-weight: 600;
+}
+
+.ifx_main_tab_content_left_container_tab_item {
+    position: relative;
+    display: none;
+    top:0px;
+    height:100%;
+    min-height: 150px;
+    border:1px solid #adadad;
+    width: 100%;
+
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+}
+
+.ifx_main_tab_content_left_container_tab_item:last-child {
+    margin-bottom:15px;
+}
+
+.ifx_main_tab_content_left_container_tab_item.active {
+    display: block;
+}
+
+.ifx_application_content_container {
+    position: relative;
+    display:block;
+    margin:20px;
+    border:1px solid #cdcdcd;
+    min-height: 190px;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+}
+
+.ifx_application_content_container_main_title {
+    position: relative;
+    display:block;
+    margin:20px;
+    font-family:'Source Sans Pro';
+    font-size: 36px;
+    color: #005da9;
+    font-weight: 600;
+}
+
+.ifx_application_content_container_title {
+    position: absolute;
+    display: block;
+    top:20px;
+    left:190px;
+    height: 30px;
+    width: 350px;
+    font-family:'Source Sans Pro';
+    font-size: 20px;
+    color: #005da9;
+    font-weight: 600;
+}
+
+.ifx_application_content_container_image {
+    position: absolute;
+    display: block;
+    top:20px;
+    left:20px;
+    height: 150px;
+    width: 150px;
+    border:1px solid black;
+}
+
+.ifx_application_content_container_description {
+    position: relative;
+    display: block;
+    /*height: auto;*/
+    /*width: 65%;*/
+    font-family:'Source Sans Pro';
+    font-size: 16px;
+    color: #adadad;
+    font-weight: 400;
+    margin-bottom: 15px !important;
+    margin-top: 60px !important;
+    margin-left: 190px !important;
+    margin-right: 10px !important;
+    /*border:1px solid blue;*/
+}
+
+.ifx_application_content_container_install_positioner {
+    text-align: right;
+    margin: 10px;
+    margin-right: 10px;
+    position: relative;
+    /*display: inline-block;*/
+}
+
+.ifx_application_content_container_install {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    height: 30px;
+    width:80px;
+    /*width:auto;*/
+
+    border:1px solid #adadad;
+    font-family:'Source Sans Pro';
+    font-weight: 600;
+    color: #005da9;
+    font-size: 16px;
+    cursor:pointer;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    overflow: hidden;
+}
+
+.ifx_application_content_container_install:hover {
+    /*color: white;*/
+    border:1px solid #777777;
+    background-color: #005da9;
+}
+
+.ifx_application_content_container_download {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    height: 30px;
+    width: 90px;
+    /*width:auto;*/
+
+    border:1px solid #adadad;
+    font-family:'Source Sans Pro';
+    font-weight: 600;
+    color: #005da9;
+    font-size: 16px;
+    cursor:pointer;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    overflow: hidden;
+}
+
+.ifx_application_content_container_download:hover {
+    /*color: white;*/
+    border:1px solid #777777;
+    background-color: #005da9;
+}
+
+.ifx_application_content_container_install_icon {
+    background-image:url("../img/installbutton_base.png");
+    width:80px;
+    height:30px;
+}
+
+.ifx_application_content_container_install_icon:hover {
+    background-image:url("../img/installbutton_hover.png");
+}
+
+.ifx_application_content_container_download_icon {
+    background-image:url("../img/downloadbutton_base.png");
+    width:90px;
+    height:30px;
+}
+
+.ifx_application_content_container_download_icon:hover {
+    background-image:url("../img/downloadbutton_hover.png");
+}
+
+.ifx_application_content_container_install_tooltip {
+    position:absolute;
+    display:none;
+    border: 1px solid #777777;
+    width:300px;
+    padding:6px;
+    right:90px;
+    top:0px;
+    font-family:'Source Sans Pro';
+    font-weight: 300;
+    background-color: #eeeeee;
+    text-align: left;
+    background-image: url(../img/mpcdrag.png);
+    background-repeat: no-repeat;
+    background-position: 110% 50%;
+}
+
+.ifx_application_content_container_install_tooltip_title {
+    font-size: 22px;
+}
+
+.ifx_application_content_container_install_tooltip_text {
+    font-size: 13px;
+}
+
+.ifx_footer_text {
+    font-family:'Source Sans Pro';
+    font-weight: 400;
+    color:white;
+}
+
+
