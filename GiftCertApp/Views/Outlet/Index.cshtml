@@ -1,0 +1,21 @@
+﻿@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+@model IList<GiftCertApp.Models.Outlet>
+@{
+    ViewBag.Title = "Outlet";
+    var jsonSerializerSettings = new JsonSerializerSettings
+    {
+        ContractResolver = new CamelCasePropertyNamesContractResolver()
+    };
+}
+
+<h2 class="ifx_application_content_container_main_title">Outlet</h2>
+
+<input type="hidden" id="outlets" value="@JsonConvert.SerializeObject(Model, jsonSerializerSettings)" />
+
+<div class="ifx_application_content_container" id="content">
+</div>
+
+@section scripts{
+    <script src="@Url.Content("~/js/outlet.bundle.js")"></script>
+}

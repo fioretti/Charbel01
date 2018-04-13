@@ -70,15 +70,15 @@
 
 	var _reactReduxToastr2 = _interopRequireDefault(_reactReduxToastr);
 
-	var _Actions = __webpack_require__(148);
+	var _Actions = __webpack_require__(27);
 
 	var actions = _interopRequireWildcard(_Actions);
 
-	var _Reducer = __webpack_require__(150);
+	var _Reducer = __webpack_require__(55);
 
 	var _Reducer2 = _interopRequireDefault(_Reducer);
 
-	var _List = __webpack_require__(151);
+	var _List = __webpack_require__(56);
 
 	var _List2 = _interopRequireDefault(_List);
 
@@ -92,72 +92,72 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ServiceType = function (_React$Component) {
-	  _inherits(ServiceType, _React$Component);
+	var GcType = function (_React$Component) {
+	    _inherits(GcType, _React$Component);
 
-	  function ServiceType() {
-	    _classCallCheck(this, ServiceType);
+	    function GcType() {
+	        _classCallCheck(this, GcType);
 
-	    return _possibleConstructorReturn(this, (ServiceType.__proto__ || Object.getPrototypeOf(ServiceType)).apply(this, arguments));
-	  }
-
-	  _createClass(ServiceType, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.props.populateData((0, _Immutable.fromJS)(JSON.parse($('#serviceTypes').val())));
+	        return _possibleConstructorReturn(this, (GcType.__proto__ || Object.getPrototypeOf(GcType)).apply(this, arguments));
 	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var style = {
-	        container: {
-	          padding: '15px'
+
+	    _createClass(GcType, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.props.populateData((0, _Immutable.fromJS)(JSON.parse($('#gcTypes').val())));
 	        }
-	      };
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var style = {
+	                container: {
+	                    padding: '15px'
+	                }
+	            };
 
-	      return _react2.default.createElement(
-	        'div',
-	        { style: style.container },
-	        _react2.default.createElement(_List2.default, null)
-	      );
-	    }
-	  }]);
+	            return _react2.default.createElement(
+	                'div',
+	                { style: style.container },
+	                _react2.default.createElement(_List2.default, null)
+	            );
+	        }
+	    }]);
 
-	  return ServiceType;
+	    return GcType;
 	}(_react2.default.Component);
 
 	function mapStateToProps(_ref) {
-	  var serviceType = _ref.serviceType;
+	    var gcType = _ref.gcType;
 
-	  return {
-	    serviceType: serviceType
-	  };
+	    return {
+	        gcType: gcType
+	    };
 	}
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)(actions, dispatch);
+	    return (0, _redux.bindActionCreators)(actions, dispatch);
 	}
 
-	var ServiceTypeContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ServiceType);
+	var GcTypeContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(GcType);
 
 	var rootReducers = (0, _redux.combineReducers)({
-	  serviceType: _Reducer2.default,
-	  toastr: _reactReduxToastr.reducer
+	    gcType: _Reducer2.default,
+	    toastr: _reactReduxToastr.reducer
 	});
 
 	var store = (0, _redux.createStore)(rootReducers, (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), window.devToolsExtension ? window.devToolsExtension() : function (f) {
-	  return f;
+	    return f;
 	}));
 
 	_reactDom2.default.render(_react2.default.createElement(
-	  _reactRedux.Provider,
-	  { store: store },
-	  _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(ServiceTypeContainer, null),
-	    _react2.default.createElement(_reactReduxToastr2.default, null)
-	  )
+	    _reactRedux.Provider,
+	    { store: store },
+	    _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(GcTypeContainer, null),
+	        _react2.default.createElement(_reactReduxToastr2.default, null)
+	    )
 	), document.getElementById('content'));
 
 /***/ }),
@@ -2360,8 +2360,96 @@
 
 
 /***/ }),
-/* 27 */,
-/* 28 */,
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.populateData = populateData;
+	exports.insertNewItemAndHandle = insertNewItemAndHandle;
+	exports.modifyItemAndHandle = modifyItemAndHandle;
+
+	var _ActionTypes = __webpack_require__(28);
+
+	var _Api = __webpack_require__(29);
+
+	var api = _interopRequireWildcard(_Api);
+
+	var _reactReduxToastr = __webpack_require__(7);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function populateData(list) {
+	  return {
+	    type: _ActionTypes.POPULATE_DATA,
+	    list: list
+	  };
+	}
+
+	function insertNewItemAndHandle(item, callback) {
+	  return function (dispatch) {
+	    api.addNewGcType(item.toJS(), function (data) {
+	      data.ok = data.status == 201 ? true : false;
+	      data.payload = data.data;
+	      if (data.ok) {
+	        var newItem = item.set('id', data.payload.id);
+	        dispatch(addNewItem(newItem));
+	      } else {
+	        _reactReduxToastr.toastr.error("Failed to save changes. Please try again.");
+	      }
+
+	      callback(data.ok);
+	    });
+	  };
+	}
+
+	function addNewItem(item) {
+	  return {
+	    type: _ActionTypes.INSERT_ITEM,
+	    item: item
+	  };
+	}
+
+	function modifyItemAndHandle(item, callback) {
+	  return function (dispatch) {
+	    api.updateGcType(item.toJS(), function (data) {
+	      data.ok = data.status == 204 ? true : false;
+
+	      if (data.ok) {
+	        dispatch(modifyItem(item));
+	      } else {
+	        _reactReduxToastr.toastr.error("Failed to save changes. Please try again.");
+	      }
+
+	      callback(data.ok);
+	    });
+	  };
+	}
+
+	function modifyItem(item) {
+	  return {
+	    type: _ActionTypes.UPDATE_ITEM,
+	    item: item
+	  };
+	}
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var POPULATE_DATA = exports.POPULATE_DATA = 'GcType/POPULATE_DATA';
+	var INSERT_ITEM = exports.INSERT_ITEM = 'GcType/INSERT_ITEM';
+	var UPDATE_ITEM = exports.UPDATE_ITEM = 'GcType/UPDATE_ITEM';
+
+/***/ }),
 /* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4448,8 +4536,275 @@
 
 
 /***/ }),
-/* 55 */,
-/* 56 */,
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function () {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _ActionTypes.POPULATE_DATA:
+	      {
+	        return state.set('list', action.list);
+	      }
+	    case _ActionTypes.INSERT_ITEM:
+	      {
+	        var list = state.get('list');
+	        return state.set('list', list.push(action.item));
+	      }
+	    case _ActionTypes.UPDATE_ITEM:
+	      {
+	        var _list = state.get('list');
+	        var itemIdx = _list.findIndex(function (item) {
+	          return item.get('id') == action.item.get('id');
+	        });
+
+	        var newList = _list.set(itemIdx, action.item);
+	        return state.set('list', newList);
+	      }
+	    default:
+	      {
+	        return state;
+	      }
+	  }
+	};
+
+	var _ActionTypes = __webpack_require__(28);
+
+	var _Immutable = __webpack_require__(6);
+
+	var initialState = (0, _Immutable.fromJS)({
+	  list: []
+	});
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _redux = __webpack_require__(3);
+
+	var _reactRedux = __webpack_require__(4);
+
+	var _Immutable = __webpack_require__(6);
+
+	var _UiUtils = __webpack_require__(57);
+
+	var uiUtils = _interopRequireWildcard(_UiUtils);
+
+	var _Actions = __webpack_require__(27);
+
+	var actions = _interopRequireWildcard(_Actions);
+
+	var _Editor = __webpack_require__(142);
+
+	var _Editor2 = _interopRequireDefault(_Editor);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var List = function (_React$Component) {
+	  _inherits(List, _React$Component);
+
+	  function List() {
+	    _classCallCheck(this, List);
+
+	    var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this));
+
+	    _this.onNew = _this.onNew.bind(_this);
+	    _this.onModify = _this.onModify.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(List, [{
+	    key: 'onNew',
+	    value: function onNew(e) {
+	      var _this2 = this;
+
+	      e.preventDefault();
+	      var template = {
+	        name: '',
+	        active: true
+	      };
+
+	      var props = {
+	        title: 'New',
+	        item: (0, _Immutable.fromJS)(template),
+	        onSuccess: function onSuccess(newItem, callback) {
+	          _this2.props.insertNewItemAndHandle(newItem, function (isOk) {
+	            callback(isOk);
+	          });
+	        }
+	      };
+
+	      uiUtils.showDialog(_react2.default.createElement(_Editor2.default, props));
+	    }
+	  }, {
+	    key: 'onModify',
+	    value: function onModify(e, item) {
+	      var _this3 = this;
+
+	      e.preventDefault();
+
+	      var props = {
+	        title: 'Modify',
+	        item: item,
+	        onSuccess: function onSuccess(updatedItem, callback) {
+	          _this3.props.modifyItemAndHandle(updatedItem, function (isOk) {
+	            callback(isOk);
+	          });
+	        }
+	      };
+
+	      uiUtils.showDialog(_react2.default.createElement(_Editor2.default, props));
+	    }
+	  }, {
+	    key: 'renderBooleanFlag',
+	    value: function renderBooleanFlag(val) {
+	      if (val) {
+	        return _react2.default.createElement('i', { className: 'fa fa-check' });
+	      }
+
+	      return _react2.default.createElement('i', { className: 'fa fa-times' });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this4 = this;
+
+	      var path = [];
+
+	      var style = {
+	        activeColumn: {
+	          width: '100px'
+	        },
+	        actionColumn: {
+	          width: '100px'
+	        },
+	        buttonStyle: {
+	          marginLeft: '3px'
+	        }
+	      };
+
+	      var gcType = this.props.gcType;
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'table',
+	          { className: 'table' },
+	          _react2.default.createElement(
+	            'thead',
+	            null,
+	            _react2.default.createElement(
+	              'tr',
+	              null,
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                'Name'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                { style: style.activeColumn },
+	                'Active'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                { style: style.actionColumn },
+	                _react2.default.createElement(
+	                  'button',
+	                  { className: 'btn btn-primary btn-xs', style: style.buttonStyle,
+	                    onClick: this.onNew },
+	                  _react2.default.createElement('i', { className: 'fa fa-plus' }),
+	                  ' Add New'
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'tbody',
+	            null,
+	            this.props.gcType.get('list').sortBy(function (item) {
+	              return item.get('name');
+	            }).map(function (item, idx) {
+	              return _react2.default.createElement(
+	                'tr',
+	                { key: idx },
+	                _react2.default.createElement(
+	                  'td',
+	                  null,
+	                  item.get('name')
+	                ),
+	                _react2.default.createElement(
+	                  'td',
+	                  null,
+	                  _this4.renderBooleanFlag(item.get('active'))
+	                ),
+	                _react2.default.createElement(
+	                  'td',
+	                  null,
+	                  _react2.default.createElement(
+	                    'button',
+	                    { className: 'btn btn-default', style: style.buttonStyle,
+	                      onClick: function onClick(e) {
+	                        return _this4.onModify(e, item);
+	                      } },
+	                    _react2.default.createElement('i', { className: 'fa fa-edit' })
+	                  )
+	                )
+	              );
+	            })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return List;
+	}(_react2.default.Component);
+
+	function mapStateToProps(_ref) {
+	  var gcType = _ref.gcType;
+
+	  return {
+	    gcType: gcType
+	  };
+	}
+
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)(actions, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(List);
+
+/***/ }),
 /* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12327,372 +12682,7 @@
 	};
 
 /***/ }),
-/* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */,
-/* 146 */,
-/* 147 */,
-/* 148 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.populateData = populateData;
-	exports.insertNewItemAndHandle = insertNewItemAndHandle;
-	exports.modifyItemAndHandle = modifyItemAndHandle;
-
-	var _ActionTypes = __webpack_require__(149);
-
-	var _Api = __webpack_require__(29);
-
-	var api = _interopRequireWildcard(_Api);
-
-	var _reactReduxToastr = __webpack_require__(7);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function populateData(list) {
-	  return {
-	    type: _ActionTypes.POPULATE_DATA,
-	    list: list
-	  };
-	}
-
-	function insertNewItemAndHandle(item, callback) {
-	  return function (dispatch) {
-	    api.addNewServiceType(item.toJS(), function (data) {
-	      data.ok = data.status == 201 ? true : false;
-	      data.payload = data.data;
-	      if (data.ok) {
-	        var newItem = item.set('id', data.payload.id);
-	        dispatch(addNewItem(newItem));
-	      } else {
-	        _reactReduxToastr.toastr.error("Failed to save changes. Please try again.");
-	      }
-
-	      callback(data.ok);
-	    });
-	  };
-	}
-
-	function addNewItem(item) {
-	  return {
-	    type: _ActionTypes.INSERT_ITEM,
-	    item: item
-	  };
-	}
-
-	function modifyItemAndHandle(item, callback) {
-	  return function (dispatch) {
-	    api.updateServiceType(item.toJS(), function (data) {
-	      data.ok = data.status == 204 ? true : false;
-
-	      if (data.ok) {
-	        dispatch(modifyItem(item));
-	      } else {
-	        _reactReduxToastr.toastr.error("Failed to save changes. Please try again.");
-	      }
-
-	      callback(data.ok);
-	    });
-	  };
-	}
-
-	function modifyItem(item) {
-	  return {
-	    type: _ActionTypes.UPDATE_ITEM,
-	    item: item
-	  };
-	}
-
-/***/ }),
-/* 149 */
-/***/ (function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var POPULATE_DATA = exports.POPULATE_DATA = 'ServiceType/POPULATE_DATA';
-	var INSERT_ITEM = exports.INSERT_ITEM = 'ServiceType/INSERT_ITEM';
-	var UPDATE_ITEM = exports.UPDATE_ITEM = 'ServiceType/UPDATE_ITEM';
-
-/***/ }),
-/* 150 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function () {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case _ActionTypes.POPULATE_DATA:
-	      {
-	        return state.set('list', action.list);
-	      }
-	    case _ActionTypes.INSERT_ITEM:
-	      {
-	        var list = state.get('list');
-	        return state.set('list', list.push(action.item));
-	      }
-	    case _ActionTypes.UPDATE_ITEM:
-	      {
-	        var _list = state.get('list');
-	        var itemIdx = _list.findIndex(function (item) {
-	          return item.get('id') == action.item.get('id');
-	        });
-
-	        var newList = _list.set(itemIdx, action.item);
-	        return state.set('list', newList);
-	      }
-	    default:
-	      {
-	        return state;
-	      }
-	  }
-	};
-
-	var _ActionTypes = __webpack_require__(149);
-
-	var _Immutable = __webpack_require__(6);
-
-	var initialState = (0, _Immutable.fromJS)({
-	  list: []
-	});
-
-/***/ }),
-/* 151 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _redux = __webpack_require__(3);
-
-	var _reactRedux = __webpack_require__(4);
-
-	var _Immutable = __webpack_require__(6);
-
-	var _UiUtils = __webpack_require__(57);
-
-	var uiUtils = _interopRequireWildcard(_UiUtils);
-
-	var _Actions = __webpack_require__(148);
-
-	var actions = _interopRequireWildcard(_Actions);
-
-	var _Editor = __webpack_require__(152);
-
-	var _Editor2 = _interopRequireDefault(_Editor);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var List = function (_React$Component) {
-	  _inherits(List, _React$Component);
-
-	  function List() {
-	    _classCallCheck(this, List);
-
-	    var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this));
-
-	    _this.onNew = _this.onNew.bind(_this);
-	    _this.onModify = _this.onModify.bind(_this);
-	    return _this;
-	  }
-
-	  _createClass(List, [{
-	    key: 'onNew',
-	    value: function onNew(e) {
-	      var _this2 = this;
-
-	      e.preventDefault();
-	      var template = {
-	        name: '',
-	        active: true
-	      };
-
-	      var props = {
-	        title: 'New',
-	        item: (0, _Immutable.fromJS)(template),
-	        onSuccess: function onSuccess(newItem, callback) {
-	          _this2.props.insertNewItemAndHandle(newItem, function (isOk) {
-	            callback(isOk);
-	          });
-	        }
-	      };
-
-	      uiUtils.showDialog(_react2.default.createElement(_Editor2.default, props));
-	    }
-	  }, {
-	    key: 'onModify',
-	    value: function onModify(e, item) {
-	      var _this3 = this;
-
-	      e.preventDefault();
-
-	      var props = {
-	        title: 'Modify',
-	        item: item,
-	        onSuccess: function onSuccess(updatedItem, callback) {
-	          _this3.props.modifyItemAndHandle(updatedItem, function (isOk) {
-	            callback(isOk);
-	          });
-	        }
-	      };
-
-	      uiUtils.showDialog(_react2.default.createElement(_Editor2.default, props));
-	    }
-	  }, {
-	    key: 'renderBooleanFlag',
-	    value: function renderBooleanFlag(val) {
-	      if (val) {
-	        return _react2.default.createElement('i', { className: 'fa fa-check' });
-	      }
-
-	      return _react2.default.createElement('i', { className: 'fa fa-times' });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this4 = this;
-
-	      var path = [];
-
-	      var style = {
-	        activeColumn: {
-	          width: '100px'
-	        },
-	        actionColumn: {
-	          width: '100px'
-	        },
-	        buttonStyle: {
-	          marginLeft: '3px'
-	        }
-	      };
-
-	      var serviceType = this.props.serviceType;
-
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'table',
-	          { className: 'table' },
-	          _react2.default.createElement(
-	            'thead',
-	            null,
-	            _react2.default.createElement(
-	              'tr',
-	              null,
-	              _react2.default.createElement(
-	                'th',
-	                null,
-	                'Name'
-	              ),
-	              _react2.default.createElement(
-	                'th',
-	                { style: style.activeColumn },
-	                'Active'
-	              ),
-	              _react2.default.createElement(
-	                'th',
-	                { style: style.actionColumn },
-	                _react2.default.createElement(
-	                  'button',
-	                  { className: 'btn btn-primary btn-xs', style: style.buttonStyle,
-	                    onClick: this.onNew },
-	                  _react2.default.createElement('i', { className: 'fa fa-plus' }),
-	                  ' Add New'
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'tbody',
-	            null,
-	            this.props.serviceType.get('list').sortBy(function (item) {
-	              return item.get('name');
-	            }).map(function (item, idx) {
-	              return _react2.default.createElement(
-	                'tr',
-	                { key: idx },
-	                _react2.default.createElement(
-	                  'td',
-	                  null,
-	                  item.get('name')
-	                ),
-	                _react2.default.createElement(
-	                  'td',
-	                  null,
-	                  _this4.renderBooleanFlag(item.get('active'))
-	                ),
-	                _react2.default.createElement(
-	                  'td',
-	                  null,
-	                  _react2.default.createElement(
-	                    'button',
-	                    { className: 'btn btn-default', style: style.buttonStyle,
-	                      onClick: function onClick(e) {
-	                        return _this4.onModify(e, item);
-	                      } },
-	                    _react2.default.createElement('i', { className: 'fa fa-edit' })
-	                  )
-	                )
-	              );
-	            })
-	          )
-	        )
-	      );
-	    }
-	  }]);
-
-	  return List;
-	}(_react2.default.Component);
-
-	function mapStateToProps(_ref) {
-	  var serviceType = _ref.serviceType;
-
-	  return {
-	    serviceType: serviceType
-	  };
-	}
-
-	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)(actions, dispatch);
-	}
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(List);
-
-/***/ }),
-/* 152 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

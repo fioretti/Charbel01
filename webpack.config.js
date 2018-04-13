@@ -4,7 +4,9 @@ var webpack = require('webpack');
 var config = {
   context: path.join(__dirname, 'GiftCertApp/Scripts'),
   entry: {   
-	serviceType: './ServiceType/Container'
+	serviceType: './ServiceType/Container',
+  outlet: './Outlet/Container',
+  gcType: './GcType/Container'
   },  
   output: {
     path: path.join(__dirname, 'GiftCertApp/wwwroot/js'),

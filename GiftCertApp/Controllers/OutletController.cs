@@ -6,27 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GiftCertApp.Models;
-using AutoMapper;
-using GiftCertApp.Models.Data;
 
 namespace GiftCertApp.Controllers
 {
-    public class ServiceTypeController : Controller
+    public class OutletController : Controller
     {
         private readonly MarcoPoloGCDBContext _context;
 
-        public ServiceTypeController(MarcoPoloGCDBContext context)
+        public OutletController(MarcoPoloGCDBContext context)
         {
             _context = context;
         }
 
-        // GET: ServicesTypes
+        // GET: Outlet
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ServicesType.ToListAsync());
+            return View(await _context.Outlet.ToListAsync());
         }
-       
-        // GET: ServicesTypes/Details/5
+
+        // GET: Outlet/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +32,39 @@ namespace GiftCertApp.Controllers
                 return NotFound();
             }
 
-            var servicesType = await _context.ServicesType
+            var outlet = await _context.Outlet
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (servicesType == null)
+            if (outlet == null)
             {
                 return NotFound();
             }
 
-            return View(servicesType);
+            return View(outlet);
         }
 
-        // GET: ServicesTypes/Create
+        // GET: Outlet/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ServicesTypes/Create
+        // POST: Outlet/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LastModifiedBy,CreatedDate,ModifiedDate,Name")] ServicesType servicesType)
+        public async Task<IActionResult> Create([Bind("Id,Name,LastModifiedBy,CreatedDate,ModifiedDate,Active")] Outlet outlet)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(servicesType);
+                _context.Add(outlet);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(servicesType);
+            return View(outlet);
         }
 
-        // GET: ServicesTypes/Edit/5
+        // GET: Outlet/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +72,22 @@ namespace GiftCertApp.Controllers
                 return NotFound();
             }
 
-            var servicesType = await _context.ServicesType.SingleOrDefaultAsync(m => m.Id == id);
-            if (servicesType == null)
+            var outlet = await _context.Outlet.SingleOrDefaultAsync(m => m.Id == id);
+            if (outlet == null)
             {
                 return NotFound();
             }
-            return View(servicesType);
+            return View(outlet);
         }
 
-        // POST: ServicesTypes/Edit/5
+        // POST: Outlet/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LastModifiedBy,CreatedDate,ModifiedDate,Name")] ServicesType servicesType)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,LastModifiedBy,CreatedDate,ModifiedDate,Active")] Outlet outlet)
         {
-            if (id != servicesType.Id)
+            if (id != outlet.Id)
             {
                 return NotFound();
             }
@@ -98,12 +96,12 @@ namespace GiftCertApp.Controllers
             {
                 try
                 {
-                    _context.Update(servicesType);
+                    _context.Update(outlet);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ServicesTypeExists(servicesType.Id))
+                    if (!OutletExists(outlet.Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +112,10 @@ namespace GiftCertApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(servicesType);
+            return View(outlet);
         }
 
-        // GET: ServicesTypes/Delete/5
+        // GET: Outlet/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,30 +123,30 @@ namespace GiftCertApp.Controllers
                 return NotFound();
             }
 
-            var servicesType = await _context.ServicesType
+            var outlet = await _context.Outlet
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (servicesType == null)
+            if (outlet == null)
             {
                 return NotFound();
             }
 
-            return View(servicesType);
+            return View(outlet);
         }
 
-        // POST: ServicesTypes/Delete/5
+        // POST: Outlet/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var servicesType = await _context.ServicesType.SingleOrDefaultAsync(m => m.Id == id);
-            _context.ServicesType.Remove(servicesType);
+            var outlet = await _context.Outlet.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Outlet.Remove(outlet);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ServicesTypeExists(int id)
+        private bool OutletExists(int id)
         {
-            return _context.ServicesType.Any(e => e.Id == id);
+            return _context.Outlet.Any(e => e.Id == id);
         }
     }
 }

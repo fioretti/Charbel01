@@ -1,5 +1,39 @@
 import axios from 'axios';
 
+// Service Type
+export const addNewServiceType = (serviceType, callback) => {
+    return axios.post('/api/ServiceType', serviceType)
+        .then(callback);
+};
+
+export const updateServiceType = (serviceType, callback) => {
+    return axios.put('/api/ServiceType/' + serviceType.id, serviceType)
+        .then(callback);
+};
+
+// GC Type
+export const addNewGcType = (gcType, callback) => {
+    return axios.post('/api/GcType', gcType)
+        .then(callback);
+};
+
+export const updateGcType = (gcType, callback) => {
+    return axios.put('/api/GcType/' + gcType.id, gcType)
+        .then(callback);
+};
+
+// Outlet
+export const addNewOutlet = (outlet, callback) => {
+    return axios.post('/api/Outlet', outlet)
+        .then(callback);
+};
+
+export const updateOutlet = (outlet, callback) => {
+    return axios.put('/api/Outlet/' + outlet.id, outlet)
+        .then(callback);
+};
+
+
 export function checkPartNumber(partNumber, callback) {
   $.post('partNumber/check', {partNumber: partNumber})
     .done(callback);
@@ -502,15 +536,6 @@ export function updateSubRequestType(subRequestType, callback) {
     .done(callback)
 }
 
-export const addNewServiceType = (serviceType, callback) => {
-    return axios.post('/api/ServiceType',  serviceType )
-        .then(callback);
-};
-
-export const updateServiceType = (serviceType, callback) => {
-    return axios.put('/api/ServiceType/' + serviceType.id, serviceType)
-        .then(callback);
-};
 
 
 export function addNewTargetLab(targetLab, callback) {

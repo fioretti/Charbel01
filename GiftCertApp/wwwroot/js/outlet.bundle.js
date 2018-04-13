@@ -70,15 +70,15 @@
 
 	var _reactReduxToastr2 = _interopRequireDefault(_reactReduxToastr);
 
-	var _Actions = __webpack_require__(148);
+	var _Actions = __webpack_require__(143);
 
 	var actions = _interopRequireWildcard(_Actions);
 
-	var _Reducer = __webpack_require__(150);
+	var _Reducer = __webpack_require__(145);
 
 	var _Reducer2 = _interopRequireDefault(_Reducer);
 
-	var _List = __webpack_require__(151);
+	var _List = __webpack_require__(146);
 
 	var _List2 = _interopRequireDefault(_List);
 
@@ -92,19 +92,19 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ServiceType = function (_React$Component) {
-	  _inherits(ServiceType, _React$Component);
+	var Outlet = function (_React$Component) {
+	  _inherits(Outlet, _React$Component);
 
-	  function ServiceType() {
-	    _classCallCheck(this, ServiceType);
+	  function Outlet() {
+	    _classCallCheck(this, Outlet);
 
-	    return _possibleConstructorReturn(this, (ServiceType.__proto__ || Object.getPrototypeOf(ServiceType)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (Outlet.__proto__ || Object.getPrototypeOf(Outlet)).apply(this, arguments));
 	  }
 
-	  _createClass(ServiceType, [{
+	  _createClass(Outlet, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.props.populateData((0, _Immutable.fromJS)(JSON.parse($('#serviceTypes').val())));
+	      this.props.populateData((0, _Immutable.fromJS)(JSON.parse($('#outlets').val())));
 	    }
 	  }, {
 	    key: 'render',
@@ -123,14 +123,14 @@
 	    }
 	  }]);
 
-	  return ServiceType;
+	  return Outlet;
 	}(_react2.default.Component);
 
 	function mapStateToProps(_ref) {
-	  var serviceType = _ref.serviceType;
+	  var outlet = _ref.outlet;
 
 	  return {
-	    serviceType: serviceType
+	    outlet: outlet
 	  };
 	}
 
@@ -138,10 +138,10 @@
 	  return (0, _redux.bindActionCreators)(actions, dispatch);
 	}
 
-	var ServiceTypeContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ServiceType);
+	var OutletContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Outlet);
 
 	var rootReducers = (0, _redux.combineReducers)({
-	  serviceType: _Reducer2.default,
+	  outlet: _Reducer2.default,
 	  toastr: _reactReduxToastr.reducer
 	});
 
@@ -155,7 +155,7 @@
 	  _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement(ServiceTypeContainer, null),
+	    _react2.default.createElement(OutletContainer, null),
 	    _react2.default.createElement(_reactReduxToastr2.default, null)
 	  )
 	), document.getElementById('content'));
@@ -12328,12 +12328,7 @@
 
 /***/ }),
 /* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */,
-/* 146 */,
-/* 147 */,
-/* 148 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12345,7 +12340,7 @@
 	exports.insertNewItemAndHandle = insertNewItemAndHandle;
 	exports.modifyItemAndHandle = modifyItemAndHandle;
 
-	var _ActionTypes = __webpack_require__(149);
+	var _ActionTypes = __webpack_require__(144);
 
 	var _Api = __webpack_require__(29);
 
@@ -12364,7 +12359,7 @@
 
 	function insertNewItemAndHandle(item, callback) {
 	  return function (dispatch) {
-	    api.addNewServiceType(item.toJS(), function (data) {
+	    api.addNewOutlet(item.toJS(), function (data) {
 	      data.ok = data.status == 201 ? true : false;
 	      data.payload = data.data;
 	      if (data.ok) {
@@ -12388,7 +12383,7 @@
 
 	function modifyItemAndHandle(item, callback) {
 	  return function (dispatch) {
-	    api.updateServiceType(item.toJS(), function (data) {
+	    api.updateOutlet(item.toJS(), function (data) {
 	      data.ok = data.status == 204 ? true : false;
 
 	      if (data.ok) {
@@ -12410,7 +12405,7 @@
 	}
 
 /***/ }),
-/* 149 */
+/* 144 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -12418,12 +12413,12 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var POPULATE_DATA = exports.POPULATE_DATA = 'ServiceType/POPULATE_DATA';
-	var INSERT_ITEM = exports.INSERT_ITEM = 'ServiceType/INSERT_ITEM';
-	var UPDATE_ITEM = exports.UPDATE_ITEM = 'ServiceType/UPDATE_ITEM';
+	var POPULATE_DATA = exports.POPULATE_DATA = 'Outlet/POPULATE_DATA';
+	var INSERT_ITEM = exports.INSERT_ITEM = 'Outlet/INSERT_ITEM';
+	var UPDATE_ITEM = exports.UPDATE_ITEM = 'Outlet/UPDATE_ITEM';
 
 /***/ }),
-/* 150 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12463,7 +12458,7 @@
 	  }
 	};
 
-	var _ActionTypes = __webpack_require__(149);
+	var _ActionTypes = __webpack_require__(144);
 
 	var _Immutable = __webpack_require__(6);
 
@@ -12472,7 +12467,7 @@
 	});
 
 /***/ }),
-/* 151 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12497,11 +12492,11 @@
 
 	var uiUtils = _interopRequireWildcard(_UiUtils);
 
-	var _Actions = __webpack_require__(148);
+	var _Actions = __webpack_require__(143);
 
 	var actions = _interopRequireWildcard(_Actions);
 
-	var _Editor = __webpack_require__(152);
+	var _Editor = __webpack_require__(147);
 
 	var _Editor2 = _interopRequireDefault(_Editor);
 
@@ -12598,7 +12593,7 @@
 	        }
 	      };
 
-	      var serviceType = this.props.serviceType;
+	      var outlet = this.props.outlet;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -12638,7 +12633,7 @@
 	          _react2.default.createElement(
 	            'tbody',
 	            null,
-	            this.props.serviceType.get('list').sortBy(function (item) {
+	            this.props.outlet.get('list').sortBy(function (item) {
 	              return item.get('name');
 	            }).map(function (item, idx) {
 	              return _react2.default.createElement(
@@ -12678,10 +12673,10 @@
 	}(_react2.default.Component);
 
 	function mapStateToProps(_ref) {
-	  var serviceType = _ref.serviceType;
+	  var outlet = _ref.outlet;
 
 	  return {
-	    serviceType: serviceType
+	    outlet: outlet
 	  };
 	}
 
@@ -12692,7 +12687,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(List);
 
 /***/ }),
-/* 152 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
