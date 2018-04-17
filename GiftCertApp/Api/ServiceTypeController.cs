@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GiftCertApp.Models;
-using GiftCertApp.Models.Data;
 
 namespace GiftCertApp.Api
 {

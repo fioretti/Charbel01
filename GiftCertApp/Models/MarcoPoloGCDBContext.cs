@@ -16,8 +16,8 @@ namespace GiftCertApp.Models
         public virtual DbSet<ServicesType> ServicesType { get; set; }
 
         public MarcoPoloGCDBContext(DbContextOptions<MarcoPoloGCDBContext> options)
-          : base(options)
-            { }
+                : base(options)
+        { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,7 +29,7 @@ namespace GiftCertApp.Models
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.GiftCertificateId).HasColumnName("GiftCertificateID");
+                entity.Property(e => e.GiftCertId).HasColumnName("GiftCertID");
 
                 entity.Property(e => e.LastModifiedBy)
                     .HasMaxLength(50)
@@ -39,9 +39,9 @@ namespace GiftCertApp.Models
 
                 entity.Property(e => e.OutletId).HasColumnName("OutletID");
 
-                entity.HasOne(d => d.GiftCertificate)
+                entity.HasOne(d => d.GiftCert)
                     .WithMany(p => p.Gcoutlet)
-                    .HasForeignKey(d => d.GiftCertificateId)
+                    .HasForeignKey(d => d.GiftCertId)
                     .HasConstraintName("FK_GCOutlet_GiftCertificate");
 
                 entity.HasOne(d => d.Outlet)
@@ -56,9 +56,20 @@ namespace GiftCertApp.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.CardType)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ccnumber)
+                    .HasColumnName("CCNumber")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.GiftCertificateId).HasColumnName("GiftCertificateID");
+                entity.Property(e => e.ExpirationDate).HasColumnType("date");
+
+                entity.Property(e => e.GiftCertId).HasColumnName("GiftCertID");
 
                 entity.Property(e => e.LastModifiedBy)
                     .HasMaxLength(50)
@@ -66,11 +77,19 @@ namespace GiftCertApp.Models
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
+                entity.Property(e => e.PaymentMode)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.PurchaseDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.GiftCertificate)
+                entity.Property(e => e.Remarks)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.GiftCert)
                     .WithMany(p => p.Gcpurchase)
-                    .HasForeignKey(d => d.GiftCertificateId)
+                    .HasForeignKey(d => d.GiftCertId)
                     .HasConstraintName("FK_GCPurchase_GiftCertificate");
             });
 
@@ -82,7 +101,7 @@ namespace GiftCertApp.Models
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.GiftCertificateId).HasColumnName("GiftCertificateID");
+                entity.Property(e => e.GiftCertId).HasColumnName("GiftCertID");
 
                 entity.Property(e => e.LastModifiedBy)
                     .HasMaxLength(50)
@@ -90,9 +109,13 @@ namespace GiftCertApp.Models
 
                 entity.Property(e => e.RedemptionDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.GiftCertificate)
+                entity.Property(e => e.Remarks)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.GiftCert)
                     .WithMany(p => p.Gcredemption)
-                    .HasForeignKey(d => d.GiftCertificateId)
+                    .HasForeignKey(d => d.GiftCertId)
                     .HasConstraintName("FK_GCRedemption_GiftCertificate");
             });
 
@@ -104,7 +127,7 @@ namespace GiftCertApp.Models
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.GiftCertificateId).HasColumnName("GiftCertificateID");
+                entity.Property(e => e.GiftCertId).HasColumnName("GiftCertID");
 
                 entity.Property(e => e.LastModifiedBy)
                     .HasMaxLength(50)
@@ -114,9 +137,9 @@ namespace GiftCertApp.Models
 
                 entity.Property(e => e.ServicesTypeId).HasColumnName("ServicesTypeID");
 
-                entity.HasOne(d => d.GiftCertificate)
+                entity.HasOne(d => d.GiftCert)
                     .WithMany(p => p.GcservicesType)
-                    .HasForeignKey(d => d.GiftCertificateId)
+                    .HasForeignKey(d => d.GiftCertId)
                     .HasConstraintName("FK_GCServicesType_GiftCertificate");
 
                 entity.HasOne(d => d.ServicesType)
@@ -159,6 +182,10 @@ namespace GiftCertApp.Models
 
                 entity.Property(e => e.GctypeId).HasColumnName("GCTypeID");
 
+                entity.Property(e => e.GiftCertNo)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.IssuanceDate).HasColumnType("datetime");
 
                 entity.Property(e => e.LastModifiedBy)
@@ -166,6 +193,8 @@ namespace GiftCertApp.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Note).HasColumnType("text");
 
                 entity.Property(e => e.Qrcode)
                     .HasColumnName("QRCode")

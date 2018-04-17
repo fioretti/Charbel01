@@ -24,6 +24,8 @@ namespace GiftCertApp.Models
         public DateTime? ModifiedDate { get; set; }
         public string Qrcode { get; set; }
         public bool? Active { get; set; }
+        public string GiftCertNo { get; set; }
+        public string Note { get; set; }
 
         public Gctype Gctype { get; set; }
         public ICollection<Gcoutlet> Gcoutlet { get; set; }

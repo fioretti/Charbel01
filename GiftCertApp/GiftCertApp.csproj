@@ -33,8 +33,4 @@
     <None Include="Views\ServiceType\Index.cshtml" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Abstracts\" />
-  </ItemGroup>
-
 </Project>

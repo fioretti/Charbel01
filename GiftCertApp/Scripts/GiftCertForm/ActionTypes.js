@@ -1,0 +1,5 @@
+
+export const SET_INITIAL_DATA = 'GiftCertForm/SET_INITIAL_DATA'
+export const HEADER_DATA_CHANGES = 'GiftCertForm/HEADER_DATA_CHANGES'
+export const FORM_DATA_CHANGED = 'GiftCertForm/FORM_DATA_CHANGED'
+export const ACTION_DATA_CHANGED = 'GiftCertForm/ACTION_DATA_CHANGED'

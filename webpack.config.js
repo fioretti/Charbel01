@@ -4,6 +4,8 @@ var webpack = require('webpack');
 var config = {
   context: path.join(__dirname, 'GiftCertApp/Scripts'),
   entry: {   
+  giftCert: './GiftCert/Container',
+  giftCertForm: './GiftCertForm/Container',
 	serviceType: './ServiceType/Container',
   outlet: './Outlet/Container',
   gcType: './GcType/Container'

@@ -1,0 +1,28 @@
+﻿@using GiftCertApp.Helpers
+@using GiftCertApp.Models.Enum
+@using GiftCertApp.Models.General
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+@model IList<GiftCertApp.Models.GiftCertificate>
+
+@{
+    ViewBag.Title = "Gift Certificates";
+}
+
+<h2 class="ifx_application_content_container_main_title">Gift Certificates</h2>
+
+@{
+    var serializerSettings = new JsonSerializerSettings
+    {
+        ContractResolver = new CamelCasePropertyNamesContractResolver()
+    };
+}
+
+@Html.Hidden("giftCerts", JsonConvert.SerializeObject(Model, serializerSettings))
+
+<div class="ifx_application_content_container" id="content">
+</div>
+
+@section scripts{
+    <script src="@Url.Content("~/js/giftCert.bundle.js")"></script>
+}

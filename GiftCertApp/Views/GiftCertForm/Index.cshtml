@@ -1,0 +1,21 @@
+﻿@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+@model GiftCertApp.Models.Data.GiftCert
+@{
+    ViewBag.Title = "Gift Certificate Form";
+    var jsonSerializerSettings = new JsonSerializerSettings
+    {
+        ContractResolver = new CamelCasePropertyNamesContractResolver()
+    };
+}
+
+<h2 class="ifx_application_content_container_main_title">Gift Certificate Form</h2>
+
+<input type="hidden" id="giftCert" value="@JsonConvert.SerializeObject(Model, jsonSerializerSettings)" />
+
+<div class="ifx_application_content_container" id="content">
+</div>
+
+@section scripts{
+    <script src="@Url.Content("~/js/giftCertForm.bundle.js")"></script>
+}
