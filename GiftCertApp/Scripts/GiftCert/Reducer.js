@@ -1,4 +1,4 @@
-import { statusList } from 'Utils/RequestStatusEnum'
+import { statusList } from 'Utils/GiftCertStatusEnum'
 import { fromJS } from 'Immutable'
 
 import { FETCHING_LIST, FETCHING_LIST_DONE, POPULATE_REQUESTS,

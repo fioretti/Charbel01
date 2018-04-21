@@ -1,9 +1,9 @@
 import React, { Component, PropTypes }  from 'react';
 import ReactDOM from 'react-dom';
 
-import { statusList } from 'Utils/RequestStatusEnum'
+import { statusList } from 'Utils/GiftCertStatusEnum'
 
-export default class RequestStatusSelector extends Component {
+export default class GiftCertStatusSelector extends Component {
   componentDidMount() {
 
     var el = $(ReactDOM.findDOMNode(this));
@@ -51,7 +51,7 @@ export default class RequestStatusSelector extends Component {
   }
 }
 
-RequestStatusSelector.propTypes = {
+GiftCertStatusSelector.propTypes = {
   defaultValue: PropTypes.array,
   style: PropTypes.object,
   multiple: PropTypes.string,

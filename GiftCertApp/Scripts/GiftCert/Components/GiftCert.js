@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { DropdownButton, MenuItem  } from 'react-bootstrap';
 
-import RequestStatus from 'Commons/RequestStatus'
+import RequestStatus from 'Commons/GiftCertStatus'
 import HumanizeMinutes from 'Commons/HumanizeMinutes'
 
 import * as uiUtils from 'Utils/UiUtils'
@@ -77,7 +77,7 @@ class RequestComponent extends React.Component {
     const item = this.props.request;
 
     let menuItems = []
-    menuItems.push(<MenuItem onClick={this.onViewClicked} key='View'>View Request</MenuItem>)
+    menuItems.push(<MenuItem onClick={this.onViewClicked} key='View'>View GiftCert</MenuItem>)
 
     const requestStatus = item.get('status');
 
@@ -168,6 +168,6 @@ RequestComponent.props = {
   isUserAdmin: PropTypes.bool.isRequired
 }
 
-const Request = connect()(RequestComponent)
+const GiftCert = connect()(RequestComponent)
 
-export default Request
+export default GiftCert

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import { statusList } from 'Utils/RequestStatusEnum'
+import { statusList } from 'Utils/GiftCertStatusEnum'
 
-export default function RequestStatus({value}){
+export default function GiftCertStatus({value}){
   return (
     <span>
       {
@@ -13,6 +13,6 @@ export default function RequestStatus({value}){
   )
 }
 
-RequestStatus.props = {
+GiftCertStatus.props = {
   value: PropTypes.number.isRequired
 }

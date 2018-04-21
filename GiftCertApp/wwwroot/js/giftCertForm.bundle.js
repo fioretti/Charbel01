@@ -78,11 +78,11 @@
 
 	var _reactReduxToastr2 = _interopRequireDefault(_reactReduxToastr);
 
-	var _Reducer = __webpack_require__(502);
+	var _Reducer = __webpack_require__(503);
 
 	var _Reducer2 = _interopRequireDefault(_Reducer);
 
-	var _Actions = __webpack_require__(506);
+	var _Actions = __webpack_require__(507);
 
 	var actions = _interopRequireWildcard(_Actions);
 
@@ -94,7 +94,7 @@
 
 	var dataUtils = _interopRequireWildcard(_DataUtils);
 
-	var _GiftCertStatusEnum = __webpack_require__(508);
+	var _GiftCertStatusEnum = __webpack_require__(269);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -29329,7 +29329,17 @@
 
 /***/ }),
 /* 268 */,
-/* 269 */,
+/* 269 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var statusList = exports.statusList = [{ id: 1, name: 'Draft' }, { id: 2, name: 'Requested' }, { id: 3, name: 'Acceptance' }, { id: 4, name: 'On Hold' }, { id: 10, name: 'Lab Queue' }, { id: 11, name: 'Lab WiP' }, { id: 20, name: 'Quality Queue' }, { id: 21, name: 'Quality' }, { id: 22, name: 'Quality Rejected' }, { id: 30, name: 'Datasheet Queue' }, { id: 31, name: 'Datasheet Process' }, { id: 32, name: 'Datasheet Approval' }, { id: 33, name: 'Datasheet Rejected' }, { id: 34, name: 'Datasheet Post Process' }, { id: 90, name: 'Canceled' }, { id: 91, name: 'Request Rejected' }, { id: 100, name: 'Closed' }];
+
+/***/ }),
 /* 270 */,
 /* 271 */,
 /* 272 */,
@@ -29562,7 +29572,8 @@
 /* 499 */,
 /* 500 */,
 /* 501 */,
-/* 502 */
+/* 502 */,
+/* 503 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29907,11 +29918,11 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _uuid = __webpack_require__(503);
+	var _uuid = __webpack_require__(504);
 
 	var _uuid2 = _interopRequireDefault(_uuid);
 
-	var _ActionTypes = __webpack_require__(505);
+	var _ActionTypes = __webpack_require__(506);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29944,7 +29955,7 @@
 	}
 
 /***/ }),
-/* 503 */
+/* 504 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//     uuid.js
@@ -29955,7 +29966,7 @@
 	// Unique ID creation requires a high quality random # generator.  We feature
 	// detect to determine the best RNG source, normalizing to a function that
 	// returns 128-bits of randomness, since that's what's usually required
-	var _rng = __webpack_require__(504);
+	var _rng = __webpack_require__(505);
 
 	// Maps for number <-> hex string conversion
 	var _byteToHex = [];
@@ -30133,7 +30144,7 @@
 
 
 /***/ }),
-/* 504 */
+/* 505 */
 /***/ (function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -30172,7 +30183,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 505 */
+/* 506 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -30186,7 +30197,7 @@
 	var ACTION_DATA_CHANGED = exports.ACTION_DATA_CHANGED = 'GiftCertForm/ACTION_DATA_CHANGED';
 
 /***/ }),
-/* 506 */
+/* 507 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30221,7 +30232,7 @@
 	exports.channelLoaded = channelLoaded;
 	exports.addTestRequest = addTestRequest;
 
-	var _ActionTypes = __webpack_require__(505);
+	var _ActionTypes = __webpack_require__(506);
 
 	var _reactReduxToastr = __webpack_require__(7);
 
@@ -30237,7 +30248,7 @@
 
 	var api = _interopRequireWildcard(_Api);
 
-	var _TestValidationUtils = __webpack_require__(507);
+	var _TestValidationUtils = __webpack_require__(508);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -30767,7 +30778,7 @@
 	}
 
 /***/ }),
-/* 507 */
+/* 508 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30803,17 +30814,6 @@
 	    valueIsEmpty: dataUtils.isEmpty(conditionSelection.get('value'))
 	  };
 	}
-
-/***/ }),
-/* 508 */
-/***/ (function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var statusList = exports.statusList = [{ id: 1, name: 'Draft' }, { id: 2, name: 'Requested' }, { id: 3, name: 'Acceptance' }, { id: 4, name: 'On Hold' }, { id: 10, name: 'Lab Queue' }, { id: 11, name: 'Lab WiP' }, { id: 20, name: 'Quality Queue' }, { id: 21, name: 'Quality' }, { id: 22, name: 'Quality Rejected' }, { id: 30, name: 'Datasheet Queue' }, { id: 31, name: 'Datasheet Process' }, { id: 32, name: 'Datasheet Approval' }, { id: 33, name: 'Datasheet Rejected' }, { id: 34, name: 'Datasheet Post Process' }, { id: 90, name: 'Canceled' }, { id: 91, name: 'Request Rejected' }, { id: 100, name: 'Closed' }];
 
 /***/ })
 /******/ ]);
