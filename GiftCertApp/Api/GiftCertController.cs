@@ -22,48 +22,48 @@ namespace GiftCertApp.Api
 
         // GET: api/GiftCert
         [HttpGet]
-        public IEnumerable<GiftCertificate> GetGiftCertificate()
+        public IEnumerable<GiftCert> GetGiftCert()
         {
-            return _context.GiftCertificate;
+            return _context.GiftCert;
         }
 
         // GET: api/GiftCert/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetGiftCertificate([FromRoute] int id)
+        public async Task<IActionResult> GetGiftCert([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var giftCertificate = await _context.GiftCertificate.SingleOrDefaultAsync(m => m.Id == id);
+            var GiftCert = await _context.GiftCert.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (giftCertificate == null)
+            if (GiftCert == null)
             {
                 return NotFound();
             }
 
-            return Ok(giftCertificate);
+            return Ok(GiftCert);
         }
 
         // PUT: api/GiftCert/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGiftCertificate([FromRoute] int id, [FromBody] GiftCertificate giftCertificate)
+        public async Task<IActionResult> PutGiftCert([FromRoute] int id, [FromBody] GiftCert GiftCert)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != giftCertificate.Id)
+            if (id != GiftCert.Id)
             {
                 return BadRequest();
             }
 
-            giftCertificate.ModifiedDate = DateTime.Now;
-            giftCertificate.LastModifiedBy = "leila";
+            GiftCert.ModifiedDate = DateTime.Now;
+            GiftCert.LastModifiedBy = "leila";
 
-            _context.Entry(giftCertificate).State = EntityState.Modified;
+            _context.Entry(GiftCert).State = EntityState.Modified;
 
             try
             {
@@ -71,7 +71,7 @@ namespace GiftCertApp.Api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GiftCertificateExists(id))
+                if (!GiftCertExists(id))
                 {
                     return NotFound();
                 }
@@ -86,47 +86,47 @@ namespace GiftCertApp.Api
 
         // POST: api/GiftCert
         [HttpPost]
-        public async Task<IActionResult> PostGiftCertificate([FromBody] GiftCertificate giftCertificate)
+        public async Task<IActionResult> PostGiftCert([FromBody] GiftCert GiftCert)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            giftCertificate.CreatedDate = DateTime.Now;
-            giftCertificate.ModifiedDate = DateTime.Now;
-            giftCertificate.LastModifiedBy = "leila";
+            GiftCert.CreatedDate = DateTime.Now;
+            GiftCert.ModifiedDate = DateTime.Now;
+            GiftCert.LastModifiedBy = "leila";
 
-            _context.GiftCertificate.Add(giftCertificate);
+            _context.GiftCert.Add(GiftCert);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGiftCertificate", new { id = giftCertificate.Id }, giftCertificate);
+            return CreatedAtAction("GetGiftCert", new { id = GiftCert.Id }, GiftCert);
         }
 
         // DELETE: api/GiftCert/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGiftCertificate([FromRoute] int id)
+        public async Task<IActionResult> DeleteGiftCert([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var giftCertificate = await _context.GiftCertificate.SingleOrDefaultAsync(m => m.Id == id);
-            if (giftCertificate == null)
+            var GiftCert = await _context.GiftCert.SingleOrDefaultAsync(m => m.Id == id);
+            if (GiftCert == null)
             {
                 return NotFound();
             }
 
-            _context.GiftCertificate.Remove(giftCertificate);
+            _context.GiftCert.Remove(GiftCert);
             await _context.SaveChangesAsync();
 
-            return Ok(giftCertificate);
+            return Ok(GiftCert);
         }
 
-        private bool GiftCertificateExists(int id)
+        private bool GiftCertExists(int id)
         {
-            return _context.GiftCertificate.Any(e => e.Id == id);
+            return _context.GiftCert.Any(e => e.Id == id);
         }
     }
 }

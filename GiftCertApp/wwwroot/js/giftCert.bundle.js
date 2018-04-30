@@ -2758,12 +2758,12 @@
 	};
 
 	// GC Type
-	var addNewGcType = exports.addNewGcType = function addNewGcType(gcType, callback) {
-	  return _axios2.default.post('/api/GcType', gcType).then(callback);
+	var addNewGcType = exports.addNewGcType = function addNewGcType(GcType, callback) {
+	  return _axios2.default.post('/api/GcType', GcType).then(callback);
 	};
 
-	var updateGcType = exports.updateGcType = function updateGcType(gcType, callback) {
-	  return _axios2.default.put('/api/GcType/' + gcType.id, gcType).then(callback);
+	var updateGcType = exports.updateGcType = function updateGcType(GcType, callback) {
+	  return _axios2.default.put('/api/GcType/' + GcType.id, GcType).then(callback);
 	};
 
 	// Outlet

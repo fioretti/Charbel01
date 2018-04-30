@@ -21,7 +21,7 @@ namespace GiftCertApp.Controllers
         // GET: GiftCert
         public async Task<IActionResult> Index()
         {
-            var marcoPoloGCDBContext = _context.GiftCertificate.Include(g => g.Gctype);
+            var marcoPoloGCDBContext = _context.GiftCert.Include(g => g.GcType);
             return View(await marcoPoloGCDBContext.ToListAsync());
         }
 
@@ -33,21 +33,21 @@ namespace GiftCertApp.Controllers
                 return NotFound();
             }
 
-            var giftCertificate = await _context.GiftCertificate
-                .Include(g => g.Gctype)
+            var GiftCert = await _context.GiftCert
+                .Include(g => g.GcType)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (giftCertificate == null)
+            if (GiftCert == null)
             {
                 return NotFound();
             }
 
-            return View(giftCertificate);
+            return View(GiftCert);
         }
 
         // GET: GiftCert/Create
         public IActionResult Create()
         {
-            ViewData["GctypeId"] = new SelectList(_context.Gctype, "Id", "Id");
+            ViewData["GcTypeId"] = new SelectList(_context.GcType, "Id", "Id");
             return View();
         }
 
@@ -56,16 +56,16 @@ namespace GiftCertApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,GctypeId,Value,IssuanceDate,DtipermitNo,ExpirationDate,LastModifiedBy,CreatedDate,ModifiedDate,Qrcode,Active,GiftCertNo,Note")] GiftCertificate giftCertificate)
+        public async Task<IActionResult> Create([Bind("Id,GcTypeId,Value,IssuanceDate,DtipermitNo,ExpirationDate,LastModifiedBy,CreatedDate,ModifiedDate,Qrcode,Active,GiftCertNo,Note")] GiftCert GiftCert)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(giftCertificate);
+                _context.Add(GiftCert);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GctypeId"] = new SelectList(_context.Gctype, "Id", "Id", giftCertificate.GctypeId);
-            return View(giftCertificate);
+            ViewData["GcTypeId"] = new SelectList(_context.GcType, "Id", "Id", GiftCert.GcTypeId);
+            return View(GiftCert);
         }
 
         // GET: GiftCert/Edit/5
@@ -76,13 +76,13 @@ namespace GiftCertApp.Controllers
                 return NotFound();
             }
 
-            var giftCertificate = await _context.GiftCertificate.SingleOrDefaultAsync(m => m.Id == id);
-            if (giftCertificate == null)
+            var GiftCert = await _context.GiftCert.SingleOrDefaultAsync(m => m.Id == id);
+            if (GiftCert == null)
             {
                 return NotFound();
             }
-            ViewData["GctypeId"] = new SelectList(_context.Gctype, "Id", "Id", giftCertificate.GctypeId);
-            return View(giftCertificate);
+            ViewData["GcTypeId"] = new SelectList(_context.GcType, "Id", "Id", GiftCert.GcTypeId);
+            return View(GiftCert);
         }
 
         // POST: GiftCert/Edit/5
@@ -90,9 +90,9 @@ namespace GiftCertApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,GctypeId,Value,IssuanceDate,DtipermitNo,ExpirationDate,LastModifiedBy,CreatedDate,ModifiedDate,Qrcode,Active,GiftCertNo,Note")] GiftCertificate giftCertificate)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,GcTypeId,Value,IssuanceDate,DtipermitNo,ExpirationDate,LastModifiedBy,CreatedDate,ModifiedDate,Qrcode,Active,GiftCertNo,Note")] GiftCert GiftCert)
         {
-            if (id != giftCertificate.Id)
+            if (id != GiftCert.Id)
             {
                 return NotFound();
             }
@@ -101,12 +101,12 @@ namespace GiftCertApp.Controllers
             {
                 try
                 {
-                    _context.Update(giftCertificate);
+                    _context.Update(GiftCert);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GiftCertificateExists(giftCertificate.Id))
+                    if (!GiftCertExists(GiftCert.Id))
                     {
                         return NotFound();
                     }
@@ -117,8 +117,8 @@ namespace GiftCertApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GctypeId"] = new SelectList(_context.Gctype, "Id", "Id", giftCertificate.GctypeId);
-            return View(giftCertificate);
+            ViewData["GcTypeId"] = new SelectList(_context.GcType, "Id", "Id", GiftCert.GcTypeId);
+            return View(GiftCert);
         }
 
         // GET: GiftCert/Delete/5
@@ -129,15 +129,15 @@ namespace GiftCertApp.Controllers
                 return NotFound();
             }
 
-            var giftCertificate = await _context.GiftCertificate
-                .Include(g => g.Gctype)
+            var GiftCert = await _context.GiftCert
+                .Include(g => g.GcType)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (giftCertificate == null)
+            if (GiftCert == null)
             {
                 return NotFound();
             }
 
-            return View(giftCertificate);
+            return View(GiftCert);
         }
 
         // POST: GiftCert/Delete/5
@@ -145,15 +145,15 @@ namespace GiftCertApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var giftCertificate = await _context.GiftCertificate.SingleOrDefaultAsync(m => m.Id == id);
-            _context.GiftCertificate.Remove(giftCertificate);
+            var GiftCert = await _context.GiftCert.SingleOrDefaultAsync(m => m.Id == id);
+            _context.GiftCert.Remove(GiftCert);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GiftCertificateExists(int id)
+        private bool GiftCertExists(int id)
         {
-            return _context.GiftCertificate.Any(e => e.Id == id);
+            return _context.GiftCert.Any(e => e.Id == id);
         }
     }
 }

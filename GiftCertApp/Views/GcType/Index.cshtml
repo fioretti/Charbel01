@@ -1,6 +1,6 @@
 ﻿@using Newtonsoft.Json
 @using Newtonsoft.Json.Serialization
-@model IList<GiftCertApp.Models.Gctype>
+@model IList<GiftCertApp.Models.GcType>
 @{
     ViewBag.Title = "Gift Cert Type";
     var jsonSerializerSettings = new JsonSerializerSettings
@@ -11,11 +11,11 @@
 
 <h2 class="ifx_application_content_container_main_title">Gift Cert Type</h2>
 
-<input type="hidden" id="gcTypes" value="@JsonConvert.SerializeObject(Model, jsonSerializerSettings)" />
+<input type="hidden" id="GcTypes" value="@JsonConvert.SerializeObject(Model, jsonSerializerSettings)" />
 
 <div class="ifx_application_content_container" id="content">
 </div>
 
 @section scripts{
-    <script src="@Url.Content("~/js/gcType.bundle.js")"></script>
+    <script src="@Url.Content("~/js/GcType.bundle.js")"></script>
 }

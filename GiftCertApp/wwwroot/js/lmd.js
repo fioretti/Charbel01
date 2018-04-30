@@ -23671,7 +23671,7 @@ S2.define('jquery.select2',[
 
     addUnitAlias('date', 'D');
 
-    // PRIOROITY
+    // PRIORITY
     addUnitPriority('date', 9);
 
     // PARSING
@@ -24468,7 +24468,7 @@ S2.define('jquery.select2',[
     // Side effect imports
 
 
-    hooks.version = '2.22.0';
+    hooks.version = '2.22.1';
 
     setHookCallback(createLocal);
 

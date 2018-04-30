@@ -12,13 +12,13 @@ export const updateServiceType = (serviceType, callback) => {
 };
 
 // GC Type
-export const addNewGcType = (gcType, callback) => {
-    return axios.post('/api/GcType', gcType)
+export const addNewGcType = (GcType, callback) => {
+    return axios.post('/api/GcType', GcType)
         .then(callback);
 };
 
-export const updateGcType = (gcType, callback) => {
-    return axios.put('/api/GcType/' + gcType.id, gcType)
+export const updateGcType = (GcType, callback) => {
+    return axios.put('/api/GcType/' + GcType.id, GcType)
         .then(callback);
 };
 

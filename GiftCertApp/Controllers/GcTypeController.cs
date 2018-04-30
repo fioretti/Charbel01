@@ -21,7 +21,7 @@ namespace GiftCertApp.Controllers
         // GET: GcType
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Gctype.ToListAsync());
+            return View(await _context.GcType.ToListAsync());
         }
 
         // GET: GcType/Details/5
@@ -32,14 +32,14 @@ namespace GiftCertApp.Controllers
                 return NotFound();
             }
 
-            var gctype = await _context.Gctype
+            var GcType = await _context.GcType
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (gctype == null)
+            if (GcType == null)
             {
                 return NotFound();
             }
 
-            return View(gctype);
+            return View(GcType);
         }
 
         // GET: GcType/Create
@@ -53,15 +53,15 @@ namespace GiftCertApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LastModifiedBy,CreatedDate,ModifiedDate,Name,Active")] Gctype gctype)
+        public async Task<IActionResult> Create([Bind("Id,LastModifiedBy,CreatedDate,ModifiedDate,Name,Active")] GcType GcType)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(gctype);
+                _context.Add(GcType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(gctype);
+            return View(GcType);
         }
 
         // GET: GcType/Edit/5
@@ -72,12 +72,12 @@ namespace GiftCertApp.Controllers
                 return NotFound();
             }
 
-            var gctype = await _context.Gctype.SingleOrDefaultAsync(m => m.Id == id);
-            if (gctype == null)
+            var GcType = await _context.GcType.SingleOrDefaultAsync(m => m.Id == id);
+            if (GcType == null)
             {
                 return NotFound();
             }
-            return View(gctype);
+            return View(GcType);
         }
 
         // POST: GcType/Edit/5
@@ -85,9 +85,9 @@ namespace GiftCertApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LastModifiedBy,CreatedDate,ModifiedDate,Name,Active")] Gctype gctype)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,LastModifiedBy,CreatedDate,ModifiedDate,Name,Active")] GcType GcType)
         {
-            if (id != gctype.Id)
+            if (id != GcType.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace GiftCertApp.Controllers
             {
                 try
                 {
-                    _context.Update(gctype);
+                    _context.Update(GcType);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GctypeExists(gctype.Id))
+                    if (!GcTypeExists(GcType.Id))
                     {
                         return NotFound();
                     }
@@ -112,7 +112,7 @@ namespace GiftCertApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(gctype);
+            return View(GcType);
         }
 
         // GET: GcType/Delete/5
@@ -123,14 +123,14 @@ namespace GiftCertApp.Controllers
                 return NotFound();
             }
 
-            var gctype = await _context.Gctype
+            var GcType = await _context.GcType
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (gctype == null)
+            if (GcType == null)
             {
                 return NotFound();
             }
 
-            return View(gctype);
+            return View(GcType);
         }
 
         // POST: GcType/Delete/5
@@ -138,15 +138,15 @@ namespace GiftCertApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var gctype = await _context.Gctype.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Gctype.Remove(gctype);
+            var GcType = await _context.GcType.SingleOrDefaultAsync(m => m.Id == id);
+            _context.GcType.Remove(GcType);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GctypeExists(int id)
+        private bool GcTypeExists(int id)
         {
-            return _context.Gctype.Any(e => e.Id == id);
+            return _context.GcType.Any(e => e.Id == id);
         }
     }
 }

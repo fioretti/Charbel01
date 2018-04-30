@@ -206,8 +206,8 @@
 
 	      var giftCert = this.props.giftCert;
 
-	      //const gcTypeInputDiv = classnames('col-xs-8', {
-	      //    'has-error': headerData.get('gcTypeIsEmpty')
+	      //const GcTypeInputDiv = classnames('col-xs-8', {
+	      //    'has-error': headerData.get('GcTypeIsEmpty')
 	      //})
 
 	      //const creatorInputDiv = classnames('col-xs-8', {        
@@ -2868,12 +2868,12 @@
 	};
 
 	// GC Type
-	var addNewGcType = exports.addNewGcType = function addNewGcType(gcType, callback) {
-	  return _axios2.default.post('/api/GcType', gcType).then(callback);
+	var addNewGcType = exports.addNewGcType = function addNewGcType(GcType, callback) {
+	  return _axios2.default.post('/api/GcType', GcType).then(callback);
 	};
 
-	var updateGcType = exports.updateGcType = function updateGcType(gcType, callback) {
-	  return _axios2.default.put('/api/GcType/' + gcType.id, gcType).then(callback);
+	var updateGcType = exports.updateGcType = function updateGcType(GcType, callback) {
+	  return _axios2.default.put('/api/GcType/' + GcType.id, GcType).then(callback);
 	};
 
 	// Outlet
@@ -29604,7 +29604,7 @@
 	        id: giftCert.id || 0,
 	        status: giftCert.status,
 	        creator: giftCert.lastModifiedBy || defaultHeaderData.get('lastModifiedBy'),
-	        gcType: giftCert.gcType || defaultHeaderData.get('gcType'),
+	        GcType: giftCert.GcType || defaultHeaderData.get('GcType'),
 	        qrCode: giftCert.qrCode || defaultHeaderData.get('qrCode'),
 	        dtiPermitNo: giftCert.dtiPermitNo || defaultHeaderData.get('dtiPermitNo'),
 	        value: giftCert.value || defaultHeaderData.get('value'),
@@ -29933,7 +29933,7 @@
 	  isSubmitting: false,
 	  headerData: {
 	    creator: { id: 0, name: '' },
-	    gcType: { id: 0, name: '' },
+	    GcType: { id: 0, name: '' },
 	    qrCode: '',
 	    giftCertNo: '',
 	    dtiPermitNo: '',

@@ -7,7 +7,7 @@ namespace GiftCertApp.Models
     {
         public ServicesType()
         {
-            GcservicesType = new HashSet<GcservicesType>();
+            GcServicesType = new HashSet<GcServicesType>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace GiftCertApp.Models
         public string Name { get; set; }
         public bool? Active { get; set; }
 
-        public ICollection<GcservicesType> GcservicesType { get; set; }
+        public ICollection<GcServicesType> GcServicesType { get; set; }
     }
 }

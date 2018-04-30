@@ -104,7 +104,7 @@
 	    _createClass(GcType, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            this.props.populateData((0, _Immutable.fromJS)(JSON.parse($('#gcTypes').val())));
+	            this.props.populateData((0, _Immutable.fromJS)(JSON.parse($('#GcTypes').val())));
 	        }
 	    }, {
 	        key: 'render',
@@ -127,10 +127,10 @@
 	}(_react2.default.Component);
 
 	function mapStateToProps(_ref) {
-	    var gcType = _ref.gcType;
+	    var GcType = _ref.GcType;
 
 	    return {
-	        gcType: gcType
+	        GcType: GcType
 	    };
 	}
 
@@ -141,7 +141,7 @@
 	var GcTypeContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(GcType);
 
 	var rootReducers = (0, _redux.combineReducers)({
-	    gcType: _Reducer2.default,
+	    GcType: _Reducer2.default,
 	    toastr: _reactReduxToastr.reducer
 	});
 
@@ -2580,12 +2580,12 @@
 	};
 
 	// GC Type
-	var addNewGcType = exports.addNewGcType = function addNewGcType(gcType, callback) {
-	  return _axios2.default.post('/api/GcType', gcType).then(callback);
+	var addNewGcType = exports.addNewGcType = function addNewGcType(GcType, callback) {
+	  return _axios2.default.post('/api/GcType', GcType).then(callback);
 	};
 
-	var updateGcType = exports.updateGcType = function updateGcType(gcType, callback) {
-	  return _axios2.default.put('/api/GcType/' + gcType.id, gcType).then(callback);
+	var updateGcType = exports.updateGcType = function updateGcType(GcType, callback) {
+	  return _axios2.default.put('/api/GcType/' + GcType.id, GcType).then(callback);
 	};
 
 	// Outlet
@@ -4711,7 +4711,7 @@
 	        }
 	      };
 
-	      var gcType = this.props.gcType;
+	      var GcType = this.props.GcType;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -4751,7 +4751,7 @@
 	          _react2.default.createElement(
 	            'tbody',
 	            null,
-	            this.props.gcType.get('list').sortBy(function (item) {
+	            this.props.GcType.get('list').sortBy(function (item) {
 	              return item.get('name');
 	            }).map(function (item, idx) {
 	              return _react2.default.createElement(
@@ -4791,10 +4791,10 @@
 	}(_react2.default.Component);
 
 	function mapStateToProps(_ref) {
-	  var gcType = _ref.gcType;
+	  var GcType = _ref.GcType;
 
 	  return {
-	    gcType: gcType
+	    GcType: GcType
 	  };
 	}
 

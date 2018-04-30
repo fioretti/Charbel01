@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace GiftCertApp.Models.Data
 {
-    public class GiftCert : IDatabaseEntity
+    public class GiftCertDto : IDatabaseEntity
     {
         public int Id { get; set; }
-        public int? GctypeId { get; set; }
+        public int? GcTypeId { get; set; }
         public decimal? Value { get; set; }
         public DateTime? IssuanceDate { get; set; }
         public string DtipermitNo { get; set; }

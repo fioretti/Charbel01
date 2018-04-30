@@ -104,8 +104,8 @@ class GiftCertForm extends React.Component {
 
     const giftCert = this.props.giftCert;
 
-    //const gcTypeInputDiv = classnames('col-xs-8', {
-    //    'has-error': headerData.get('gcTypeIsEmpty')
+    //const GcTypeInputDiv = classnames('col-xs-8', {
+    //    'has-error': headerData.get('GcTypeIsEmpty')
     //})
 
     //const creatorInputDiv = classnames('col-xs-8', {        

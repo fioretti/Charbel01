@@ -74,7 +74,7 @@ class List extends React.Component {
       }
     }
 
-    const gcType = this.props.gcType
+    const GcType = this.props.GcType
 
     return (
       <div>
@@ -93,7 +93,7 @@ class List extends React.Component {
           </thead>
           <tbody>
             {
-              this.props.gcType.get('list')
+              this.props.GcType.get('list')
                 .sortBy((item) => item.get('name'))
                 .map((item, idx) => {
                   return (
@@ -117,9 +117,9 @@ class List extends React.Component {
   }
 }
 
-function mapStateToProps({gcType}) {
+function mapStateToProps({GcType}) {
   return {
-      gcType: gcType
+      GcType: GcType
   }
 }
 

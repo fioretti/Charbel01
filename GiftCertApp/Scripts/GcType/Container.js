@@ -15,7 +15,7 @@ import List from './Components/List'
 
 class GcType extends React.Component {
     componentDidMount() {
-        this.props.populateData(fromJS(JSON.parse($('#gcTypes').val())));
+        this.props.populateData(fromJS(JSON.parse($('#GcTypes').val())));
     }
 
     render() {
@@ -33,9 +33,9 @@ class GcType extends React.Component {
     }
 }
 
-function mapStateToProps({ gcType }) {
+function mapStateToProps({ GcType }) {
     return {
-        gcType: gcType
+        GcType: GcType
     }
 }
 
@@ -46,7 +46,7 @@ function mapDispatchToProps(dispatch) {
 const GcTypeContainer = connect(mapStateToProps, mapDispatchToProps)(GcType)
 
 const rootReducers = combineReducers({
-    gcType: reducer,
+    GcType: reducer,
     toastr: toastrReducer
 });
 

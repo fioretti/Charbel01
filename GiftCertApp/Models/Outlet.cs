@@ -7,7 +7,7 @@ namespace GiftCertApp.Models
     {
         public Outlet()
         {
-            Gcoutlet = new HashSet<Gcoutlet>();
+            GcOutlet = new HashSet<GcOutlet>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace GiftCertApp.Models
         public DateTime? ModifiedDate { get; set; }
         public bool? Active { get; set; }
 
-        public ICollection<Gcoutlet> Gcoutlet { get; set; }
+        public ICollection<GcOutlet> GcOutlet { get; set; }
     }
 }

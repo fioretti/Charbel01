@@ -15,7 +15,7 @@ const initialState = fromJS({
   isSubmitting: false,
   headerData: {    
     creator: { id: 0, name: '' },             
-    gcType: { id: 0, name: '' },
+    GcType: { id: 0, name: '' },
     qrCode: '',
     giftCertNo: '',
     dtiPermitNo: '',
@@ -56,7 +56,7 @@ export default function (state = initialState, action) {
         id: giftCert.id || 0,          
         status: giftCert.status ,               
         creator: giftCert.lastModifiedBy || defaultHeaderData.get('lastModifiedBy'),
-        gcType: giftCert.gcType || defaultHeaderData.get('gcType'),
+        GcType: giftCert.GcType || defaultHeaderData.get('GcType'),
         qrCode: giftCert.qrCode || defaultHeaderData.get('qrCode'),
         dtiPermitNo: giftCert.dtiPermitNo || defaultHeaderData.get('dtiPermitNo'),
         value: giftCert.value || defaultHeaderData.get('value'),

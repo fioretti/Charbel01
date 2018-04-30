@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace GiftCertApp.Models
 {
-    public partial class Gctype
+    public partial class GcType
     {
-        public Gctype()
+        public GcType()
         {
-            GiftCertificate = new HashSet<GiftCertificate>();
+            GiftCert = new HashSet<GiftCert>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace GiftCertApp.Models
         public string Name { get; set; }
         public bool? Active { get; set; }
 
-        public ICollection<GiftCertificate> GiftCertificate { get; set; }
+        public ICollection<GiftCert> GiftCert { get; set; }
     }
 }

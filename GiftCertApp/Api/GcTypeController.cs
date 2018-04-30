@@ -22,48 +22,48 @@ namespace GiftCertApp.Api
 
         // GET: api/GcType
         [HttpGet]
-        public IEnumerable<Gctype> GetGctype()
+        public IEnumerable<GcType> GetGcType()
         {
-            return _context.Gctype;
+            return _context.GcType;
         }
 
         // GET: api/GcType/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetGctype([FromRoute] int id)
+        public async Task<IActionResult> GetGcType([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var gctype = await _context.Gctype.SingleOrDefaultAsync(m => m.Id == id);
+            var GcType = await _context.GcType.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (gctype == null)
+            if (GcType == null)
             {
                 return NotFound();
             }
 
-            return Ok(gctype);
+            return Ok(GcType);
         }
 
         // PUT: api/GcType/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGctype([FromRoute] int id, [FromBody] Gctype gctype)
+        public async Task<IActionResult> PutGcType([FromRoute] int id, [FromBody] GcType GcType)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != gctype.Id)
+            if (id != GcType.Id)
             {
                 return BadRequest();
             }
 
-            gctype.ModifiedDate = DateTime.Now;
-            gctype.LastModifiedBy = "leila";
+            GcType.ModifiedDate = DateTime.Now;
+            GcType.LastModifiedBy = "leila";
 
-            _context.Entry(gctype).State = EntityState.Modified;
+            _context.Entry(GcType).State = EntityState.Modified;
 
             try
             {
@@ -71,7 +71,7 @@ namespace GiftCertApp.Api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GctypeExists(id))
+                if (!GcTypeExists(id))
                 {
                     return NotFound();
                 }
@@ -86,47 +86,47 @@ namespace GiftCertApp.Api
 
         // POST: api/GcType
         [HttpPost]
-        public async Task<IActionResult> PostGctype([FromBody] Gctype gctype)
+        public async Task<IActionResult> PostGcType([FromBody] GcType GcType)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            gctype.CreatedDate = DateTime.Now;
-            gctype.ModifiedDate = DateTime.Now;
-            gctype.LastModifiedBy = "leila";
+            GcType.CreatedDate = DateTime.Now;
+            GcType.ModifiedDate = DateTime.Now;
+            GcType.LastModifiedBy = "leila";
 
-            _context.Gctype.Add(gctype);
+            _context.GcType.Add(GcType);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGctype", new { id = gctype.Id }, gctype);
+            return CreatedAtAction("GetGcType", new { id = GcType.Id }, GcType);
         }
 
         // DELETE: api/GcType/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGctype([FromRoute] int id)
+        public async Task<IActionResult> DeleteGcType([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var gctype = await _context.Gctype.SingleOrDefaultAsync(m => m.Id == id);
-            if (gctype == null)
+            var GcType = await _context.GcType.SingleOrDefaultAsync(m => m.Id == id);
+            if (GcType == null)
             {
                 return NotFound();
             }
 
-            _context.Gctype.Remove(gctype);
+            _context.GcType.Remove(GcType);
             await _context.SaveChangesAsync();
 
-            return Ok(gctype);
+            return Ok(GcType);
         }
 
-        private bool GctypeExists(int id)
+        private bool GcTypeExists(int id)
         {
-            return _context.Gctype.Any(e => e.Id == id);
+            return _context.GcType.Any(e => e.Id == id);
         }
     }
 }
