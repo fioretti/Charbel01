@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace GiftCertApp.Models
@@ -17,6 +18,7 @@ namespace GiftCertApp.Models
         public string Name { get; set; }
         public bool? Active { get; set; }
 
+        [JsonIgnore]
         public ICollection<GiftCert> GiftCert { get; set; }
     }
 }

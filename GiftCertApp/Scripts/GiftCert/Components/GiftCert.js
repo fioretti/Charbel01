@@ -2,15 +2,15 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { DropdownButton, MenuItem  } from 'react-bootstrap';
 
-import RequestStatus from 'Commons/GiftCertStatus'
+import GiftCertStatus from 'Commons/GiftCertStatus'
 import HumanizeMinutes from 'Commons/HumanizeMinutes'
 
 import * as uiUtils from 'Utils/UiUtils'
 import * as actions from '../Actions'
 import * as dataUtils from 'Utils/DataUtils'
-import Priority from 'Commons/Priority'
+import GcType from 'Commons/GcType'
 
-class RequestComponent extends React.Component {
+class GiftCertComponent extends React.Component {
   constructor() {
     super()
     this.onViewClicked = this.onViewClicked.bind(this)
@@ -118,8 +118,8 @@ class RequestComponent extends React.Component {
       </DropdownButton>
     )
 
-    const requestType = item.get('requestType')
-    const requestTypeString = requestType != null ? requestType.get('name') : '-'
+    const gcType = item.get('gcType')
+    const gcTypeString = gcType != null ? gcType.get('name') : '-'
 
     const division = item.get('division')
     const divisionString = division != null ? division.get('name') : '-'
@@ -127,34 +127,24 @@ class RequestComponent extends React.Component {
     const businessLine = item.get('businessLine')
     const businessLineString = businessLine != null ? businessLine.get('name') : '-'
 
-    const requestDate = item.get('requestDate')
-    const requestDateString = requestDate != null ? dataUtils.renderToLocalDateTime(requestDate) : '-'
+    const issuanceDate = item.get('issuanceDate')
+    const issuanceDateString = issuanceDate != null ? dataUtils.renderToLocalDateTime(issuanceDate) : '-'
+
+    const expirationDate = item.get('expirationDate')
+    const expirationDateString = expirationDate != null ? dataUtils.renderToLocalDateTime(expirationDate) : '-'
 
     const toggleDetail = this.props.toggleDetail
 
     return (
-      <tr>
-        <td>{item.get('projectCode')}</td>
-        <td>{item.get('partNumber')}</td>
-        <td>{requestTypeString}</td>
-        {
-          (() => {
-            if(toggleDetail) {
-              return (<td>{divisionString}</td>)
-            }
-          })()
-        }
-        {
-          (() => {
-            if(toggleDetail) {
-              return (<td>{businessLineString}</td>)
-            }
-          })()
-        }
-        <td><Priority value={item.get('priority')} /></td>
-        <td>{requestDateString}</td>
-        <td><HumanizeMinutes minutes={item.get('ageRequest')} /></td>
-        <td><RequestStatus value={item.get('status')} /></td>
+        <tr>
+        <td>{item.get('giftCertNo')}</td>
+        <td>{gcTypeString}</td>   
+        <td>{item.get('value')}</td>
+        <td>{item.get('dtiPermitNo')}</td>
+        <td>{gcTypeString}</td>    
+        <td>{issuanceDateString}</td>
+        <td>{expirationDateString}</td>
+        <td><GiftCertStatus value={item.get('status')} /></td>
         <td>
           {actionsElem}
         </td>
@@ -163,11 +153,11 @@ class RequestComponent extends React.Component {
   }
 }
 
-RequestComponent.props = {
+GiftCertComponent.props = {
   request: PropTypes.object.isRequired,
   isUserAdmin: PropTypes.bool.isRequired
 }
 
-const GiftCert = connect()(RequestComponent)
+const GiftCert = connect()(GiftCertComponent)
 
 export default GiftCert

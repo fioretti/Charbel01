@@ -168,26 +168,12 @@ class MyGiftCert extends React.Component {
                 <table className='table table-striped'>
                     <thead>
                         <tr>
-                            <th>Project Number</th>
-                            <th>Part Number</th>
-                            <th>Request Type</th>
-                            {
-                                (() => {
-                                    if (toggleDetail) {
-                                        return (<th>Division</th>)
-                                    }
-                                })()
-                            }
-                            {
-                                (() => {
-                                    if (toggleDetail) {
-                                        return (<th>Business Line</th>)
-                                    }
-                                })()
-                            }
-                            <th>Priority</th>
-                            <th>Request Date</th>
-                            <th>Age Request</th>
+                            <th>GC Number</th>
+                            <th>GC Type</th>
+                            <th>Value</th>                           
+                            <th>DTI Permit No</th>
+                            <th>Issuance Date</th>
+                            <th>Expiration Date</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -196,7 +182,7 @@ class MyGiftCert extends React.Component {
                         {
                             this.props.myGiftCert.get('result').map((item, idx) => {
                                 return (
-                                    <Request request={item} key={idx}
+                                    <GiftCert request={item} key={idx}
                                         toggleDetail={toggleDetail}
                                         isUserAdmin={this.props.myGiftCert.get('isUserAdmin')}
                                         allowCreate={this.props.myGiftCert.get('allowCreate')}

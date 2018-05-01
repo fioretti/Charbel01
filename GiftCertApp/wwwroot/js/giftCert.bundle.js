@@ -315,50 +315,32 @@
 	                            _react2.default.createElement(
 	                                'th',
 	                                null,
-	                                'Project Number'
+	                                'GC Number'
 	                            ),
 	                            _react2.default.createElement(
 	                                'th',
 	                                null,
-	                                'Part Number'
+	                                'GC Type'
 	                            ),
 	                            _react2.default.createElement(
 	                                'th',
 	                                null,
-	                                'Request Type'
-	                            ),
-	                            function () {
-	                                if (toggleDetail) {
-	                                    return _react2.default.createElement(
-	                                        'th',
-	                                        null,
-	                                        'Division'
-	                                    );
-	                                }
-	                            }(),
-	                            function () {
-	                                if (toggleDetail) {
-	                                    return _react2.default.createElement(
-	                                        'th',
-	                                        null,
-	                                        'Business Line'
-	                                    );
-	                                }
-	                            }(),
-	                            _react2.default.createElement(
-	                                'th',
-	                                null,
-	                                'Priority'
+	                                'Value'
 	                            ),
 	                            _react2.default.createElement(
 	                                'th',
 	                                null,
-	                                'Request Date'
+	                                'DTI Permit No'
 	                            ),
 	                            _react2.default.createElement(
 	                                'th',
 	                                null,
-	                                'Age Request'
+	                                'Issuance Date'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                null,
+	                                'Expiration Date'
 	                            ),
 	                            _react2.default.createElement(
 	                                'th',
@@ -376,7 +358,7 @@
 	                        'tbody',
 	                        null,
 	                        this.props.myGiftCert.get('result').map(function (item, idx) {
-	                            return _react2.default.createElement(Request, { request: item, key: idx,
+	                            return _react2.default.createElement(_GiftCert2.default, { request: item, key: idx,
 	                                toggleDetail: toggleDetail,
 	                                isUserAdmin: _this3.props.myGiftCert.get('isUserAdmin'),
 	                                allowCreate: _this3.props.myGiftCert.get('allowCreate'),
@@ -29728,9 +29710,9 @@
 
 	var dataUtils = _interopRequireWildcard(_DataUtils);
 
-	var _Priority = __webpack_require__(501);
+	var _GcType = __webpack_require__(501);
 
-	var _Priority2 = _interopRequireDefault(_Priority);
+	var _GcType2 = _interopRequireDefault(_GcType);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -29742,13 +29724,13 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var RequestComponent = function (_React$Component) {
-	  _inherits(RequestComponent, _React$Component);
+	var GiftCertComponent = function (_React$Component) {
+	  _inherits(GiftCertComponent, _React$Component);
 
-	  function RequestComponent() {
-	    _classCallCheck(this, RequestComponent);
+	  function GiftCertComponent() {
+	    _classCallCheck(this, GiftCertComponent);
 
-	    var _this = _possibleConstructorReturn(this, (RequestComponent.__proto__ || Object.getPrototypeOf(RequestComponent)).call(this));
+	    var _this = _possibleConstructorReturn(this, (GiftCertComponent.__proto__ || Object.getPrototypeOf(GiftCertComponent)).call(this));
 
 	    _this.onViewClicked = _this.onViewClicked.bind(_this);
 	    _this.onResubmit = _this.onResubmit.bind(_this);
@@ -29758,7 +29740,7 @@
 	    return _this;
 	  }
 
-	  _createClass(RequestComponent, [{
+	  _createClass(GiftCertComponent, [{
 	    key: 'onViewClicked',
 	    value: function onViewClicked(e) {
 	      e.preventDefault();
@@ -29881,8 +29863,8 @@
 	        menuItems
 	      );
 
-	      var requestType = item.get('requestType');
-	      var requestTypeString = requestType != null ? requestType.get('name') : '-';
+	      var gcType = item.get('gcType');
+	      var gcTypeString = gcType != null ? gcType.get('name') : '-';
 
 	      var division = item.get('division');
 	      var divisionString = division != null ? division.get('name') : '-';
@@ -29890,8 +29872,11 @@
 	      var businessLine = item.get('businessLine');
 	      var businessLineString = businessLine != null ? businessLine.get('name') : '-';
 
-	      var requestDate = item.get('requestDate');
-	      var requestDateString = requestDate != null ? dataUtils.renderToLocalDateTime(requestDate) : '-';
+	      var issuanceDate = item.get('issuanceDate');
+	      var issuanceDateString = issuanceDate != null ? dataUtils.renderToLocalDateTime(issuanceDate) : '-';
+
+	      var expirationDate = item.get('expirationDate');
+	      var expirationDateString = expirationDate != null ? dataUtils.renderToLocalDateTime(expirationDate) : '-';
 
 	      var toggleDetail = this.props.toggleDetail;
 
@@ -29901,50 +29886,37 @@
 	        _react2.default.createElement(
 	          'td',
 	          null,
-	          item.get('projectCode')
+	          item.get('giftCertNo')
 	        ),
 	        _react2.default.createElement(
 	          'td',
 	          null,
-	          item.get('partNumber')
+	          gcTypeString
 	        ),
 	        _react2.default.createElement(
 	          'td',
 	          null,
-	          requestTypeString
-	        ),
-	        function () {
-	          if (toggleDetail) {
-	            return _react2.default.createElement(
-	              'td',
-	              null,
-	              divisionString
-	            );
-	          }
-	        }(),
-	        function () {
-	          if (toggleDetail) {
-	            return _react2.default.createElement(
-	              'td',
-	              null,
-	              businessLineString
-	            );
-	          }
-	        }(),
-	        _react2.default.createElement(
-	          'td',
-	          null,
-	          _react2.default.createElement(_Priority2.default, { value: item.get('priority') })
+	          item.get('value')
 	        ),
 	        _react2.default.createElement(
 	          'td',
 	          null,
-	          requestDateString
+	          item.get('dtiPermitNo')
 	        ),
 	        _react2.default.createElement(
 	          'td',
 	          null,
-	          _react2.default.createElement(_HumanizeMinutes2.default, { minutes: item.get('ageRequest') })
+	          gcTypeString
+	        ),
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          issuanceDateString
+	        ),
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          expirationDateString
 	        ),
 	        _react2.default.createElement(
 	          'td',
@@ -29960,15 +29932,15 @@
 	    }
 	  }]);
 
-	  return RequestComponent;
+	  return GiftCertComponent;
 	}(_react2.default.Component);
 
-	RequestComponent.props = {
+	GiftCertComponent.props = {
 	  request: _react.PropTypes.object.isRequired,
 	  isUserAdmin: _react.PropTypes.bool.isRequired
 	};
 
-	var GiftCert = (0, _reactRedux.connect)()(RequestComponent);
+	var GiftCert = (0, _reactRedux.connect)()(GiftCertComponent);
 
 	exports.default = GiftCert;
 
@@ -48764,29 +48736,29 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = Priority;
+	exports.default = GcType;
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _PriorityEnum = __webpack_require__(502);
+	var _gcTypeEnum = __webpack_require__(502);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function Priority(_ref) {
+	function GcType(_ref) {
 	  var value = _ref.value;
 
 	  return _react2.default.createElement(
 	    'span',
 	    null,
-	    _PriorityEnum.priorityList.filter(function (item) {
+	    _gcTypeEnum.gcTypeList.filter(function (item) {
 	      return item.id == value;
 	    })[0].name
 	  );
 	}
 
-	Priority.props = {
+	GcType.props = {
 	  value: _react.PropTypes.number.isRequired
 	};
 
@@ -48799,7 +48771,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var priorityList = exports.priorityList = [{ id: 0, name: 'Not set' }, { id: 1, name: '1' }, { id: 2, name: '2' }, { id: 3, name: '3' }];
+	var gcTypeList = exports.gcTypeList = [{ id: 0, name: 'Not set' }, { id: 1, name: 'Regular GC' }, { id: 2, name: 'Promotional GC' }, { id: 3, name: 'Corporate GC' }];
 
 /***/ })
 /******/ ]);
