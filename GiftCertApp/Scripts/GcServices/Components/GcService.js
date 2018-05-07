@@ -5,9 +5,9 @@ import Lots from './Lots'
 
 const { object, bool } = PropTypes
 
-import * as addLotModalActions from 'AddLotModal/Actions'
-import * as removeDeviceModalActions from 'RemoveDeviceConfirmation/Actions'
-import * as removeLotModalActions from 'RemoveLotConfirmation/Actions'
+//import * as addLotModalActions from 'AddLotModal/Actions'
+import * as removeGcServiceModalActions from 'RemoveGcServiceConfirmation/Actions'
+//import * as removeLotModalActions from 'RemoveLotConfirmation/Actions'
 
 class Device extends React.Component {
   constructor() {

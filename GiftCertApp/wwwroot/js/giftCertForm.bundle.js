@@ -78,7 +78,11 @@
 
 	var _UserSelector2 = _interopRequireDefault(_UserSelector);
 
-	var _DateTimePicker = __webpack_require__(507);
+	var _GcServices = __webpack_require__(507);
+
+	var _GcServices2 = _interopRequireDefault(_GcServices);
+
+	var _DateTimePicker = __webpack_require__(520);
 
 	var _DateTimePicker2 = _interopRequireDefault(_DateTimePicker);
 
@@ -86,11 +90,19 @@
 
 	var _reactReduxToastr2 = _interopRequireDefault(_reactReduxToastr);
 
-	var _Reducer = __webpack_require__(508);
+	var _Reducer = __webpack_require__(521);
 
 	var _Reducer2 = _interopRequireDefault(_Reducer);
 
-	var _Actions = __webpack_require__(512);
+	var _Reducer3 = __webpack_require__(524);
+
+	var _Reducer4 = _interopRequireDefault(_Reducer3);
+
+	var _Reducer5 = __webpack_require__(525);
+
+	var _Reducer6 = _interopRequireDefault(_Reducer5);
+
+	var _Actions = __webpack_require__(513);
 
 	var actions = _interopRequireWildcard(_Actions);
 
@@ -120,15 +132,13 @@
 
 	var string = _react.PropTypes.string,
 	    number = _react.PropTypes.number;
-	//import DeviceList from 'Devices'
 	//import DeviceCharacteristics from 'DeviceCharacteristics'
 	//import TestSelections from 'TestSelections'
 
 	//import Tests from 'Tests'
 
-	//import addDeviceModalReducer from 'AddDeviceModal/Reducer';
 	//import addLotModalReducer from 'AddLotModal/Reducer'
-	//import removeDeviceModalReducer from 'RemoveDeviceConfirmation/Reducer'
+
 	//import removeLotModalReducer from 'RemoveLotConfirmation/Reducer'
 
 	var request = $('#giftCert').val();
@@ -864,7 +874,11 @@
 	                            'Services'
 	                        )
 	                    ),
-	                    _react2.default.createElement('div', { className: 'panel-body' })
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'panel-body' },
+	                        _react2.default.createElement(_GcServices2.default, null)
+	                    )
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -930,9 +944,9 @@
 
 	var rootReducers = (0, _redux.combineReducers)({
 	    giftCert: _Reducer2.default,
-	    //  addDeviceModal: addDeviceModalReducer,
+	    addGcServiceModal: _Reducer4.default,
 	    //  addLotModal: addLotModalReducer,
-	    // removeDeviceModal: removeDeviceModalReducer,
+	    removeDeviceModal: _Reducer6.default,
 	    // removeLotModal: removeLotModalReducer,
 	    toastr: _reactReduxToastr.reducer
 	});
@@ -30810,6 +30824,289 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.GcServices = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(4);
+
+	var _redux = __webpack_require__(3);
+
+	var _style = __webpack_require__(508);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	var _GcService = __webpack_require__(509);
+
+	var _GcService2 = _interopRequireDefault(_GcService);
+
+	var _AddGcServiceModal = __webpack_require__(516);
+
+	var _AddGcServiceModal2 = _interopRequireDefault(_AddGcServiceModal);
+
+	var _Actions = __webpack_require__(517);
+
+	var addGcServiceModalActions = _interopRequireWildcard(_Actions);
+
+	var _RemoveGcServiceConfirmation = __webpack_require__(519);
+
+	var _RemoveGcServiceConfirmation2 = _interopRequireDefault(_RemoveGcServiceConfirmation);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var GcServices = exports.GcServices = function (_React$Component) {
+	    _inherits(GcServices, _React$Component);
+
+	    function GcServices() {
+	        _classCallCheck(this, GcServices);
+
+	        var _this = _possibleConstructorReturn(this, (GcServices.__proto__ || Object.getPrototypeOf(GcServices)).call(this));
+
+	        _this.onNewService = _this.onNewService.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(GcServices, [{
+	        key: 'onNewService',
+	        value: function onNewService(e) {
+	            e.preventDefault();
+	            this.props.openModal();
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            var showButton = !this.props.limitDevices || this.props.devices.count() < 1;
+	            _style2.default.mainAction.display = showButton ? 'block' : 'none';
+
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'alert alert-danger', role: 'alert' },
+	                    _react2.default.createElement('span', { className: 'glyphicon glyphicon-exclamation-sign', 'aria-hidden': 'true' }),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'sr-only' },
+	                        'Error: '
+	                    ),
+	                    '\xA0',
+	                    this.props.deviceConfidentiality
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { style: _style2.default.mainAction },
+	                    _react2.default.createElement(
+	                        'button',
+	                        { className: 'btn btn-primary', onClick: this.onNewService },
+	                        _react2.default.createElement('i', { className: 'fa fa-plus' }),
+	                        ' Add Device'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { style: _style2.default.deviceHeader },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { style: _style2.default.deviceRowHeader },
+	                        '\xA0'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { style: _style2.default.packageTypeHeader },
+	                        'Package Type'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { style: _style2.default.partNumberHeader },
+	                        'Part Number'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { style: _style2.default.actionHeader },
+	                        '\xA0'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { style: _style2.default.deviceBody },
+	                    this.props.devices.map(function (item) {
+	                        return _react2.default.createElement(Device, { key: item.get('partNumber'), device: item, requiredLots: _this2.props.requiredLots });
+	                    })
+	                ),
+	                _react2.default.createElement(_AddGcServiceModal2.default, null),
+	                _react2.default.createElement(RemoveDeviceConfirmation, null)
+	            );
+	        }
+	    }]);
+
+	    return GcServices;
+	}(_react2.default.Component);
+
+	function mapStateToProps(_ref) {
+	    var testRequest = _ref.testRequest;
+
+	    //const requestType = testRequest.get('headerData').get('requestType');
+	    //const deviceConfidentiality = testRequest.get('deviceConfidentiality');
+	    //let limitDevices = true;
+	    //let requiredLots = true;
+	    //if (requestType.get('id') > 0) {
+	    //    limitDevices = requestType.get('limitDevices')
+	    //    requiredLots = requestType.get('requiresLot')
+	    //}
+
+	    return {
+	        devices: testRequest.get('services')
+	        //   limitDevices: limitDevices,
+	        //    requiredLots: requiredLots,
+	        //   deviceConfidentiality: deviceConfidentiality
+	    };
+	}
+
+	function mapDispatchToProps(dispatch) {
+	    return (0, _redux.bindActionCreators)(addDeviceModalActions, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(GcServices);
+
+/***/ }),
+/* 508 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var style = {
+	  mainAction: {
+	    marginBottom: '20px'
+	  },
+	  deviceHeader: {
+	    width: '100%',
+	    padding: '5px',
+	    display: 'table-header-group'
+	  },
+	  deviceBody: {
+	    width: '100%'
+	  },
+	  deviceRow: {
+	    display: 'table-row'
+	  },
+	  deviceHeaderColumn: {
+	    backgroundColor: '#95B3D7',
+	    color: '#ffffff',
+	    textAlign: 'left'
+	  },
+	  lotHeader: {
+	    width: '100%',
+	    padding: '5px',
+	    display: 'table-header-group'
+	  },
+	  lotBody: {
+	    width: '100%'
+	  },
+	  lotRow: {
+	    display: 'table-row'
+	  },
+	  expandCollapse: {
+	    cursor: 'pointer'
+	  },
+	  removeLot: {
+	    color: '#d9534f',
+	    cursor: 'pointer'
+	  }
+	};
+
+	style.column = {
+	  display: 'table-cell',
+	  padding: '5px'
+	};
+
+	style.packageTypeColumn = _extends({}, style.column, {
+	  width: '150px'
+	});
+
+	style.partNumberColumn = _extends({}, style.column, {
+	  width: '150px'
+	});
+
+	style.waferNumberColumn = _extends({}, style.column, {
+	  textAlign: 'right',
+	  width: '80px'
+	});
+
+	style.assemblyLotColumn = _extends({}, style.column, {
+	  textAlign: 'center',
+	  width: '120px'
+	});
+
+	style.dateCodeColumn = _extends({}, style.column, {
+	  width: '80px'
+	});
+
+	style.quantityColumn = _extends({}, style.column, {
+	  textAlign: 'right',
+	  width: '80px'
+	});
+
+	style.deviceRowHeader = _extends({}, style.column, {
+	  width: '30px'
+	});
+
+	style.lotRowHeader = _extends({}, style.column, {
+	  width: '65px'
+	});
+
+	style.actionColumn = _extends({}, style.column, {
+	  width: '150px'
+	});
+
+	style.packageTypeHeader = _extends({}, style.packageTypeColumn, style.deviceHeaderColumn);
+
+	style.partNumberHeader = _extends({}, style.partNumberColumn, style.deviceHeaderColumn);
+
+	style.waferNumberHeader = _extends({}, style.waferNumberColumn, style.deviceHeaderColumn);
+
+	style.assemblyLotHeader = _extends({}, style.assemblyLotColumn, style.deviceHeaderColumn);
+
+	style.dateCodeHeader = _extends({}, style.dateCodeColumn, style.deviceHeaderColumn);
+
+	style.quantityHeader = _extends({}, style.quantityColumn, style.deviceHeaderColumn);
+
+	style.actionHeader = _extends({}, style.actionColumn, style.deviceHeaderColumn, {
+	  backgroundColor: 'none',
+	  borderBottom: 'none'
+	});
+
+	exports.default = style;
+
+/***/ }),
+/* 509 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
@@ -30821,11 +31118,21 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(2);
+	var _reactRedux = __webpack_require__(4);
 
-	var _reactDom2 = _interopRequireDefault(_reactDom);
+	var _style = __webpack_require__(508);
 
-	var _DataUtils = __webpack_require__(122);
+	var _style2 = _interopRequireDefault(_style);
+
+	var _Lots = __webpack_require__(510);
+
+	var _Lots2 = _interopRequireDefault(_Lots);
+
+	var _Actions = __webpack_require__(511);
+
+	var removeGcServiceModalActions = _interopRequireWildcard(_Actions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30835,826 +31142,318 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var DateTimePicker = function (_Component) {
-	  _inherits(DateTimePicker, _Component);
+	var object = _react.PropTypes.object,
+	    bool = _react.PropTypes.bool;
 
-	  function DateTimePicker() {
-	    _classCallCheck(this, DateTimePicker);
+	//import * as addLotModalActions from 'AddLotModal/Actions'
 
-	    var _this = _possibleConstructorReturn(this, (DateTimePicker.__proto__ || Object.getPrototypeOf(DateTimePicker)).call(this));
+	//import * as removeLotModalActions from 'RemoveLotConfirmation/Actions'
 
-	    _this.formatDate = _this.formatDate.bind(_this);
+	var Device = function (_React$Component) {
+	  _inherits(Device, _React$Component);
+
+	  function Device() {
+	    _classCallCheck(this, Device);
+
+	    var _this = _possibleConstructorReturn(this, (Device.__proto__ || Object.getPrototypeOf(Device)).call(this));
+
+	    _this.state = {
+	      expand: false
+	    };
+
+	    _this.onExpandClicked = _this.onExpandClicked.bind(_this);
+	    _this.onCollapseClicked = _this.onCollapseClicked.bind(_this);
+	    _this.onRemoveDevice = _this.onRemoveDevice.bind(_this);
+	    _this.onAddLot = _this.onAddLot.bind(_this);
+	    _this.onRemoveLot = _this.onRemoveLot.bind(_this);
 	    return _this;
 	  }
 
-	  _createClass(DateTimePicker, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      var dateInputOpts = {
-	        format: this.props.showTime ? _DataUtils.DATETIME_FORMAT : _DataUtils.DATE_FORMAT,
-	        showClear: this.props.notAllowClear ? false : true,
-	        showClose: true
-	      };
-
-	      $(this.refs.dateControl).datetimepicker(dateInputOpts).on('dp.change', function (e) {
-
-	        var date = e.date;
-
-	        if (date === false) {
-	          date = undefined;
-	        }
-
-	        _this2.props.onChange(date);
-	      });
+	  _createClass(Device, [{
+	    key: 'onExpandClicked',
+	    value: function onExpandClicked(e) {
+	      e.preventDefault();
+	      this.setState(_extends({}, this.state, {
+	        expand: true
+	      }));
 	    }
 	  }, {
-	    key: 'formatDate',
-	    value: function formatDate(date) {
-	      if (date) {
-	        return date.format(this.props.showTime ? _DataUtils.DATETIME_FORMAT : _DataUtils.DATE_FORMAT);
-	      }
-
-	      return '';
+	    key: 'onCollapseClicked',
+	    value: function onCollapseClicked(e) {
+	      e.preventDefault();
+	      this.setState(_extends({}, this.state, {
+	        expand: false
+	      }));
+	    }
+	  }, {
+	    key: 'onRemoveDevice',
+	    value: function onRemoveDevice(e) {
+	      e.preventDefault();
+	      this.props.dispatch(removeDeviceModalActions.openModal(this.props.device));
+	    }
+	  }, {
+	    key: 'onAddLot',
+	    value: function onAddLot() {
+	      this.props.dispatch(addLotModalActions.openModal(this.props.device));
+	    }
+	  }, {
+	    key: 'onRemoveLot',
+	    value: function onRemoveLot(lot) {
+	      this.props.dispatch(removeLotModalActions.openModal({
+	        device: this.props.device,
+	        lot: lot
+	      }));
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var attrs = {};
+	      var _this2 = this;
 
-	      if (this.props.disabled) {
-	        attrs.disabled = 'disabled';
-	      }
+	      var lotSectionStyle = {
+	        marginLeft: '55px',
+	        display: this.state.expand ? 'block' : 'none'
+	      };
 
-	      if (this.props.tabIndex) {
-	        attrs.tabIndex = this.props.tabIndex;
-	      }
+	      var expandStyle = _extends({}, _style2.default.expandCollapse, {
+	        display: this.state.expand ? 'none' : 'block'
+	      });
 
-	      return _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control lmd-date-input', ref: 'dateControl',
-	        value: this.formatDate(this.props.value) }, attrs));
+	      var collapseStyle = _extends({}, _style2.default.expandCollapse, {
+	        display: this.state.expand ? 'block' : 'none'
+	      });
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { style: _style2.default.deviceRowHeader },
+	            function () {
+	              if (_this2.props.requiredLots) {
+	                return _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  _react2.default.createElement('i', { className: 'fa fa-plus', style: expandStyle, onClick: _this2.onExpandClicked }),
+	                  _react2.default.createElement('i', { className: 'fa fa-minus', style: collapseStyle, onClick: _this2.onCollapseClicked })
+	                );
+	              }
+	            }()
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { style: _style2.default.packageTypeColumn },
+	            this.props.device.get('packageType').get('name')
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { style: _style2.default.partNumberColumn },
+	            this.props.device.get('partNumber')
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { style: _style2.default.actionColumn },
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'btn btn-link', onClick: this.onRemoveDevice },
+	              'Remove Device'
+	            )
+	          )
+	        ),
+	        function () {
+	          if (_this2.props.requiredLots) {
+	            return _react2.default.createElement(
+	              'div',
+	              { style: lotSectionStyle },
+	              _react2.default.createElement(_Lots2.default, { lots: _this2.props.device.get('lots'),
+	                onAddLot: _this2.onAddLot,
+	                onRemoveLot: _this2.onRemoveLot })
+	            );
+	          }
+	        }()
+	      );
 	    }
 	  }]);
 
-	  return DateTimePicker;
-	}(_react.Component);
+	  return Device;
+	}(_react2.default.Component);
 
-	exports.default = DateTimePicker;
-
-
-	DateTimePicker.propTypes = {
-	  value: _react.PropTypes.object,
-	  onChange: _react.PropTypes.func
+	Device.propTypes = {
+	  device: object.isRequired,
+	  requiredLots: bool.isRequired
 	};
 
+	exports.default = (0, _reactRedux.connect)()(Device);
+
 /***/ }),
-/* 508 */
+/* 510 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
+	exports.default = Lots;
 
-	exports.default = function () {
-	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	    var action = arguments[1];
+	var _react = __webpack_require__(1);
 
-	    switch (action.type) {
-	        case _ActionTypes.SET_ADMIN_STATE:
-	            return state.set('isUserAdmin', true);
-	        case _ActionTypes.COMMENTS_CHANGED:
-	            return state.set('comments', state.get('comments').merge((0, _Immutable.fromJS)(action.changes)));
-	        case _ActionTypes.ACTION_DATA_CHANGED:
-	            {
-	                return state.set('actions', state.get('actions').merge((0, _Immutable.fromJS)(action.changes)));
-	            }
-	        case _ActionTypes.SET_INITIAL_DATA:
-	            var request = action.data;
-	            debugger;
-	            var defaultHeaderData = initialState.get('headerData');
-	            var defaultActions = initialState.get('actions');
+	var _react2 = _interopRequireDefault(_react);
 
-	            //let watchers = []
+	var _style = __webpack_require__(508);
 
-	            //request.watchers.forEach((watcher) => {
-	            //  watchers.push(watcher)
-	            //})
-
-	            var _newHeaderData = {
-	                id: request.id || 0,
-
-	                giftCertNo: request.giftCertNo || defaultHeaderData.get('giftCertNo'),
-	                status: request.status,
-	                gcType: request.gcType || defaultHeaderData.get('gcType'),
-	                creator: request.creator,
-	                dtiPermitNo: request.giftCertNo || defaultHeaderData.get('dtiPermitNo'),
-	                issuanceDate: convertDateToMoment(request.issuanceDate),
-	                expirationDate: convertDateToMoment(request.expirationDate),
-	                value: request.giftCertNo || defaultHeaderData.get('value'),
-	                note: request.note || defaultHeaderData.get('note')
-
-	                //requester: request.requester,                                             
-	                //division: request.division || defaultHeaderData.get('division'),
-	                //businessLine: request.businessLine || defaultHeaderData.get('businessLine'),
-	                //productLine: request.productLine || defaultHeaderData.get('productLine'),
-	                //segment: request.segment || defaultHeaderData.get('segment'),
-	                //requestType: request.requestType || defaultHeaderData.get('requestType'),
-	                //subRequestType: request.subRequestType || defaultHeaderData.get('subRequestType'),
-	                //targetLab: request.targetLab || defaultHeaderData.get('targetLab'),
-
-	                //priority: request.priority || defaultHeaderData.get('priority'),
-	                //projectManager: request.projectManager || defaultHeaderData.get('projectManager'),
-	                //projectOwner: request.projectOwner || defaultHeaderData.get('projectOwner'),
-	                //requesterComments: request.requesterComments || defaultHeaderData.get('requesterComments'),
-	                //projectCode: request.projectCode || defaultHeaderData.get('projectCode'),
-	                //referenceProjectCode: request.referenceProjectCode || defaultHeaderData.get('referenceProjectCode'),
-	                //  watchers: watchers,
-	                //  requestDate: request.requestDate || defaultHeaderData.get('requestDate'),
-	            };
-
-	            var newDevices = request.devices || initialState.get('devices');
-	            var deviceConfidentiality = request.deviceConfidentiality || initialState.get('deviceConfidentiality');
-	            var newTests = request.testSelection || initialState.get('tests');
-
-	            for (var _idx2 = 0; _idx2 < newDevices.length; _idx2++) {
-	                var device = newDevices[_idx2];
-
-	                if (device.channel == null) {
-	                    device.channel = { id: 0 };
-	                }
-	            }
-
-	            return state.merge({
-	                isLoading: false,
-	                headerData: (0, _Immutable.fromJS)(_newHeaderData),
-	                devices: (0, _Immutable.fromJS)(newDevices),
-	                deviceConfidentiality: (0, _Immutable.fromJS)(deviceConfidentiality),
-	                tests: (0, _Immutable.fromJS)(newTests.map(function (item) {
-	                    item.uuid = _uuid2.default.v4();
-	                    return item;
-	                })),
-	                comments: (0, _Immutable.fromJS)({
-	                    adminSupportComments: request.adminSupportComments,
-	                    reviewerComments: request.reviewerComments,
-	                    datasheetProcessorComments: request.datasheetProcessorComments
-	                }),
-	                actions: {
-	                    requestDate: convertDateToMoment(request.requestDate),
-	                    requestedBy: request.requester || defaultActions.get('requestedBy'),
-	                    partsReceivedDate: convertDateToMoment(request.partsReceivedDate),
-	                    partsReceivedBy: request.partsReceivedBy || defaultActions.get('partsReceivedBy'),
-	                    managerAcceptedDate: convertDateToMoment(request.managerAcceptedDate),
-	                    managerAcceptedBy: request.managerAcceptedBy || defaultActions.get('managerAcceptedBy'),
-	                    releasedToLabDate: convertDateToMoment(request.releasedToLabDate),
-	                    releasedToLabBy: request.releasedToLabBy || defaultActions.get('releasedToLabBy'),
-	                    rejectedToRequesterDate: convertDateToMoment(request.rejectedToRequesterDate),
-	                    rejectedToRequesterBy: request.rejectedToRequesterBy || defaultActions.get('rejectedToRequesterBy'),
-	                    dataAcceptedDate: convertDateToMoment(request.dataAcceptedDate),
-	                    dataAcceptedBy: request.dataAcceptedBy || defaultActions.get('dataAcceptedBy'),
-	                    datasheetAcceptedDate: convertDateToMoment(request.datasheetAcceptedDate),
-	                    datasheetAcceptedBy: request.datasheetAcceptedBy || defaultActions.get('datasheetAcceptedBy'),
-	                    dataSheetApprovalDate: convertDateToMoment(request.dataSheetApprovalDate),
-	                    dataSheetApprovalBy: request.dataSheetApprovalBy || defaultActions.get('dataSheetApprovalBy'),
-	                    datasheetRejectedDate: convertDateToMoment(request.datasheetRejectedDate),
-	                    datasheetRejectedBy: request.datasheetRejectedBy || defaultActions.get('datasheetRejectedBy'),
-	                    firstReviewDate: convertDateToMoment(request.firstReviewDate),
-	                    firstReviewBy: request.firstReviewBy || defaultActions.get('firstReviewBy'),
-	                    nthReviewDate: convertDateToMoment(request.nthReviewDate),
-	                    nthReviewBy: request.nthReviewBy || defaultActions.get('nthReviewBy'),
-	                    toWebDate: convertDateToMoment(request.toWebDate),
-	                    toWebBy: request.toWebBy || defaultActions.get('toWebBy'),
-	                    canceledDate: convertDateToMoment(request.canceledDate),
-	                    canceledBy: request.canceledBy || defaultActions.get('canceledBy'),
-	                    closedDate: convertDateToMoment(request.closedDate),
-	                    closedBy: request.closedBy || defaultActions.get('closedBy')
-	                }
-	            });
-	        case _ActionTypes.SUB_REQUEST_TYPE_LOADED:
-	            return state.set('subRequestTypeData', (0, _Immutable.fromJS)(action.subRequestTypes));
-	        case _ActionTypes.CHANNEL_LOADED:
-	            return state.set('channelsData', (0, _Immutable.fromJS)(action.channels));
-	        case _ActionTypes.TARGET_LABS_LOADED:
-	            {
-	                var headerData = state.get('headerData');
-	                // Based On -	CTT-45 - The target lab
-	                // Target Lab should default to ELS-EVL1,
-	                // but since we allow user to add more target lab.. we fixed to the first one
-	                return state.merge({
-	                    headerData: headerData.set('targetLab', (0, _Immutable.fromJS)(action.targetLabs[0])),
-	                    targetLabsData: (0, _Immutable.fromJS)(action.targetLabs)
-	                });
-	            }
-	        case _ActionTypes.CLEAR_LOTS:
-	            {
-	                var _devices = state.get('devices');
-	                for (var _idx3 = 0; _idx3 < _devices.count(); _idx3++) {
-	                    _devices = _devices.setIn([_idx3, 'lots'], (0, _Immutable.fromJS)([]));
-	                }
-
-	                return state.merge({
-	                    devices: _devices
-	                });
-	            }
-	        case _ActionTypes.DIVISIONS_LOADED:
-	            return state.set('divisionsData', (0, _Immutable.fromJS)(action.divisions));
-	        case _ActionTypes.REQUEST_TYPE_LOADED:
-	            return state.set('requestTypeData', (0, _Immutable.fromJS)(action.requestTypes));
-	        case _ActionTypes.GC_TYPE_LOADED:
-	            return state.set('gcTypesData', (0, _Immutable.fromJS)(action.gcTypes));
-	        case _ActionTypes.FORM_DATA_CHANGED:
-	            return state.merge(action.changes);
-	        case _ActionTypes.HEADER_DATA_CHANGES:
-	            var headerData = state.get('headerData');
-	            var _newHeaderData = headerData.merge(action.changes);
-	            return state.set('headerData', _newHeaderData);
-	        case _ActionTypes.ADD_DEVICE:
-	            {
-	                var _device = action.device.set('lots', (0, _Immutable.fromJS)([]));
-
-	                var _idx = state.get('devices').findIndex(function (item) {
-	                    return item.get('partNumber') === _device.get('partNumber');
-	                });
-
-	                if (_idx >= 0) {
-	                    return state;
-	                }
-
-	                var channel = _device.get('channel');
-	                if (channel === undefined || channel === null) {
-	                    _device = _device.set('channel', (0, _Immutable.fromJS)({}));
-	                }
-
-	                if (!state.get('headerData').get('requestType').get('isCharacteristicsMandatory') && !_device.get('isReadOnly')) {
-	                    var na = 'N/A';
-	                    _device = _device.merge({
-	                        channel: {
-	                            id: 0,
-	                            name: na
-	                        },
-	                        vgsMax: na,
-	                        numBondWires: na,
-	                        dieDimension: na,
-	                        vsd: na,
-	                        idssMax125: na,
-	                        isReadOnly: false,
-	                        idssMax25: na,
-	                        rdsVceMax: na,
-	                        tjMax: na,
-	                        vgsThMax: na,
-	                        rgMax: na,
-	                        bvdss: na,
-	                        rthPcbMount: na,
-	                        internalRg: na,
-	                        activeArea: na,
-	                        igssMaxVgsMinus: na,
-	                        dieThickness: na,
-	                        bondWireDiameter: na,
-	                        igssMaxVgsPlus: na,
-	                        generation: na,
-	                        rdsVceTypical: na,
-	                        vgsThTypical: na,
-	                        rgTypical: na,
-	                        vgsThMin: na,
-	                        hexSize: na,
-	                        gateOxideThickness: na
-	                    });
-	                }
-
-	                var newList = state.get('devices').push(_device);
-
-	                return state.merge({
-	                    devices: newList
-	                });
-	            }
-	        case _ActionTypes.ADD_LOT:
-	            var devices = state.get('devices');
-
-	            var _idx = devices.findIndex(function (item) {
-	                return item.get('partNumber') === action.device.get('partNumber');
-	            });
-
-	            var currentDevice = devices.get(_idx);
-	            var newLots = currentDevice.get('lots').push(action.lot);
-	            var newDevice = currentDevice.set('lots', newLots);
-
-	            return state.merge({
-	                devices: devices.set(_idx, newDevice)
-	            });
-	        case _ActionTypes.REMOVE_DEVICE:
-	            var deviceListAfterRemove = state.get('devices').filter(function (item) {
-	                return item.get('partNumber') !== action.device.get('partNumber');
-	            });
-
-	            return state.merge({
-	                devices: deviceListAfterRemove
-	            });
-	        case _ActionTypes.REMOVE_LOT:
-	            {
-	                var _devices2 = state.get('devices');
-
-	                var _idx4 = _devices2.findIndex(function (item) {
-	                    return item.get('partNumber') === action.device.get('partNumber');
-	                });
-
-	                var _currentDevice = _devices2.get(_idx4);
-	                var _newLots = _currentDevice.get('lots').filter(function (item) {
-	                    return item !== action.lot;
-	                });
-
-	                var _newDevice = _currentDevice.set('lots', _newLots);
-
-	                return state.merge({
-	                    devices: _devices2.set(_idx4, _newDevice)
-	                });
-	            }
-	        case _ActionTypes.CHARACTERISTIC_CHANGED:
-	            {
-	                var _devices3 = state.get('devices');
-
-	                var _idx5 = _devices3.findIndex(function (item) {
-	                    return item.get('partNumber') === action.partNumber;
-	                });
-
-	                var _currentDevice2 = _devices3.get(_idx5);
-
-	                return state.merge({
-	                    devices: _devices3.set(_idx5, _currentDevice2.merge(action.changes))
-	                });
-	            }
-	        case _ActionTypes.TEST_SELECTION_LOADED:
-	            {
-	                // remove tests that are not in testSelections
-	                var validTests = (0, _Immutable.List)([]);
-
-	                var tests = state.get('tests');
-
-	                tests.forEach(function (test) {
-	                    action.testSelections.forEach(function (selection) {
-	                        if (test.get('testSelection').get('id') === selection.id) {
-	                            validTests = validTests.push(test);
-	                        }
-	                    });
-	                });
-
-	                return state.merge({
-	                    tests: validTests,
-	                    testSelectionData: action.testSelections
-	                });
-	            }
-	        case _ActionTypes.ADD_TEST_SELECTION:
-	            {
-	                var _tests = state.get('tests');
-
-	                var conditionSelections = [];
-
-	                action.test.get('conditions').forEach(function (condition) {
-	                    conditionSelections.push({
-	                        condition: condition
-	                    });
-	                });
-
-	                var test = (0, _Immutable.fromJS)({
-	                    testSelection: action.test,
-	                    conditionSelections: conditionSelections,
-	                    uuid: _uuid2.default.v4()
-	                });
-
-	                if (_tests.has(test)) {
-	                    return state;
-	                }
-
-	                return state.merge({
-	                    tests: _tests.push(test)
-	                });
-	            }
-	        case _ActionTypes.COPY_TEST_SELECTION:
-	            {
-	                var source = action.test.toJS();
-
-	                var _newTest = {
-	                    testSelection: source.testSelection,
-	                    conditionSelections: [],
-	                    numTemperatures: source.numTemperatures,
-	                    temperature: source.temperature,
-	                    numOfDevices: source.numOfDevices,
-	                    comments: source.comments
-	                };
-
-	                source.conditionSelections.forEach(function (item) {
-	                    var newConditionSelection = {
-	                        condition: item.condition,
-	                        value: item.value
-	                    };
-
-	                    if (item.condition.stepApplicable) {
-	                        newConditionSelection.stepFrom = item.stepFrom;
-	                        newConditionSelection.stepTo = item.stepTo;
-	                        newConditionSelection.stepping = item.stepping;
-	                    }
-
-	                    _newTest.conditionSelections.push(newConditionSelection);
-	                });
-
-	                return state.merge({
-	                    tests: state.get('tests').push((0, _Immutable.fromJS)(_newTest))
-	                });
-
-	                return state;
-	            }
-	        case _ActionTypes.REMOVE_TEST_SELECTION:
-	            {
-	                var testsAfterRemove = state.get('tests').filter(function (item) {
-	                    return item.get('uuid') !== action.test.get('uuid');
-	                });
-
-	                return state.merge({
-	                    tests: testsAfterRemove
-	                });
-	            }
-	        case _ActionTypes.TEST_MODIFIED:
-	            {
-	                var payload = action.payload;
-	                var currentTest = payload.test;
-
-	                var _idx6 = state.get('tests').findIndex(function (item) {
-	                    return item.get('uuid') === currentTest.get('uuid');
-	                });
-
-	                var _test = state.get('tests').get(_idx6);
-	                var newTest = _test.merge(payload.changes);
-
-	                return state.merge({
-	                    tests: state.get('tests').set(_idx6, newTest)
-	                });
-	            }
-	        case _ActionTypes.CONDITION_MODIFIED:
-	            {
-	                var _payload = action.payload;
-
-	                var testIdx = state.get('tests').findIndex(function (item) {
-	                    return item.get('uuid') == _payload.test.get('uuid');
-	                });
-
-	                var _test2 = state.get('tests').get(testIdx);
-
-	                var conditionIdx = _test2.get('conditionSelections').findIndex(function (item) {
-	                    return item.get('condition') == _payload.condition;
-	                });
-
-	                var conditionSelection = _test2.get('conditionSelections').get(conditionIdx);
-	                var newConditionSelection = conditionSelection.merge(_payload.changes);
-
-	                var newConditionList = _test2.get('conditionSelections').set(conditionIdx, newConditionSelection);
-
-	                var _newTest2 = _test2.set('conditionSelections', newConditionList);
-
-	                return state.merge({
-	                    tests: state.get('tests').set(testIdx, _newTest2)
-	                });
-	            }
-	        case _ActionTypes.CLEAR_TEST_SELECTION:
-	            {
-	                return state.merge({
-	                    tests: (0, _Immutable.fromJS)([])
-	                });
-	            }
-	        default:
-	            return state;
-	    }
-	};
-
-	var _Immutable = __webpack_require__(6);
-
-	var _moment = __webpack_require__(143);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
-	var _uuid = __webpack_require__(509);
-
-	var _uuid2 = _interopRequireDefault(_uuid);
-
-	var _ActionTypes = __webpack_require__(511);
+	var _style2 = _interopRequireDefault(_style);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var initialState = (0, _Immutable.fromJS)({
-	    isUserAdmin: false,
-	    isLoading: true,
-	    isSavingDraft: false,
-	    isSubmitting: false,
-	    headerData: {
-	        // requester: { id: 0, name: '' },
-	        creator: { id: 0, name: '' },
-	        gcType: { id: 0, name: '' },
-	        giftCertNo: '',
-	        dtiPermitNo: '',
-	        qrCode: '',
-	        issuanceDate: undefined,
-	        expirationDate: undefined,
-	        value: ''
+	var object = _react.PropTypes.object,
+	    func = _react.PropTypes.func;
 
-	        //division: { id: 0, name: '' },
-	        //businessLine: { id: 0, name: '' },
-	        //productLine: { id: 0, name: '' },
-	        //segment: { id: 0, name: '' },
-	        //requestType: { id: 0, name: '', limitDevices: true, closeDateType: 1  } ,
-	        //subRequestType: { id: 0, name: '' } ,
-	        //targetLab: { id: 0, name: '' },
-	        //priority: 0,
-	        //projectManager: { id: 0, name: '' },
-	        //projectOwner: { id: 0, name: '' },
 
-	        //referenceProjectCode: '',
-	        //watchers: [],
-	        //requestDate: null
-	    },
-	    divisionsData: [],
-	    requestTypeData: [],
-	    subRequestTypeData: [],
-	    targetLabsData: [],
-	    gcTypesData: [],
-	    channelsData: [],
-	    devices: [],
-	    deviceConfidentiality: '',
-	    tests: [],
-	    testSelectionData: [],
-	    comments: {
-	        adminSupportComments: '',
-	        reviewerComments: '',
-	        datasheetProcessorComments: ''
-	    },
-	    actions: {
-	        requestDate: undefined,
-	        requestedBy: { id: 0, fullName: '' },
-	        partsReceivedDate: undefined,
-	        partsReceivedBy: { id: 0, fullName: '' },
-	        managerAcceptedDate: undefined,
-	        managerAcceptedBy: { id: 0, fullName: '' },
-	        releasedToLabDate: undefined,
-	        releasedToLabBy: { id: 0, fullName: '' },
-	        rejectedToRequesterDate: undefined,
-	        rejectedToRequesterBy: { id: 0, fullName: '' },
-	        dataAcceptedDate: undefined,
-	        dataAcceptedBy: { id: 0, fullName: '' },
-	        datasheetAcceptedDate: undefined,
-	        datasheetAcceptedBy: { id: 0, fullName: '' },
-	        dataSheetApprovalDate: undefined,
-	        dataSheetApprovalBy: { id: 0, fullName: '' },
-	        datasheetRejectedDate: undefined,
-	        datasheetRejectedBy: { id: 0, fullName: '' },
-	        firstReviewDate: undefined,
-	        firstReviewBy: { id: 0, fullName: '' },
-	        nthReviewDate: undefined,
-	        nthReviewBy: { id: 0, fullName: '' },
-	        toWebDate: undefined,
-	        toWebBy: { id: 0, fullName: '' },
-	        canceledDate: undefined,
-	        canceledBy: { id: 0, fullName: '' },
-	        closedDate: undefined,
-	        closedBy: { id: 0, fullName: '' }
-	    }
-	});
+	Lots.propTypes = {
+	  lots: object.isRequired,
+	  onAddLot: func.isRequired,
+	  onRemoveLot: func.isRequired
+	};
 
-	function convertDateToMoment(date) {
-	    if (date != null) {
-	        return (0, _moment2.default)(date);
-	    }
+	function Lots(_ref) {
+	  var lots = _ref.lots,
+	      onAddLot = _ref.onAddLot,
+	      onRemoveLot = _ref.onRemoveLot;
 
-	    return undefined;
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      { style: _style2.default.lotHeader },
+	      _react2.default.createElement(
+	        'div',
+	        { style: _style2.default.lotRowHeader },
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn btn-default btn-xs',
+	            onClick: function onClick(e) {
+	              e.preventDefault();
+	              onAddLot();
+	            } },
+	          'Add Lot'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { style: _style2.default.waferNumberHeader },
+	        'Wafer #'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { style: _style2.default.assemblyLotHeader },
+	        'Assembly Lot'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { style: _style2.default.dateCodeHeader },
+	        'Date Code'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { style: _style2.default.quantityHeader },
+	        'Quantity'
+	      ),
+	      _react2.default.createElement('div', { style: _style2.default.actionHeader })
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { style: _style2.default.lotBody },
+	      lots.map(function (item, idx) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: idx, style: _style2.default.lotRow },
+	          _react2.default.createElement(
+	            'div',
+	            { style: _style2.default.lotRowHeader },
+	            '\xA0'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { style: _style2.default.waferNumberColumn },
+	            item.get('waferNo')
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { style: _style2.default.assemblyLotColumn },
+	            item.get('assemblyLot')
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { style: _style2.default.dateCodeColumn },
+	            item.get('dateCode')
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { style: _style2.default.quantityColumn },
+	            item.get('quantity')
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { style: _style2.default.actionColumn },
+	            _react2.default.createElement('i', { className: 'fa fa-remove', style: _style2.default.removeLot,
+	              onClick: function onClick(e) {
+	                e.preventDefault;
+	                onRemoveLot(item);
+	              } })
+	          )
+	        );
+	      })
+	    )
+	  );
 	}
-
-/***/ }),
-/* 509 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	//     uuid.js
-	//
-	//     Copyright (c) 2010-2012 Robert Kieffer
-	//     MIT License - http://opensource.org/licenses/mit-license.php
-
-	// Unique ID creation requires a high quality random # generator.  We feature
-	// detect to determine the best RNG source, normalizing to a function that
-	// returns 128-bits of randomness, since that's what's usually required
-	var _rng = __webpack_require__(510);
-
-	// Maps for number <-> hex string conversion
-	var _byteToHex = [];
-	var _hexToByte = {};
-	for (var i = 0; i < 256; i++) {
-	  _byteToHex[i] = (i + 0x100).toString(16).substr(1);
-	  _hexToByte[_byteToHex[i]] = i;
-	}
-
-	// **`parse()` - Parse a UUID into it's component bytes**
-	function parse(s, buf, offset) {
-	  var i = (buf && offset) || 0, ii = 0;
-
-	  buf = buf || [];
-	  s.toLowerCase().replace(/[0-9a-f]{2}/g, function(oct) {
-	    if (ii < 16) { // Don't overflow!
-	      buf[i + ii++] = _hexToByte[oct];
-	    }
-	  });
-
-	  // Zero out remaining bytes if string was short
-	  while (ii < 16) {
-	    buf[i + ii++] = 0;
-	  }
-
-	  return buf;
-	}
-
-	// **`unparse()` - Convert UUID byte array (ala parse()) into a string**
-	function unparse(buf, offset) {
-	  var i = offset || 0, bth = _byteToHex;
-	  return  bth[buf[i++]] + bth[buf[i++]] +
-	          bth[buf[i++]] + bth[buf[i++]] + '-' +
-	          bth[buf[i++]] + bth[buf[i++]] + '-' +
-	          bth[buf[i++]] + bth[buf[i++]] + '-' +
-	          bth[buf[i++]] + bth[buf[i++]] + '-' +
-	          bth[buf[i++]] + bth[buf[i++]] +
-	          bth[buf[i++]] + bth[buf[i++]] +
-	          bth[buf[i++]] + bth[buf[i++]];
-	}
-
-	// **`v1()` - Generate time-based UUID**
-	//
-	// Inspired by https://github.com/LiosK/UUID.js
-	// and http://docs.python.org/library/uuid.html
-
-	// random #'s we need to init node and clockseq
-	var _seedBytes = _rng();
-
-	// Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
-	var _nodeId = [
-	  _seedBytes[0] | 0x01,
-	  _seedBytes[1], _seedBytes[2], _seedBytes[3], _seedBytes[4], _seedBytes[5]
-	];
-
-	// Per 4.2.2, randomize (14 bit) clockseq
-	var _clockseq = (_seedBytes[6] << 8 | _seedBytes[7]) & 0x3fff;
-
-	// Previous uuid creation time
-	var _lastMSecs = 0, _lastNSecs = 0;
-
-	// See https://github.com/broofa/node-uuid for API details
-	function v1(options, buf, offset) {
-	  var i = buf && offset || 0;
-	  var b = buf || [];
-
-	  options = options || {};
-
-	  var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq;
-
-	  // UUID timestamps are 100 nano-second units since the Gregorian epoch,
-	  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
-	  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
-	  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
-	  var msecs = options.msecs !== undefined ? options.msecs : new Date().getTime();
-
-	  // Per 4.2.1.2, use count of uuid's generated during the current clock
-	  // cycle to simulate higher resolution clock
-	  var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
-
-	  // Time since last uuid creation (in msecs)
-	  var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
-
-	  // Per 4.2.1.2, Bump clockseq on clock regression
-	  if (dt < 0 && options.clockseq === undefined) {
-	    clockseq = clockseq + 1 & 0x3fff;
-	  }
-
-	  // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
-	  // time interval
-	  if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
-	    nsecs = 0;
-	  }
-
-	  // Per 4.2.1.2 Throw error if too many uuids are requested
-	  if (nsecs >= 10000) {
-	    throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
-	  }
-
-	  _lastMSecs = msecs;
-	  _lastNSecs = nsecs;
-	  _clockseq = clockseq;
-
-	  // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
-	  msecs += 12219292800000;
-
-	  // `time_low`
-	  var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
-	  b[i++] = tl >>> 24 & 0xff;
-	  b[i++] = tl >>> 16 & 0xff;
-	  b[i++] = tl >>> 8 & 0xff;
-	  b[i++] = tl & 0xff;
-
-	  // `time_mid`
-	  var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
-	  b[i++] = tmh >>> 8 & 0xff;
-	  b[i++] = tmh & 0xff;
-
-	  // `time_high_and_version`
-	  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
-	  b[i++] = tmh >>> 16 & 0xff;
-
-	  // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
-	  b[i++] = clockseq >>> 8 | 0x80;
-
-	  // `clock_seq_low`
-	  b[i++] = clockseq & 0xff;
-
-	  // `node`
-	  var node = options.node || _nodeId;
-	  for (var n = 0; n < 6; n++) {
-	    b[i + n] = node[n];
-	  }
-
-	  return buf ? buf : unparse(b);
-	}
-
-	// **`v4()` - Generate random UUID**
-
-	// See https://github.com/broofa/node-uuid for API details
-	function v4(options, buf, offset) {
-	  // Deprecated - 'format' argument, as supported in v1.2
-	  var i = buf && offset || 0;
-
-	  if (typeof(options) == 'string') {
-	    buf = options == 'binary' ? new Array(16) : null;
-	    options = null;
-	  }
-	  options = options || {};
-
-	  var rnds = options.random || (options.rng || _rng)();
-
-	  // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
-	  rnds[6] = (rnds[6] & 0x0f) | 0x40;
-	  rnds[8] = (rnds[8] & 0x3f) | 0x80;
-
-	  // Copy bytes to buffer, if provided
-	  if (buf) {
-	    for (var ii = 0; ii < 16; ii++) {
-	      buf[i + ii] = rnds[ii];
-	    }
-	  }
-
-	  return buf || unparse(rnds);
-	}
-
-	// Export public API
-	var uuid = v4;
-	uuid.v1 = v1;
-	uuid.v4 = v4;
-	uuid.parse = parse;
-	uuid.unparse = unparse;
-
-	module.exports = uuid;
-
-
-/***/ }),
-/* 510 */
-/***/ (function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {
-	var rng;
-
-	var crypto = global.crypto || global.msCrypto; // for IE 11
-	if (crypto && crypto.getRandomValues) {
-	  // WHATWG crypto-based RNG - http://wiki.whatwg.org/wiki/Crypto
-	  // Moderately fast, high quality
-	  var _rnds8 = new Uint8Array(16);
-	  rng = function whatwgRNG() {
-	    crypto.getRandomValues(_rnds8);
-	    return _rnds8;
-	  };
-	}
-
-	if (!rng) {
-	  // Math.random()-based (RNG)
-	  //
-	  // If all else fails, use Math.random().  It's fast, but is of unspecified
-	  // quality.
-	  var  _rnds = new Array(16);
-	  rng = function() {
-	    for (var i = 0, r; i < 16; i++) {
-	      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
-	      _rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
-	    }
-
-	    return _rnds;
-	  };
-	}
-
-	module.exports = rng;
-
-
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
 /* 511 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.openModal = openModal;
+	exports.closeModal = closeModal;
+	exports.removeDevice = removeDevice;
+
+	var _ActionTypes = __webpack_require__(512);
+
+	var _Actions = __webpack_require__(513);
+
+	var giftCertFormAction = _interopRequireWildcard(_Actions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function openModal(device) {
+	  return {
+	    type: _ActionTypes.OPEN_MODAL,
+	    device: device
+	  };
+	}
+
+	function closeModal() {
+	  return {
+	    type: _ActionTypes.CLOSE_MODAL
+	  };
+	}
+
+	function removeDevice(device) {
+	  return function (dispatch) {
+	    dispatch(testRequestFormAction.removeDevice(device));
+	    dispatch(closeModal());
+	  };
+	}
+
+/***/ }),
+/* 512 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -31662,34 +31461,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var DIVISIONS_LOADED = exports.DIVISIONS_LOADED = 'GiftCertForm/DIVISIONS_LOADED';
-	var REQUEST_TYPE_LOADED = exports.REQUEST_TYPE_LOADED = 'GiftCertForm/REQUEST_TYPE_LOADED';
-	var SET_INITIAL_DATA = exports.SET_INITIAL_DATA = 'GiftCertForm/SET_INITIAL_DATA';
-	var HEADER_DATA_CHANGES = exports.HEADER_DATA_CHANGES = 'GiftCertForm/HEADER_DATA_CHANGES';
-	var TARGET_LABS_LOADED = exports.TARGET_LABS_LOADED = 'GiftCertForm/TARGET_LABS_LOADED';
-	var ADD_DEVICE = exports.ADD_DEVICE = 'GiftCertForm/ADD_DEVICE';
-	var ADD_LOT = exports.ADD_LOT = 'GiftCertForm/ADD_LOT';
-	var REMOVE_DEVICE = exports.REMOVE_DEVICE = 'GiftCertForm/REMOVE_DEVICE';
-	var REMOVE_LOT = exports.REMOVE_LOT = 'GiftCertForm/REMOVE_LOT';
-	var CHARACTERISTIC_CHANGED = exports.CHARACTERISTIC_CHANGED = 'GiftCertForm/CHARACTERISTIC_CHANGED';
-	var TEST_SELECTION_LOADED = exports.TEST_SELECTION_LOADED = 'GiftCertForm/TEST_SELECTION_LOADED';
-	var ADD_TEST_SELECTION = exports.ADD_TEST_SELECTION = 'GiftCertForm/ADD_TEST_SELECTION';
-	var REMOVE_TEST_SELECTION = exports.REMOVE_TEST_SELECTION = 'GiftCertForm/REMOVE_TEST_SELECTION';
-	var TEST_MODIFIED = exports.TEST_MODIFIED = 'GiftCertForm/TEST_MODIFIED';
-	var CONDITION_MODIFIED = exports.CONDITION_MODIFIED = 'GiftCertForm/CONDITION_MODIFIED';
-	var GC_TYPE_LOADED = exports.GC_TYPE_LOADED = 'GiftCertForm/GC_TYPE_LOADED';
-	var FORM_DATA_CHANGED = exports.FORM_DATA_CHANGED = 'GiftCertForm/FORM_DATA_CHANGED';
-	var CHANNEL_LOADED = exports.CHANNEL_LOADED = 'GiftCertForm/CHANNEL_LOADED';
-	var CLEAR_TEST_SELECTION = exports.CLEAR_TEST_SELECTION = 'GiftCertForm/CLEAR_TEST_SELECTION';
-	var COPY_TEST_SELECTION = exports.COPY_TEST_SELECTION = 'GiftCertForm/COPY_TEST_SELECTION';
-	var SET_ADMIN_STATE = exports.SET_ADMIN_STATE = 'GiftCertForm/SET_ADMIN_STATE';
-	var COMMENTS_CHANGED = exports.COMMENTS_CHANGED = 'GiftCertForm/COMMENTS_CHANGED';
-	var ACTION_DATA_CHANGED = exports.ACTION_DATA_CHANGED = 'GiftCertForm/ACTION_DATA_CHANGED';
-	var SUB_REQUEST_TYPE_LOADED = exports.SUB_REQUEST_TYPE_LOADED = 'GiftCertForm/SUB_REQUEST_TYPE_LOADED';
-	var CLEAR_LOTS = exports.CLEAR_LOTS = 'GiftCertForm/CLEAR_LOTS';
+	var OPEN_MODAL = exports.OPEN_MODAL = 'RemoveDeviceConfirmation/OPEN_MODAL';
+	var CLOSE_MODAL = exports.CLOSE_MODAL = 'RemoveDeviceConfirmation/CLOSE_MODAL';
 
 /***/ }),
-/* 512 */
+/* 513 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31727,7 +31503,7 @@
 	exports.channelLoaded = channelLoaded;
 	exports.addTestRequest = addTestRequest;
 
-	var _ActionTypes = __webpack_require__(511);
+	var _ActionTypes = __webpack_require__(514);
 
 	var _reactReduxToastr = __webpack_require__(7);
 
@@ -31743,7 +31519,7 @@
 
 	var api = _interopRequireWildcard(_Api);
 
-	var _TestValidationUtils = __webpack_require__(513);
+	var _TestValidationUtils = __webpack_require__(515);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -32330,7 +32106,42 @@
 	}
 
 /***/ }),
-/* 513 */
+/* 514 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var DIVISIONS_LOADED = exports.DIVISIONS_LOADED = 'GiftCertForm/DIVISIONS_LOADED';
+	var REQUEST_TYPE_LOADED = exports.REQUEST_TYPE_LOADED = 'GiftCertForm/REQUEST_TYPE_LOADED';
+	var SET_INITIAL_DATA = exports.SET_INITIAL_DATA = 'GiftCertForm/SET_INITIAL_DATA';
+	var HEADER_DATA_CHANGES = exports.HEADER_DATA_CHANGES = 'GiftCertForm/HEADER_DATA_CHANGES';
+	var TARGET_LABS_LOADED = exports.TARGET_LABS_LOADED = 'GiftCertForm/TARGET_LABS_LOADED';
+	var ADD_DEVICE = exports.ADD_DEVICE = 'GiftCertForm/ADD_DEVICE';
+	var ADD_LOT = exports.ADD_LOT = 'GiftCertForm/ADD_LOT';
+	var REMOVE_DEVICE = exports.REMOVE_DEVICE = 'GiftCertForm/REMOVE_DEVICE';
+	var REMOVE_LOT = exports.REMOVE_LOT = 'GiftCertForm/REMOVE_LOT';
+	var CHARACTERISTIC_CHANGED = exports.CHARACTERISTIC_CHANGED = 'GiftCertForm/CHARACTERISTIC_CHANGED';
+	var TEST_SELECTION_LOADED = exports.TEST_SELECTION_LOADED = 'GiftCertForm/TEST_SELECTION_LOADED';
+	var ADD_TEST_SELECTION = exports.ADD_TEST_SELECTION = 'GiftCertForm/ADD_TEST_SELECTION';
+	var REMOVE_TEST_SELECTION = exports.REMOVE_TEST_SELECTION = 'GiftCertForm/REMOVE_TEST_SELECTION';
+	var TEST_MODIFIED = exports.TEST_MODIFIED = 'GiftCertForm/TEST_MODIFIED';
+	var CONDITION_MODIFIED = exports.CONDITION_MODIFIED = 'GiftCertForm/CONDITION_MODIFIED';
+	var GC_TYPE_LOADED = exports.GC_TYPE_LOADED = 'GiftCertForm/GC_TYPE_LOADED';
+	var FORM_DATA_CHANGED = exports.FORM_DATA_CHANGED = 'GiftCertForm/FORM_DATA_CHANGED';
+	var CHANNEL_LOADED = exports.CHANNEL_LOADED = 'GiftCertForm/CHANNEL_LOADED';
+	var CLEAR_TEST_SELECTION = exports.CLEAR_TEST_SELECTION = 'GiftCertForm/CLEAR_TEST_SELECTION';
+	var COPY_TEST_SELECTION = exports.COPY_TEST_SELECTION = 'GiftCertForm/COPY_TEST_SELECTION';
+	var SET_ADMIN_STATE = exports.SET_ADMIN_STATE = 'GiftCertForm/SET_ADMIN_STATE';
+	var COMMENTS_CHANGED = exports.COMMENTS_CHANGED = 'GiftCertForm/COMMENTS_CHANGED';
+	var ACTION_DATA_CHANGED = exports.ACTION_DATA_CHANGED = 'GiftCertForm/ACTION_DATA_CHANGED';
+	var SUB_REQUEST_TYPE_LOADED = exports.SUB_REQUEST_TYPE_LOADED = 'GiftCertForm/SUB_REQUEST_TYPE_LOADED';
+	var CLEAR_LOTS = exports.CLEAR_LOTS = 'GiftCertForm/CLEAR_LOTS';
+
+/***/ }),
+/* 515 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32366,6 +32177,1628 @@
 	    valueIsEmpty: dataUtils.isEmpty(conditionSelection.get('value'))
 	  };
 	}
+
+/***/ }),
+/* 516 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _redux = __webpack_require__(3);
+
+	var _reactRedux = __webpack_require__(4);
+
+	var _classnames = __webpack_require__(9);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _Actions = __webpack_require__(517);
+
+	var actions = _interopRequireWildcard(_Actions);
+
+	var _reactBootstrapModal = __webpack_require__(59);
+
+	var _reactBootstrapModal2 = _interopRequireDefault(_reactBootstrapModal);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Modal = function (_React$Component) {
+	  _inherits(Modal, _React$Component);
+
+	  function Modal() {
+	    _classCallCheck(this, Modal);
+
+	    var _this = _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this));
+
+	    _this.onSearchClick = _this.onSearchClick.bind(_this);
+	    _this.onAddClicked = _this.onAddClicked.bind(_this);
+	    _this.onFieldChanged = _this.onFieldChanged.bind(_this);
+
+	    _this.onPackageTypeGroupChanged = _this.onPackageTypeGroupChanged.bind(_this);
+	    _this.onPackageTypeChanged = _this.onPackageTypeChanged.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(Modal, [{
+	    key: 'onFieldChanged',
+	    value: function onFieldChanged(name, e) {
+	      var value = e.target.value;
+	      this.props.fieldChanged(_defineProperty({}, name, value));
+	    }
+	  }, {
+	    key: 'onPackageTypeGroupChanged',
+	    value: function onPackageTypeGroupChanged(e) {
+	      var device = this.props.modalData.get('device');
+
+	      var newDevice = device.merge({
+	        packageTypeGroup: {
+	          id: parseInt(e.target.value),
+	          name: $('option:selected', e.target).text()
+	        }
+	      });
+
+	      this.props.fieldChanged({
+	        device: newDevice
+	      });
+	    }
+	  }, {
+	    key: 'onPackageTypeChanged',
+	    value: function onPackageTypeChanged(e) {
+	      var device = this.props.modalData.get('device');
+
+	      var newDevice = device.merge({
+	        packageType: {
+	          id: parseInt(e.target.value),
+	          name: $('option:selected', e.target).text()
+	        }
+	      });
+
+	      this.props.fieldChanged({
+	        device: newDevice
+	      });
+	    }
+	  }, {
+	    key: 'onSearchClick',
+	    value: function onSearchClick(e) {
+	      e.preventDefault();
+	      var modalData = this.props.modalData;
+	      this.props.checkPartNumberAndHandleResult(modalData.get('search'));
+	    }
+	  }, {
+	    key: 'onAddClicked',
+	    value: function onAddClicked(e) {
+	      e.preventDefault();
+	      var device = this.props.modalData.get('device');
+	      this.props.addDeviceToTestRequest(device);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var modalData = this.props.modalData;
+
+	      var packageTypeBaseStyle = {
+	        display: modalData.get('isFetchingPackageType') ? 'none' : 'inline',
+	        width: '180px'
+	      };
+
+	      var style = {
+	        searchSection: {
+	          paddingBottom: '5px'
+	        },
+	        searchControl: {
+	          marginRight: '10px'
+	        },
+	        searchButton: {
+	          width: '100px'
+	        },
+	        deviceEditor: {
+	          marginTop: '10px',
+	          paddingTop: '10px',
+	          borderTop: '1px solid #e5e5e5',
+	          display: modalData.get('showEditor') ? 'block' : 'none'
+	        },
+	        packageGroupType: _extends({}, packageTypeBaseStyle, {
+	          marginRight: '8px'
+	        }),
+	        packageType: _extends({}, packageTypeBaseStyle),
+	        searchLoading: {
+	          display: modalData.get('isSearching') ? 'inline-block' : 'none'
+	        },
+	        packageTypeLoading: {
+	          display: modalData.get('isFetchingPackageType') ? 'inline-block' : 'none'
+	        }
+	      };
+
+	      var searchButtonClass = (0, _classnames2.default)('btn', 'btn-default', {
+	        'disabled': modalData.get('isSearching')
+	      });
+
+	      var addButtonClass = (0, _classnames2.default)('btn', 'btn-success', {
+	        'disabled': modalData.get('isSearching')
+	      });
+
+	      var packageTypesDropdownOpts = {};
+	      var packageTypeGroupsOptionList = [];
+	      var packageTypesOptionList = [];
+
+	      if (modalData.get('isPartFound')) {
+	        packageTypesDropdownOpts.disabled = 'disabled';
+
+	        var packageTypeGroup = modalData.get('device').get('packageTypeGroup');
+	        var packageType = modalData.get('device').get('packageType');
+
+	        packageTypeGroupsOptionList.push(_react2.default.createElement(
+	          'option',
+	          { key: packageTypeGroup.get('id'), value: packageTypeGroup.get('id') },
+	          packageTypeGroup.get('name')
+	        ));
+	        packageTypesOptionList.push(_react2.default.createElement(
+	          'option',
+	          { key: packageType.get('id'), value: packageType.get('id') },
+	          packageType.get('name')
+	        ));
+	      } else {
+	        packageTypeGroupsOptionList.push(_react2.default.createElement(
+	          'option',
+	          { key: '', value: '' },
+	          'Select group'
+	        ));
+	        modalData.get('packageTypeGroupsData').map(function (item) {
+	          packageTypeGroupsOptionList.push(_react2.default.createElement(
+	            'option',
+	            { key: item.get('id'), value: item.get('id') },
+	            item.get('name')
+	          ));
+	        });
+
+	        var selectedPackageGroup = modalData.get('device').get('packageTypeGroup');
+	        packageTypesOptionList.push(_react2.default.createElement(
+	          'option',
+	          { key: '', value: '' },
+	          'Select package'
+	        ));
+
+	        if (selectedPackageGroup.get('id') > 0) {
+	          var group = modalData.get('packageTypeGroupsData').filter(function (item) {
+	            return item.get('id') == selectedPackageGroup.get('id');
+	          }).map(function (item) {
+	            return item;
+	          });
+
+	          group.get(0).get('packageTypes').forEach(function (item) {
+	            packageTypesOptionList.push(_react2.default.createElement(
+	              'option',
+	              { key: item.get('id'), value: item.get('id') },
+	              item.get('name')
+	            ));
+	          });
+	        }
+	      }
+
+	      return _react2.default.createElement(
+	        _reactBootstrapModal2.default,
+	        { show: modalData.get('isOpen'), onHide: this.props.closeModal },
+	        _react2.default.createElement(
+	          _reactBootstrapModal2.default.Header,
+	          { closeButton: true },
+	          _react2.default.createElement(
+	            _reactBootstrapModal2.default.Title,
+	            { id: 'ModalHeader' },
+	            'Add Device'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrapModal2.default.Body,
+	          null,
+	          function () {
+	            if (modalData.get('showError')) {
+	              return _react2.default.createElement(
+	                'div',
+	                { className: 'alert alert-danger' },
+	                modalData.get('errorMessage')
+	              );
+	            }
+	          }(),
+	          _react2.default.createElement(
+	            'div',
+	            { style: style.searchSection },
+	            _react2.default.createElement(
+	              'form',
+	              { className: 'form-inline' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'form-group' },
+	                _react2.default.createElement(
+	                  'label',
+	                  { className: 'control-label', style: style.searchControl },
+	                  'Part Number'
+	                ),
+	                _react2.default.createElement('input', { type: 'text', className: 'form-control', style: style.searchControl,
+	                  value: modalData.get('search'), onChange: _.partial(this.onFieldChanged, 'search') })
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                { className: searchButtonClass, onClick: this.onSearchClick, style: style.searchButton },
+	                _react2.default.createElement('i', { className: 'fa fa-spinner fa-spin', style: style.searchLoading }),
+	                ' Search'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'form',
+	            { className: 'form-horizontal', style: style.deviceEditor },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-group' },
+	              _react2.default.createElement(
+	                'label',
+	                { className: 'col-xs-4 control-label' },
+	                'Part Number'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'col-xs-8' },
+	                _react2.default.createElement('input', { type: 'text', className: 'form-control', value: modalData.get('device').get('partNumber'), disabled: true })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-group' },
+	              _react2.default.createElement(
+	                'label',
+	                { className: 'col-xs-4 control-label' },
+	                'Package Type'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'col-xs-8' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'form-control-static', style: style.packageTypeLoading },
+	                  _react2.default.createElement('i', { className: 'fa fa-spinner fa-spin' })
+	                ),
+	                _react2.default.createElement(
+	                  'select',
+	                  _extends({ className: 'form-control', style: style.packageGroupType }, packageTypesDropdownOpts, {
+	                    onChange: this.onPackageTypeGroupChanged }),
+	                  packageTypeGroupsOptionList
+	                ),
+	                _react2.default.createElement(
+	                  'select',
+	                  _extends({ className: 'form-control', style: style.packageType }, packageTypesDropdownOpts, {
+	                    onChange: this.onPackageTypeChanged }),
+	                  packageTypesOptionList
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrapModal2.default.Footer,
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrapModal2.default.Dismiss,
+	            { className: 'btn btn-default' },
+	            'Cancel'
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { className: addButtonClass, onClick: this.onAddClicked },
+	            'Add'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Modal;
+	}(_react2.default.Component);
+
+	function mapStateToProps(_ref, props) {
+	  var addDeviceModal = _ref.addDeviceModal;
+
+	  return {
+	    modalData: addDeviceModal
+	  };
+	}
+
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)(actions, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Modal);
+
+/***/ }),
+/* 517 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.openModal = openModal;
+	exports.fieldChanged = fieldChanged;
+	exports.closeModal = closeModal;
+	exports.addDeviceToTestRequest = addDeviceToTestRequest;
+	exports.checkPartNumberAndHandleResult = checkPartNumberAndHandleResult;
+
+	var _ActionTypes = __webpack_require__(518);
+
+	var _Api = __webpack_require__(29);
+
+	var api = _interopRequireWildcard(_Api);
+
+	var _DataUtils = __webpack_require__(122);
+
+	var dataUtils = _interopRequireWildcard(_DataUtils);
+
+	var _Actions = __webpack_require__(513);
+
+	var giftCertFormAction = _interopRequireWildcard(_Actions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function openModal() {
+	  return {
+	    type: _ActionTypes.OPEN_MODAL
+	  };
+	}
+
+	function fieldChanged(changes) {
+	  return {
+	    type: _ActionTypes.FORM_DATA_CHANGES,
+	    changes: changes
+	  };
+	}
+
+	function closeModal() {
+	  return {
+	    type: _ActionTypes.CLOSE_MODAL
+	  };
+	}
+
+	function addDeviceToTestRequest(device) {
+	  return function (dispatch) {
+	    dispatch(resetErrorsState());
+
+	    if (dataUtils.isEmpty(device.get('partNumber'))) {
+	      dispatch(showMissingPartNumber());
+	      return;
+	    }
+
+	    if (device.get('packageType').get('id') <= 0) {
+	      dispatch(showMissingPackageType());
+	      return;
+	    }
+
+	    dispatch(testRequestFormAction.addDevice(device));
+	    dispatch(closeModal());
+	  };
+	}
+
+	function resetErrorsState() {
+	  return {
+	    type: _ActionTypes.RESET_ERRORS_STATE
+	  };
+	}
+
+	function showMissingPartNumber() {
+	  return {
+	    type: _ActionTypes.SHOW_ERROR,
+	    message: 'Please type part number.'
+	  };
+	}
+
+	function showMissingPackageType() {
+	  return {
+	    type: _ActionTypes.SHOW_ERROR,
+	    message: 'Please select a package type.'
+	  };
+	}
+
+	function showMissingPartNumber() {
+	  return {
+	    type: _ActionTypes.SHOW_ERROR,
+	    message: 'Incorrect part number format. Part number must contains at least 1 character.'
+	  };
+	}
+
+	function checkPartNumberAndHandleResult(partNumber) {
+	  return function (dispatch) {
+	    partNumber = dataUtils.trim(partNumber);
+
+	    dispatch(fieldChanged({
+	      search: partNumber
+	    }));
+
+	    dispatch(resetErrorsState());
+
+	    if (dataUtils.isEmpty(partNumber)) {
+	      dispatch(showMissingPartNumber());
+	      return;
+	    }
+
+	    if (!dataUtils.validPartNumber(partNumber)) {
+	      dispatch(showMissingPartNumber());
+	      return;
+	    }
+
+	    dispatch(checkPartNumber());
+
+	    api.checkPartNumber(partNumber, function (data) {
+	      dispatch(fetchPartDataSuccess(data));
+
+	      if (!data.isExists) {
+	        dispatch(fetchPackageType());
+	        api.getPackageTypeGroup(function (data) {
+	          dispatch(fetchPackageTypeSuccess(data));
+	        });
+	      }
+	    });
+	  };
+	}
+
+	function fetchPartDataSuccess(data) {
+	  return {
+	    type: _ActionTypes.FETCH_PART_DATA_SUCCESS,
+	    data: data
+	  };
+	}
+
+	function checkPartNumber() {
+	  return {
+	    type: _ActionTypes.FETCH_PART_DATA
+	  };
+	}
+
+	function fetchPackageType() {
+	  return {
+	    type: _ActionTypes.FETCH_PACKAGE_TYPE
+	  };
+	}
+
+	function fetchPackageTypeSuccess(data) {
+	  return {
+	    type: _ActionTypes.FETCH_PACKAGE_TYPE_SUCCESS,
+	    data: data
+	  };
+	}
+
+/***/ }),
+/* 518 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var OPEN_MODAL = exports.OPEN_MODAL = 'AddDeviceModal/OPEN_NEW_DEVICE_MODAL';
+	var CLOSE_MODAL = exports.CLOSE_MODAL = 'AddDeviceModal/CLOSE_NEW_DEVICE_MODAL';
+	var FETCH_PART_DATA = exports.FETCH_PART_DATA = 'AddDeviceModal/FETCH_PART_DATA';
+	var FETCH_PACKAGE_TYPE = exports.FETCH_PACKAGE_TYPE = 'AddDeviceModal/FETCH_PACKAGE_TYPE';
+	var FETCH_PACKAGE_TYPE_SUCCESS = exports.FETCH_PACKAGE_TYPE_SUCCESS = 'AddDeviceModal/FETCH_PACKAGE_TYPE_SUCCESS';
+	var FORM_DATA_CHANGES = exports.FORM_DATA_CHANGES = 'AddDeviceModal/FORM_DATA_CHANGES';
+	var FETCH_PART_DATA_SUCCESS = exports.FETCH_PART_DATA_SUCCESS = 'AddDeviceModal/FETCH_PART_DATA_SUCCESS';
+	var RESET_ERRORS_STATE = exports.RESET_ERRORS_STATE = 'AddDeviceModal/RESET_ERRORS_STATE';
+	var SHOW_ERROR = exports.SHOW_ERROR = 'AddDeviceModal/SHOW_ERROR';
+
+/***/ }),
+/* 519 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _redux = __webpack_require__(3);
+
+	var _reactRedux = __webpack_require__(4);
+
+	var _Actions = __webpack_require__(511);
+
+	var actions = _interopRequireWildcard(_Actions);
+
+	var _reactBootstrapModal = __webpack_require__(59);
+
+	var _reactBootstrapModal2 = _interopRequireDefault(_reactBootstrapModal);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Modal = function (_React$Component) {
+	  _inherits(Modal, _React$Component);
+
+	  function Modal() {
+	    _classCallCheck(this, Modal);
+
+	    var _this = _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this));
+
+	    _this.onRemoveClicked = _this.onRemoveClicked.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(Modal, [{
+	    key: 'onRemoveClicked',
+	    value: function onRemoveClicked(e) {
+	      e.preventDefault();
+	      var modalData = this.props.modalData;
+	      var device = modalData.get('device');
+	      this.props.removeDevice(device);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var modalData = this.props.modalData;
+	      var device = modalData.get('device');
+
+	      return _react2.default.createElement(
+	        _reactBootstrapModal2.default,
+	        { show: modalData.get('isOpen'), onHide: this.props.closeModal },
+	        _react2.default.createElement(
+	          _reactBootstrapModal2.default.Header,
+	          { closeButton: true },
+	          _react2.default.createElement(
+	            _reactBootstrapModal2.default.Title,
+	            { id: 'ModalHeader' },
+	            'Remove Device'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrapModal2.default.Body,
+	          null,
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'Do you want to remove this device?'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrapModal2.default.Footer,
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrapModal2.default.Dismiss,
+	            { className: 'btn btn-default' },
+	            'Cancel'
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'btn btn-danger', onClick: this.onRemoveClicked },
+	            'Remove'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Modal;
+	}(_react2.default.Component);
+
+	function mapStateToProps(_ref, props) {
+	  var removeDeviceModal = _ref.removeDeviceModal;
+
+	  return {
+	    modalData: removeDeviceModal
+	  };
+	}
+
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)(actions, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Modal);
+
+/***/ }),
+/* 520 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(2);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _DataUtils = __webpack_require__(122);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DateTimePicker = function (_Component) {
+	  _inherits(DateTimePicker, _Component);
+
+	  function DateTimePicker() {
+	    _classCallCheck(this, DateTimePicker);
+
+	    var _this = _possibleConstructorReturn(this, (DateTimePicker.__proto__ || Object.getPrototypeOf(DateTimePicker)).call(this));
+
+	    _this.formatDate = _this.formatDate.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(DateTimePicker, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      var dateInputOpts = {
+	        format: this.props.showTime ? _DataUtils.DATETIME_FORMAT : _DataUtils.DATE_FORMAT,
+	        showClear: this.props.notAllowClear ? false : true,
+	        showClose: true
+	      };
+
+	      $(this.refs.dateControl).datetimepicker(dateInputOpts).on('dp.change', function (e) {
+
+	        var date = e.date;
+
+	        if (date === false) {
+	          date = undefined;
+	        }
+
+	        _this2.props.onChange(date);
+	      });
+	    }
+	  }, {
+	    key: 'formatDate',
+	    value: function formatDate(date) {
+	      if (date) {
+	        return date.format(this.props.showTime ? _DataUtils.DATETIME_FORMAT : _DataUtils.DATE_FORMAT);
+	      }
+
+	      return '';
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var attrs = {};
+
+	      if (this.props.disabled) {
+	        attrs.disabled = 'disabled';
+	      }
+
+	      if (this.props.tabIndex) {
+	        attrs.tabIndex = this.props.tabIndex;
+	      }
+
+	      return _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control lmd-date-input', ref: 'dateControl',
+	        value: this.formatDate(this.props.value) }, attrs));
+	    }
+	  }]);
+
+	  return DateTimePicker;
+	}(_react.Component);
+
+	exports.default = DateTimePicker;
+
+
+	DateTimePicker.propTypes = {
+	  value: _react.PropTypes.object,
+	  onChange: _react.PropTypes.func
+	};
+
+/***/ }),
+/* 521 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function () {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case _ActionTypes.SET_ADMIN_STATE:
+	            return state.set('isUserAdmin', true);
+	        case _ActionTypes.COMMENTS_CHANGED:
+	            return state.set('comments', state.get('comments').merge((0, _Immutable.fromJS)(action.changes)));
+	        case _ActionTypes.ACTION_DATA_CHANGED:
+	            {
+	                return state.set('actions', state.get('actions').merge((0, _Immutable.fromJS)(action.changes)));
+	            }
+	        case _ActionTypes.SET_INITIAL_DATA:
+	            var request = action.data;
+	            debugger;
+	            var defaultHeaderData = initialState.get('headerData');
+	            var defaultActions = initialState.get('actions');
+
+	            //let watchers = []
+
+	            //request.watchers.forEach((watcher) => {
+	            //  watchers.push(watcher)
+	            //})
+
+	            var _newHeaderData = {
+	                id: request.id || 0,
+
+	                giftCertNo: request.giftCertNo || defaultHeaderData.get('giftCertNo'),
+	                status: request.status,
+	                gcType: request.gcType || defaultHeaderData.get('gcType'),
+	                creator: request.creator,
+	                dtiPermitNo: request.giftCertNo || defaultHeaderData.get('dtiPermitNo'),
+	                issuanceDate: convertDateToMoment(request.issuanceDate),
+	                expirationDate: convertDateToMoment(request.expirationDate),
+	                value: request.giftCertNo || defaultHeaderData.get('value'),
+	                note: request.note || defaultHeaderData.get('note')
+
+	                //requester: request.requester,                                             
+	                //division: request.division || defaultHeaderData.get('division'),
+	                //businessLine: request.businessLine || defaultHeaderData.get('businessLine'),
+	                //productLine: request.productLine || defaultHeaderData.get('productLine'),
+	                //segment: request.segment || defaultHeaderData.get('segment'),
+	                //requestType: request.requestType || defaultHeaderData.get('requestType'),
+	                //subRequestType: request.subRequestType || defaultHeaderData.get('subRequestType'),
+	                //targetLab: request.targetLab || defaultHeaderData.get('targetLab'),
+
+	                //priority: request.priority || defaultHeaderData.get('priority'),
+	                //projectManager: request.projectManager || defaultHeaderData.get('projectManager'),
+	                //projectOwner: request.projectOwner || defaultHeaderData.get('projectOwner'),
+	                //requesterComments: request.requesterComments || defaultHeaderData.get('requesterComments'),
+	                //projectCode: request.projectCode || defaultHeaderData.get('projectCode'),
+	                //referenceProjectCode: request.referenceProjectCode || defaultHeaderData.get('referenceProjectCode'),
+	                //  watchers: watchers,
+	                //  requestDate: request.requestDate || defaultHeaderData.get('requestDate'),
+	            };
+
+	            var newDevices = request.devices || initialState.get('devices');
+	            var deviceConfidentiality = request.deviceConfidentiality || initialState.get('deviceConfidentiality');
+	            var newTests = request.testSelection || initialState.get('tests');
+
+	            for (var _idx2 = 0; _idx2 < newDevices.length; _idx2++) {
+	                var device = newDevices[_idx2];
+
+	                if (device.channel == null) {
+	                    device.channel = { id: 0 };
+	                }
+	            }
+
+	            return state.merge({
+	                isLoading: false,
+	                headerData: (0, _Immutable.fromJS)(_newHeaderData),
+	                devices: (0, _Immutable.fromJS)(newDevices),
+	                deviceConfidentiality: (0, _Immutable.fromJS)(deviceConfidentiality),
+	                tests: (0, _Immutable.fromJS)(newTests.map(function (item) {
+	                    item.uuid = _uuid2.default.v4();
+	                    return item;
+	                })),
+	                comments: (0, _Immutable.fromJS)({
+	                    adminSupportComments: request.adminSupportComments,
+	                    reviewerComments: request.reviewerComments,
+	                    datasheetProcessorComments: request.datasheetProcessorComments
+	                }),
+	                actions: {
+	                    requestDate: convertDateToMoment(request.requestDate),
+	                    requestedBy: request.requester || defaultActions.get('requestedBy'),
+	                    partsReceivedDate: convertDateToMoment(request.partsReceivedDate),
+	                    partsReceivedBy: request.partsReceivedBy || defaultActions.get('partsReceivedBy'),
+	                    managerAcceptedDate: convertDateToMoment(request.managerAcceptedDate),
+	                    managerAcceptedBy: request.managerAcceptedBy || defaultActions.get('managerAcceptedBy'),
+	                    releasedToLabDate: convertDateToMoment(request.releasedToLabDate),
+	                    releasedToLabBy: request.releasedToLabBy || defaultActions.get('releasedToLabBy'),
+	                    rejectedToRequesterDate: convertDateToMoment(request.rejectedToRequesterDate),
+	                    rejectedToRequesterBy: request.rejectedToRequesterBy || defaultActions.get('rejectedToRequesterBy'),
+	                    dataAcceptedDate: convertDateToMoment(request.dataAcceptedDate),
+	                    dataAcceptedBy: request.dataAcceptedBy || defaultActions.get('dataAcceptedBy'),
+	                    datasheetAcceptedDate: convertDateToMoment(request.datasheetAcceptedDate),
+	                    datasheetAcceptedBy: request.datasheetAcceptedBy || defaultActions.get('datasheetAcceptedBy'),
+	                    dataSheetApprovalDate: convertDateToMoment(request.dataSheetApprovalDate),
+	                    dataSheetApprovalBy: request.dataSheetApprovalBy || defaultActions.get('dataSheetApprovalBy'),
+	                    datasheetRejectedDate: convertDateToMoment(request.datasheetRejectedDate),
+	                    datasheetRejectedBy: request.datasheetRejectedBy || defaultActions.get('datasheetRejectedBy'),
+	                    firstReviewDate: convertDateToMoment(request.firstReviewDate),
+	                    firstReviewBy: request.firstReviewBy || defaultActions.get('firstReviewBy'),
+	                    nthReviewDate: convertDateToMoment(request.nthReviewDate),
+	                    nthReviewBy: request.nthReviewBy || defaultActions.get('nthReviewBy'),
+	                    toWebDate: convertDateToMoment(request.toWebDate),
+	                    toWebBy: request.toWebBy || defaultActions.get('toWebBy'),
+	                    canceledDate: convertDateToMoment(request.canceledDate),
+	                    canceledBy: request.canceledBy || defaultActions.get('canceledBy'),
+	                    closedDate: convertDateToMoment(request.closedDate),
+	                    closedBy: request.closedBy || defaultActions.get('closedBy')
+	                }
+	            });
+	        case _ActionTypes.SUB_REQUEST_TYPE_LOADED:
+	            return state.set('subRequestTypeData', (0, _Immutable.fromJS)(action.subRequestTypes));
+	        case _ActionTypes.CHANNEL_LOADED:
+	            return state.set('channelsData', (0, _Immutable.fromJS)(action.channels));
+	        case _ActionTypes.TARGET_LABS_LOADED:
+	            {
+	                var headerData = state.get('headerData');
+	                // Based On -	CTT-45 - The target lab
+	                // Target Lab should default to ELS-EVL1,
+	                // but since we allow user to add more target lab.. we fixed to the first one
+	                return state.merge({
+	                    headerData: headerData.set('targetLab', (0, _Immutable.fromJS)(action.targetLabs[0])),
+	                    targetLabsData: (0, _Immutable.fromJS)(action.targetLabs)
+	                });
+	            }
+	        case _ActionTypes.CLEAR_LOTS:
+	            {
+	                var _devices = state.get('devices');
+	                for (var _idx3 = 0; _idx3 < _devices.count(); _idx3++) {
+	                    _devices = _devices.setIn([_idx3, 'lots'], (0, _Immutable.fromJS)([]));
+	                }
+
+	                return state.merge({
+	                    devices: _devices
+	                });
+	            }
+	        case _ActionTypes.DIVISIONS_LOADED:
+	            return state.set('divisionsData', (0, _Immutable.fromJS)(action.divisions));
+	        case _ActionTypes.REQUEST_TYPE_LOADED:
+	            return state.set('requestTypeData', (0, _Immutable.fromJS)(action.requestTypes));
+	        case _ActionTypes.GC_TYPE_LOADED:
+	            return state.set('gcTypesData', (0, _Immutable.fromJS)(action.gcTypes));
+	        case _ActionTypes.FORM_DATA_CHANGED:
+	            return state.merge(action.changes);
+	        case _ActionTypes.HEADER_DATA_CHANGES:
+	            var headerData = state.get('headerData');
+	            var _newHeaderData = headerData.merge(action.changes);
+	            return state.set('headerData', _newHeaderData);
+	        case _ActionTypes.ADD_DEVICE:
+	            {
+	                var _device = action.device.set('lots', (0, _Immutable.fromJS)([]));
+
+	                var _idx = state.get('devices').findIndex(function (item) {
+	                    return item.get('partNumber') === _device.get('partNumber');
+	                });
+
+	                if (_idx >= 0) {
+	                    return state;
+	                }
+
+	                var channel = _device.get('channel');
+	                if (channel === undefined || channel === null) {
+	                    _device = _device.set('channel', (0, _Immutable.fromJS)({}));
+	                }
+
+	                if (!state.get('headerData').get('requestType').get('isCharacteristicsMandatory') && !_device.get('isReadOnly')) {
+	                    var na = 'N/A';
+	                    _device = _device.merge({
+	                        channel: {
+	                            id: 0,
+	                            name: na
+	                        },
+	                        vgsMax: na,
+	                        numBondWires: na,
+	                        dieDimension: na,
+	                        vsd: na,
+	                        idssMax125: na,
+	                        isReadOnly: false,
+	                        idssMax25: na,
+	                        rdsVceMax: na,
+	                        tjMax: na,
+	                        vgsThMax: na,
+	                        rgMax: na,
+	                        bvdss: na,
+	                        rthPcbMount: na,
+	                        internalRg: na,
+	                        activeArea: na,
+	                        igssMaxVgsMinus: na,
+	                        dieThickness: na,
+	                        bondWireDiameter: na,
+	                        igssMaxVgsPlus: na,
+	                        generation: na,
+	                        rdsVceTypical: na,
+	                        vgsThTypical: na,
+	                        rgTypical: na,
+	                        vgsThMin: na,
+	                        hexSize: na,
+	                        gateOxideThickness: na
+	                    });
+	                }
+
+	                var newList = state.get('devices').push(_device);
+
+	                return state.merge({
+	                    devices: newList
+	                });
+	            }
+	        case _ActionTypes.ADD_LOT:
+	            var devices = state.get('devices');
+
+	            var _idx = devices.findIndex(function (item) {
+	                return item.get('partNumber') === action.device.get('partNumber');
+	            });
+
+	            var currentDevice = devices.get(_idx);
+	            var newLots = currentDevice.get('lots').push(action.lot);
+	            var newDevice = currentDevice.set('lots', newLots);
+
+	            return state.merge({
+	                devices: devices.set(_idx, newDevice)
+	            });
+	        case _ActionTypes.REMOVE_DEVICE:
+	            var deviceListAfterRemove = state.get('devices').filter(function (item) {
+	                return item.get('partNumber') !== action.device.get('partNumber');
+	            });
+
+	            return state.merge({
+	                devices: deviceListAfterRemove
+	            });
+	        case _ActionTypes.REMOVE_LOT:
+	            {
+	                var _devices2 = state.get('devices');
+
+	                var _idx4 = _devices2.findIndex(function (item) {
+	                    return item.get('partNumber') === action.device.get('partNumber');
+	                });
+
+	                var _currentDevice = _devices2.get(_idx4);
+	                var _newLots = _currentDevice.get('lots').filter(function (item) {
+	                    return item !== action.lot;
+	                });
+
+	                var _newDevice = _currentDevice.set('lots', _newLots);
+
+	                return state.merge({
+	                    devices: _devices2.set(_idx4, _newDevice)
+	                });
+	            }
+	        case _ActionTypes.CHARACTERISTIC_CHANGED:
+	            {
+	                var _devices3 = state.get('devices');
+
+	                var _idx5 = _devices3.findIndex(function (item) {
+	                    return item.get('partNumber') === action.partNumber;
+	                });
+
+	                var _currentDevice2 = _devices3.get(_idx5);
+
+	                return state.merge({
+	                    devices: _devices3.set(_idx5, _currentDevice2.merge(action.changes))
+	                });
+	            }
+	        case _ActionTypes.TEST_SELECTION_LOADED:
+	            {
+	                // remove tests that are not in testSelections
+	                var validTests = (0, _Immutable.List)([]);
+
+	                var tests = state.get('tests');
+
+	                tests.forEach(function (test) {
+	                    action.testSelections.forEach(function (selection) {
+	                        if (test.get('testSelection').get('id') === selection.id) {
+	                            validTests = validTests.push(test);
+	                        }
+	                    });
+	                });
+
+	                return state.merge({
+	                    tests: validTests,
+	                    testSelectionData: action.testSelections
+	                });
+	            }
+	        case _ActionTypes.ADD_TEST_SELECTION:
+	            {
+	                var _tests = state.get('tests');
+
+	                var conditionSelections = [];
+
+	                action.test.get('conditions').forEach(function (condition) {
+	                    conditionSelections.push({
+	                        condition: condition
+	                    });
+	                });
+
+	                var test = (0, _Immutable.fromJS)({
+	                    testSelection: action.test,
+	                    conditionSelections: conditionSelections,
+	                    uuid: _uuid2.default.v4()
+	                });
+
+	                if (_tests.has(test)) {
+	                    return state;
+	                }
+
+	                return state.merge({
+	                    tests: _tests.push(test)
+	                });
+	            }
+	        case _ActionTypes.COPY_TEST_SELECTION:
+	            {
+	                var source = action.test.toJS();
+
+	                var _newTest = {
+	                    testSelection: source.testSelection,
+	                    conditionSelections: [],
+	                    numTemperatures: source.numTemperatures,
+	                    temperature: source.temperature,
+	                    numOfDevices: source.numOfDevices,
+	                    comments: source.comments
+	                };
+
+	                source.conditionSelections.forEach(function (item) {
+	                    var newConditionSelection = {
+	                        condition: item.condition,
+	                        value: item.value
+	                    };
+
+	                    if (item.condition.stepApplicable) {
+	                        newConditionSelection.stepFrom = item.stepFrom;
+	                        newConditionSelection.stepTo = item.stepTo;
+	                        newConditionSelection.stepping = item.stepping;
+	                    }
+
+	                    _newTest.conditionSelections.push(newConditionSelection);
+	                });
+
+	                return state.merge({
+	                    tests: state.get('tests').push((0, _Immutable.fromJS)(_newTest))
+	                });
+
+	                return state;
+	            }
+	        case _ActionTypes.REMOVE_TEST_SELECTION:
+	            {
+	                var testsAfterRemove = state.get('tests').filter(function (item) {
+	                    return item.get('uuid') !== action.test.get('uuid');
+	                });
+
+	                return state.merge({
+	                    tests: testsAfterRemove
+	                });
+	            }
+	        case _ActionTypes.TEST_MODIFIED:
+	            {
+	                var payload = action.payload;
+	                var currentTest = payload.test;
+
+	                var _idx6 = state.get('tests').findIndex(function (item) {
+	                    return item.get('uuid') === currentTest.get('uuid');
+	                });
+
+	                var _test = state.get('tests').get(_idx6);
+	                var newTest = _test.merge(payload.changes);
+
+	                return state.merge({
+	                    tests: state.get('tests').set(_idx6, newTest)
+	                });
+	            }
+	        case _ActionTypes.CONDITION_MODIFIED:
+	            {
+	                var _payload = action.payload;
+
+	                var testIdx = state.get('tests').findIndex(function (item) {
+	                    return item.get('uuid') == _payload.test.get('uuid');
+	                });
+
+	                var _test2 = state.get('tests').get(testIdx);
+
+	                var conditionIdx = _test2.get('conditionSelections').findIndex(function (item) {
+	                    return item.get('condition') == _payload.condition;
+	                });
+
+	                var conditionSelection = _test2.get('conditionSelections').get(conditionIdx);
+	                var newConditionSelection = conditionSelection.merge(_payload.changes);
+
+	                var newConditionList = _test2.get('conditionSelections').set(conditionIdx, newConditionSelection);
+
+	                var _newTest2 = _test2.set('conditionSelections', newConditionList);
+
+	                return state.merge({
+	                    tests: state.get('tests').set(testIdx, _newTest2)
+	                });
+	            }
+	        case _ActionTypes.CLEAR_TEST_SELECTION:
+	            {
+	                return state.merge({
+	                    tests: (0, _Immutable.fromJS)([])
+	                });
+	            }
+	        default:
+	            return state;
+	    }
+	};
+
+	var _Immutable = __webpack_require__(6);
+
+	var _moment = __webpack_require__(143);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _uuid = __webpack_require__(522);
+
+	var _uuid2 = _interopRequireDefault(_uuid);
+
+	var _ActionTypes = __webpack_require__(514);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var initialState = (0, _Immutable.fromJS)({
+	    isUserAdmin: false,
+	    isLoading: true,
+	    isSavingDraft: false,
+	    isSubmitting: false,
+	    headerData: {
+	        // requester: { id: 0, name: '' },
+	        creator: { id: 0, name: '' },
+	        gcType: { id: 0, name: '' },
+	        giftCertNo: '',
+	        dtiPermitNo: '',
+	        qrCode: '',
+	        issuanceDate: undefined,
+	        expirationDate: undefined,
+	        value: ''
+
+	        //division: { id: 0, name: '' },
+	        //businessLine: { id: 0, name: '' },
+	        //productLine: { id: 0, name: '' },
+	        //segment: { id: 0, name: '' },
+	        //requestType: { id: 0, name: '', limitDevices: true, closeDateType: 1  } ,
+	        //subRequestType: { id: 0, name: '' } ,
+	        //targetLab: { id: 0, name: '' },
+	        //priority: 0,
+	        //projectManager: { id: 0, name: '' },
+	        //projectOwner: { id: 0, name: '' },
+
+	        //referenceProjectCode: '',
+	        //watchers: [],
+	        //requestDate: null
+	    },
+	    divisionsData: [],
+	    requestTypeData: [],
+	    subRequestTypeData: [],
+	    targetLabsData: [],
+	    gcTypesData: [],
+	    channelsData: [],
+	    devices: [],
+	    deviceConfidentiality: '',
+	    tests: [],
+	    testSelectionData: [],
+	    comments: {
+	        adminSupportComments: '',
+	        reviewerComments: '',
+	        datasheetProcessorComments: ''
+	    },
+	    actions: {
+	        requestDate: undefined,
+	        requestedBy: { id: 0, fullName: '' },
+	        partsReceivedDate: undefined,
+	        partsReceivedBy: { id: 0, fullName: '' },
+	        managerAcceptedDate: undefined,
+	        managerAcceptedBy: { id: 0, fullName: '' },
+	        releasedToLabDate: undefined,
+	        releasedToLabBy: { id: 0, fullName: '' },
+	        rejectedToRequesterDate: undefined,
+	        rejectedToRequesterBy: { id: 0, fullName: '' },
+	        dataAcceptedDate: undefined,
+	        dataAcceptedBy: { id: 0, fullName: '' },
+	        datasheetAcceptedDate: undefined,
+	        datasheetAcceptedBy: { id: 0, fullName: '' },
+	        dataSheetApprovalDate: undefined,
+	        dataSheetApprovalBy: { id: 0, fullName: '' },
+	        datasheetRejectedDate: undefined,
+	        datasheetRejectedBy: { id: 0, fullName: '' },
+	        firstReviewDate: undefined,
+	        firstReviewBy: { id: 0, fullName: '' },
+	        nthReviewDate: undefined,
+	        nthReviewBy: { id: 0, fullName: '' },
+	        toWebDate: undefined,
+	        toWebBy: { id: 0, fullName: '' },
+	        canceledDate: undefined,
+	        canceledBy: { id: 0, fullName: '' },
+	        closedDate: undefined,
+	        closedBy: { id: 0, fullName: '' }
+	    }
+	});
+
+	function convertDateToMoment(date) {
+	    if (date != null) {
+	        return (0, _moment2.default)(date);
+	    }
+
+	    return undefined;
+	}
+
+/***/ }),
+/* 522 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	//     uuid.js
+	//
+	//     Copyright (c) 2010-2012 Robert Kieffer
+	//     MIT License - http://opensource.org/licenses/mit-license.php
+
+	// Unique ID creation requires a high quality random # generator.  We feature
+	// detect to determine the best RNG source, normalizing to a function that
+	// returns 128-bits of randomness, since that's what's usually required
+	var _rng = __webpack_require__(523);
+
+	// Maps for number <-> hex string conversion
+	var _byteToHex = [];
+	var _hexToByte = {};
+	for (var i = 0; i < 256; i++) {
+	  _byteToHex[i] = (i + 0x100).toString(16).substr(1);
+	  _hexToByte[_byteToHex[i]] = i;
+	}
+
+	// **`parse()` - Parse a UUID into it's component bytes**
+	function parse(s, buf, offset) {
+	  var i = (buf && offset) || 0, ii = 0;
+
+	  buf = buf || [];
+	  s.toLowerCase().replace(/[0-9a-f]{2}/g, function(oct) {
+	    if (ii < 16) { // Don't overflow!
+	      buf[i + ii++] = _hexToByte[oct];
+	    }
+	  });
+
+	  // Zero out remaining bytes if string was short
+	  while (ii < 16) {
+	    buf[i + ii++] = 0;
+	  }
+
+	  return buf;
+	}
+
+	// **`unparse()` - Convert UUID byte array (ala parse()) into a string**
+	function unparse(buf, offset) {
+	  var i = offset || 0, bth = _byteToHex;
+	  return  bth[buf[i++]] + bth[buf[i++]] +
+	          bth[buf[i++]] + bth[buf[i++]] + '-' +
+	          bth[buf[i++]] + bth[buf[i++]] + '-' +
+	          bth[buf[i++]] + bth[buf[i++]] + '-' +
+	          bth[buf[i++]] + bth[buf[i++]] + '-' +
+	          bth[buf[i++]] + bth[buf[i++]] +
+	          bth[buf[i++]] + bth[buf[i++]] +
+	          bth[buf[i++]] + bth[buf[i++]];
+	}
+
+	// **`v1()` - Generate time-based UUID**
+	//
+	// Inspired by https://github.com/LiosK/UUID.js
+	// and http://docs.python.org/library/uuid.html
+
+	// random #'s we need to init node and clockseq
+	var _seedBytes = _rng();
+
+	// Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
+	var _nodeId = [
+	  _seedBytes[0] | 0x01,
+	  _seedBytes[1], _seedBytes[2], _seedBytes[3], _seedBytes[4], _seedBytes[5]
+	];
+
+	// Per 4.2.2, randomize (14 bit) clockseq
+	var _clockseq = (_seedBytes[6] << 8 | _seedBytes[7]) & 0x3fff;
+
+	// Previous uuid creation time
+	var _lastMSecs = 0, _lastNSecs = 0;
+
+	// See https://github.com/broofa/node-uuid for API details
+	function v1(options, buf, offset) {
+	  var i = buf && offset || 0;
+	  var b = buf || [];
+
+	  options = options || {};
+
+	  var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq;
+
+	  // UUID timestamps are 100 nano-second units since the Gregorian epoch,
+	  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
+	  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+	  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
+	  var msecs = options.msecs !== undefined ? options.msecs : new Date().getTime();
+
+	  // Per 4.2.1.2, use count of uuid's generated during the current clock
+	  // cycle to simulate higher resolution clock
+	  var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
+
+	  // Time since last uuid creation (in msecs)
+	  var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
+
+	  // Per 4.2.1.2, Bump clockseq on clock regression
+	  if (dt < 0 && options.clockseq === undefined) {
+	    clockseq = clockseq + 1 & 0x3fff;
+	  }
+
+	  // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+	  // time interval
+	  if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
+	    nsecs = 0;
+	  }
+
+	  // Per 4.2.1.2 Throw error if too many uuids are requested
+	  if (nsecs >= 10000) {
+	    throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
+	  }
+
+	  _lastMSecs = msecs;
+	  _lastNSecs = nsecs;
+	  _clockseq = clockseq;
+
+	  // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
+	  msecs += 12219292800000;
+
+	  // `time_low`
+	  var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+	  b[i++] = tl >>> 24 & 0xff;
+	  b[i++] = tl >>> 16 & 0xff;
+	  b[i++] = tl >>> 8 & 0xff;
+	  b[i++] = tl & 0xff;
+
+	  // `time_mid`
+	  var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
+	  b[i++] = tmh >>> 8 & 0xff;
+	  b[i++] = tmh & 0xff;
+
+	  // `time_high_and_version`
+	  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
+	  b[i++] = tmh >>> 16 & 0xff;
+
+	  // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
+	  b[i++] = clockseq >>> 8 | 0x80;
+
+	  // `clock_seq_low`
+	  b[i++] = clockseq & 0xff;
+
+	  // `node`
+	  var node = options.node || _nodeId;
+	  for (var n = 0; n < 6; n++) {
+	    b[i + n] = node[n];
+	  }
+
+	  return buf ? buf : unparse(b);
+	}
+
+	// **`v4()` - Generate random UUID**
+
+	// See https://github.com/broofa/node-uuid for API details
+	function v4(options, buf, offset) {
+	  // Deprecated - 'format' argument, as supported in v1.2
+	  var i = buf && offset || 0;
+
+	  if (typeof(options) == 'string') {
+	    buf = options == 'binary' ? new Array(16) : null;
+	    options = null;
+	  }
+	  options = options || {};
+
+	  var rnds = options.random || (options.rng || _rng)();
+
+	  // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+	  rnds[6] = (rnds[6] & 0x0f) | 0x40;
+	  rnds[8] = (rnds[8] & 0x3f) | 0x80;
+
+	  // Copy bytes to buffer, if provided
+	  if (buf) {
+	    for (var ii = 0; ii < 16; ii++) {
+	      buf[i + ii] = rnds[ii];
+	    }
+	  }
+
+	  return buf || unparse(rnds);
+	}
+
+	// Export public API
+	var uuid = v4;
+	uuid.v1 = v1;
+	uuid.v4 = v4;
+	uuid.parse = parse;
+	uuid.unparse = unparse;
+
+	module.exports = uuid;
+
+
+/***/ }),
+/* 523 */
+/***/ (function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {
+	var rng;
+
+	var crypto = global.crypto || global.msCrypto; // for IE 11
+	if (crypto && crypto.getRandomValues) {
+	  // WHATWG crypto-based RNG - http://wiki.whatwg.org/wiki/Crypto
+	  // Moderately fast, high quality
+	  var _rnds8 = new Uint8Array(16);
+	  rng = function whatwgRNG() {
+	    crypto.getRandomValues(_rnds8);
+	    return _rnds8;
+	  };
+	}
+
+	if (!rng) {
+	  // Math.random()-based (RNG)
+	  //
+	  // If all else fails, use Math.random().  It's fast, but is of unspecified
+	  // quality.
+	  var  _rnds = new Array(16);
+	  rng = function() {
+	    for (var i = 0, r; i < 16; i++) {
+	      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
+	      _rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
+	    }
+
+	    return _rnds;
+	  };
+	}
+
+	module.exports = rng;
+
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ }),
+/* 524 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function () {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _ActionTypes.RESET_ERRORS_STATE:
+	      return state.set('showError', false);
+	    case _ActionTypes.SHOW_ERROR:
+	      return state.merge({
+	        showError: true,
+	        errorMessage: action.message
+	      });
+	    case _ActionTypes.OPEN_MODAL:
+	      return initialState.set('isOpen', true);
+	    case _ActionTypes.CLOSE_MODAL:
+	      return initialState;
+	    case _ActionTypes.FETCH_PART_DATA:
+	      return state.set('isSearching', true);
+	    case _ActionTypes.FETCH_PACKAGE_TYPE:
+	      return state.set('isFetchingPackageType', true);
+	    case _ActionTypes.FETCH_PACKAGE_TYPE_SUCCESS:
+	      return state.merge({
+	        isFetchingPackageType: false,
+	        packageTypeGroupsData: action.data
+	      });
+	    case _ActionTypes.FORM_DATA_CHANGES:
+	      return state.merge(action.changes);
+	    case _ActionTypes.FETCH_PART_DATA_SUCCESS:
+	      var newState = state.merge({
+	        isSearching: false,
+	        showEditor: true,
+	        isPartFound: action.data.isExists
+	      });
+
+	      if (action.data.isExists) {
+	        var device = action.data.result;
+	        newState = newState.merge({
+	          device: device
+	        });
+	      } else {
+	        var defaultDevice = initialState.get('device').set('partNumber', state.get('search'));
+
+	        newState = newState.merge({
+	          device: defaultDevice
+	        });
+	      }
+
+	      return newState;
+	    default:
+	      return state;
+	  }
+	};
+
+	var _Immutable = __webpack_require__(6);
+
+	var _ActionTypes = __webpack_require__(518);
+
+	var initialState = (0, _Immutable.fromJS)({
+	  search: '',
+	  showEditor: false,
+	  device: {
+	    partNumber: '',
+	    packageTypeGroup: {
+	      id: 0
+	    },
+	    packageType: {
+	      id: 0
+	    }
+	  },
+	  isPartFound: false,
+	  packageTypeGroupsData: [],
+	  isOpen: false,
+	  isSearching: false,
+	  isFetchingPackageType: false,
+	  showError: false,
+	  errorMessage: ''
+	});
+
+/***/ }),
+/* 525 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function () {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _ActionTypes.OPEN_MODAL:
+	      return initialState.merge({
+	        isOpen: true,
+	        device: action.device
+	      });
+	    case _ActionTypes.CLOSE_MODAL:
+	      return initialState;
+	    default:
+	      return state;
+	  }
+	};
+
+	var _Immutable = __webpack_require__(6);
+
+	var _ActionTypes = __webpack_require__(512);
+
+	var initialState = (0, _Immutable.fromJS)({
+	  isOpen: false,
+	  device: {}
+	});
 
 /***/ })
 /******/ ]);

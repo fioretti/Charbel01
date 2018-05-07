@@ -70,15 +70,15 @@
 
 	var _reactReduxToastr2 = _interopRequireDefault(_reactReduxToastr);
 
-	var _Actions = __webpack_require__(514);
+	var _Actions = __webpack_require__(526);
 
 	var actions = _interopRequireWildcard(_Actions);
 
-	var _Reducer = __webpack_require__(516);
+	var _Reducer = __webpack_require__(528);
 
 	var _Reducer2 = _interopRequireDefault(_Reducer);
 
-	var _List = __webpack_require__(517);
+	var _List = __webpack_require__(529);
 
 	var _List2 = _interopRequireDefault(_List);
 
@@ -12704,7 +12704,19 @@
 /* 511 */,
 /* 512 */,
 /* 513 */,
-/* 514 */
+/* 514 */,
+/* 515 */,
+/* 516 */,
+/* 517 */,
+/* 518 */,
+/* 519 */,
+/* 520 */,
+/* 521 */,
+/* 522 */,
+/* 523 */,
+/* 524 */,
+/* 525 */,
+/* 526 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12716,7 +12728,7 @@
 	exports.insertNewItemAndHandle = insertNewItemAndHandle;
 	exports.modifyItemAndHandle = modifyItemAndHandle;
 
-	var _ActionTypes = __webpack_require__(515);
+	var _ActionTypes = __webpack_require__(527);
 
 	var _Api = __webpack_require__(29);
 
@@ -12781,7 +12793,7 @@
 	}
 
 /***/ }),
-/* 515 */
+/* 527 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -12794,7 +12806,7 @@
 	var UPDATE_ITEM = exports.UPDATE_ITEM = 'Outlet/UPDATE_ITEM';
 
 /***/ }),
-/* 516 */
+/* 528 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12834,7 +12846,7 @@
 	  }
 	};
 
-	var _ActionTypes = __webpack_require__(515);
+	var _ActionTypes = __webpack_require__(527);
 
 	var _Immutable = __webpack_require__(6);
 
@@ -12843,7 +12855,7 @@
 	});
 
 /***/ }),
-/* 517 */
+/* 529 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12868,11 +12880,11 @@
 
 	var uiUtils = _interopRequireWildcard(_UiUtils);
 
-	var _Actions = __webpack_require__(514);
+	var _Actions = __webpack_require__(526);
 
 	var actions = _interopRequireWildcard(_Actions);
 
-	var _Editor = __webpack_require__(518);
+	var _Editor = __webpack_require__(530);
 
 	var _Editor2 = _interopRequireDefault(_Editor);
 
@@ -13063,7 +13075,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(List);
 
 /***/ }),
-/* 518 */
+/* 530 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

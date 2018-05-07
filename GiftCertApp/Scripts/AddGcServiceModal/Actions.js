@@ -4,7 +4,7 @@ import { OPEN_MODAL, CLOSE_MODAL, FETCH_PACKAGE_TYPE, FETCH_PART_DATA,
 
 import * as api from 'Utils/Api'
 import * as dataUtils from 'Utils/DataUtils'
-import * as testRequestFormAction from 'TestRequestForm/Actions'
+import * as giftCertFormAction from 'GiftCertForm/Actions'
 
 export function openModal() {
   return {

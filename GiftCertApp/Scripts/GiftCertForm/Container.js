@@ -20,9 +20,9 @@ import DateTimePicker from 'Commons/DateTimePicker'
 import ReduxToastr from 'react-redux-toastr'
 
 import giftCertFormReducer from './Reducer';
-//import addDeviceModalReducer from 'AddDeviceModal/Reducer';
+import addGcServiceModalReducer from 'AddGcServiceModal/Reducer';
 //import addLotModalReducer from 'AddLotModal/Reducer'
-//import removeDeviceModalReducer from 'RemoveDeviceConfirmation/Reducer'
+import removeGcServiceModalReducer from 'RemoveGcServiceConfirmation/Reducer'
 //import removeLotModalReducer from 'RemoveLotConfirmation/Reducer'
 import { reducer as toastrReducer } from 'react-redux-toastr'
 
@@ -655,9 +655,9 @@ const GiftCertFormContainer = connect(mapStateToProps, mapDispatchToProps)(GiftC
 
 const rootReducers = combineReducers({
     giftCert: giftCertFormReducer,
-    //  addDeviceModal: addDeviceModalReducer,
+    addGcServiceModal: addGcServiceModalReducer,
     //  addLotModal: addLotModalReducer,
-    // removeDeviceModal: removeDeviceModalReducer,
+    removeDeviceModal: removeGcServiceModalReducer,
     // removeLotModal: removeLotModalReducer,
     toastr: toastrReducer
 });
