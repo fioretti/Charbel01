@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GiftCertApp.Models;
+using GiftCertApp.Models.Data;
+using System.Linq;
 
 namespace GiftCertApp.Api
 {
     [Produces("application/json")]
-    [Route("api/GiftCert")]
+    [Route("api/GiftCert/[action]")]
     public class GiftCertController : Controller
     {
         private readonly MarcoPoloGCDBContext _context;
@@ -46,6 +48,7 @@ namespace GiftCertApp.Api
             return Ok(GiftCert);
         }
 
+  
         // PUT: api/GiftCert/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGiftCert([FromRoute] int id, [FromBody] GiftCert GiftCert)
@@ -86,6 +89,26 @@ namespace GiftCertApp.Api
 
         // POST: api/GiftCert
         [HttpPost]
+        [ActionName("PostGiftCertByFIlter")]
+        public IEnumerable<GiftCert> PostGiftCertByFilter([FromBody] GiftCertRequest giftCertRequest)
+        {
+            var giftCerts = new List<GiftCert>();
+          
+            foreach (var status in giftCertRequest.Status)
+            {
+                var giftCert = _context.GiftCert.SingleOrDefault(m => m.Status == Convert.ToInt32(status));
+                if (giftCert != null)
+                    giftCerts.Add(giftCert);
+            }
+
+            var _giftCerts = giftCerts.Where(m => m.CreatedDate >= giftCertRequest.RequestedDateFrom && m.CreatedDate <= giftCertRequest.RequestedDateTo).ToList();
+
+            return _giftCerts;       
+        }
+
+        // POST: api/GiftCert
+        [HttpPost]
+        [ActionName("PostGiftCert")]
         public async Task<IActionResult> PostGiftCert([FromBody] GiftCert GiftCert)
         {
             if (!ModelState.IsValid)

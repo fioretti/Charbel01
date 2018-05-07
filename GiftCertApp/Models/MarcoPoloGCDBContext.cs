@@ -16,8 +16,9 @@ namespace GiftCertApp.Models
         public virtual DbSet<ServicesType> ServicesType { get; set; }
 
         public MarcoPoloGCDBContext(DbContextOptions<MarcoPoloGCDBContext> options)
-          : base(options)
-            { }
+           : base(options)
+        { }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GcOutlet>(entity =>

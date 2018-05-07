@@ -5,6 +5,7 @@ import { FETCHING_LIST, FETCHING_LIST_DONE, POPULATE_REQUESTS,
   CHANGE_STATUS, CHANGE_DATE_RANGE, RESUBMIT_REQUEST, DELETE_REQUEST ,
   REVALIDATE_LIST, NEW_FORM_CREATED, TOGGLE_DETAIL, SET_USER_ADMIN,
   SET_ALLOW_CREATE, SET_ALLOW_MODIFY, SET_ALLOW_DELETE } from './ActionTypes'
+import { debug } from 'util';
 
 const initialState = fromJS({
   isUserAdmin: false,
@@ -80,7 +81,7 @@ export default function (state = initialState, action) {
         })
       }
     case POPULATE_REQUESTS:
-      {
+          {              
         return state.merge({
           result: fromJS(action.requests)
         })

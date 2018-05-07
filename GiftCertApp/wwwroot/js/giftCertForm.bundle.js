@@ -74,15 +74,23 @@
 
 	var _Immutable = __webpack_require__(6);
 
+	var _UserSelector = __webpack_require__(506);
+
+	var _UserSelector2 = _interopRequireDefault(_UserSelector);
+
+	var _DateTimePicker = __webpack_require__(507);
+
+	var _DateTimePicker2 = _interopRequireDefault(_DateTimePicker);
+
 	var _reactReduxToastr = __webpack_require__(7);
 
 	var _reactReduxToastr2 = _interopRequireDefault(_reactReduxToastr);
 
-	var _Reducer = __webpack_require__(503);
+	var _Reducer = __webpack_require__(508);
 
 	var _Reducer2 = _interopRequireDefault(_Reducer);
 
-	var _Actions = __webpack_require__(507);
+	var _Actions = __webpack_require__(512);
 
 	var actions = _interopRequireWildcard(_Actions);
 
@@ -95,6 +103,8 @@
 	var dataUtils = _interopRequireWildcard(_DataUtils);
 
 	var _GiftCertStatusEnum = __webpack_require__(269);
+
+	var _util = __webpack_require__(272);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -110,430 +120,836 @@
 
 	var string = _react.PropTypes.string,
 	    number = _react.PropTypes.number;
+	//import DeviceList from 'Devices'
+	//import DeviceCharacteristics from 'DeviceCharacteristics'
+	//import TestSelections from 'TestSelections'
 
+	//import Tests from 'Tests'
 
-	var giftCert = $('#giftCert').val();
+	//import addDeviceModalReducer from 'AddDeviceModal/Reducer';
+	//import addLotModalReducer from 'AddLotModal/Reducer'
+	//import removeDeviceModalReducer from 'RemoveDeviceConfirmation/Reducer'
+	//import removeLotModalReducer from 'RemoveLotConfirmation/Reducer'
+
+	var request = $('#giftCert').val();
+	debugger;
+	//const deviceConfidentiality = $('#deviceConfidentiality').val();
 	var isUserAdmin = $('#isUserAdmin');
 
 	var GiftCertForm = function (_React$Component) {
-	  _inherits(GiftCertForm, _React$Component);
+	    _inherits(GiftCertForm, _React$Component);
 
-	  function GiftCertForm() {
-	    _classCallCheck(this, GiftCertForm);
+	    function GiftCertForm() {
+	        _classCallCheck(this, GiftCertForm);
 
-	    var _this = _possibleConstructorReturn(this, (GiftCertForm.__proto__ || Object.getPrototypeOf(GiftCertForm)).call(this));
+	        var _this = _possibleConstructorReturn(this, (GiftCertForm.__proto__ || Object.getPrototypeOf(GiftCertForm)).call(this));
 
-	    _this.onFieldChanged = _this.onFieldChanged.bind(_this);
-	    _this.onSubmitClicked = _this.onSubmitClicked.bind(_this);
-	    _this.onActionDataChanged = _this.onActionDataChanged.bind(_this);
-	    return _this;
-	  }
+	        _this.onFieldChanged = _this.onFieldChanged.bind(_this);
+	        _this.onCommentsChanged = _this.onCommentsChanged.bind(_this);
+	        _this.onSubmitClicked = _this.onSubmitClicked.bind(_this);
+	        _this.onRequesterSelectAndUnselect = _this.onRequesterSelectAndUnselect.bind(_this);
+	        _this.onWatcherSelectAndUnselect = _this.onWatcherSelectAndUnselect.bind(_this);
+	        _this.onDivisionChanged = _this.onDivisionChanged.bind(_this);
+	        _this.onBusinessLineChanged = _this.onBusinessLineChanged.bind(_this);
+	        _this.onProductLineChanged = _this.onProductLineChanged.bind(_this);
+	        _this.onTargetLabChanged = _this.onTargetLabChanged.bind(_this);
+	        _this.onSegmentChanged = _this.onSegmentChanged.bind(_this);
+	        _this.onRequestTypeChanged = _this.onRequestTypeChanged.bind(_this);
+	        _this.onSubRequestTypeChanged = _this.onSubRequestTypeChanged.bind(_this);
+	        _this.onGcTypeChanged = _this.onGcTypeChanged.bind(_this);
+	        _this.onProjectManagerChanged = _this.onProjectManagerChanged.bind(_this);
+	        _this.onProjectOwnerChanged = _this.onProjectOwnerChanged.bind(_this);
+	        _this.onIssuanceDateChanged = _this.onIssuanceDateChanged.bind(_this);
+	        _this.onExpirationDateChanged = _this.onExpirationDateChanged.bind(_this);
 
-	  _createClass(GiftCertForm, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var self = this;
-	      debugger;
-	      self.props.setInitialDataAndHandle(JSON.parse(giftCert));
+	        _this.onActionDataChanged = _this.onActionDataChanged.bind(_this);
+	        return _this;
 	    }
-	  }, {
-	    key: 'onSubmitClicked',
-	    value: function onSubmitClicked(e, isSavingDraft) {
-	      e.preventDefault();
-	      var data = this.props.testRequest;
-	      this.props.addTestRequest(data, isSavingDraft);
-	    }
-	  }, {
-	    key: 'onActionDataChanged',
-	    value: function onActionDataChanged(name, date) {
-	      this.props.actionDataChanged(_defineProperty({}, name, date));
-	    }
-	  }, {
-	    key: 'onFieldChanged',
-	    value: function onFieldChanged(name, e) {
-	      var value = e.target.value;
-	      this.props.headerDataChanged(_defineProperty({}, name, (0, _Immutable.fromJS)(value)));
-	    }
-	  }, {
-	    key: 'formatStatusForDisplay',
-	    value: function formatStatusForDisplay(data) {
-	      debugger;
-	      return _GiftCertStatusEnum.statusList.filter(function (item) {
-	        return item.id == data;
-	      })[0].name;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
 
-	      //if(this.props.giftCert.get('isLoading')) {
-	      //  return (<div />)
-	      //}
+	    _createClass(GiftCertForm, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var self = this;
 
-	      var style = {
-	        container: {
-	          padding: '15px'
-	        },
-	        form: {
-	          marginTop: '10px',
-	          marginLeft: '20px',
-	          marginRight: '20px',
-	          marginBottom: '10px'
-	        },
-	        singleColumnRow: {
-	          marginRight: '15px'
-	        },
-	        userSelector: {
-	          width: '100%'
-	        },
-	        watchers: {
-	          width: '100%'
-	        },
-	        buttonActionRow: {
-	          marginRight: '30px'
-	        },
-	        submitStyle: {
-	          width: '150px'
-	        },
-	        hiddenSubmitStyle: {
-	          display: 'none'
-	        },
-	        dualColumnDiv: {
-	          padding: '0'
+	            if (isUserAdmin.length > 0 || $('#canModifyRequest').length > 0) {
+	                self.props.setAdminState();
+	            }
+	            debugger;
+	            var _request = JSON.parse(request);
+	            // _request.deviceConfidentiality = deviceConfidentiality.replace(/[\"]+/g, '');
+	            self.props.setInitialDataAndHandle(_request);
+
+	            api.getChannels(function (data) {
+	                self.props.channelLoaded(data);
+	            });
+
+	            api.getDivisions(function (data) {
+	                self.props.divisionsLoaded(data);
+	            });
+
+	            api.getTargetLabs(function (data) {
+	                self.props.targetlabsLoaded(data);
+	            });
+
+	            api.getTestRequestTypes(function (data) {
+	                self.props.requestTypeLoaded(data);
+	            });
+
+	            api.getGcType(function (data) {
+	                debugger;
+	                self.props.gcTypesLoaded(data.data);
+	            });
+
+	            api.getSubRequestType(function (data) {
+	                self.props.subRequestTypesLoaded(data);
+	            });
 	        }
-	      };
+	    }, {
+	        key: 'onCommentsChanged',
+	        value: function onCommentsChanged(name, e) {
+	            var value = e.target.value;
+	            this.props.commentsChanged(_defineProperty({}, name, (0, _Immutable.fromJS)(value)));
+	        }
+	    }, {
+	        key: 'onSubmitClicked',
+	        value: function onSubmitClicked(e, isSavingDraft) {
+	            e.preventDefault();
+	            var data = this.props.giftCert;
 
-	      var giftCert = this.props.giftCert;
+	            this.props.addTestRequest(data, isSavingDraft);
+	        }
+	    }, {
+	        key: 'onActionDataChanged',
+	        value: function onActionDataChanged(name, date) {
+	            this.props.actionDataChanged(_defineProperty({}, name, date));
+	        }
+	    }, {
+	        key: 'onIssuanceDateChanged',
+	        value: function onIssuanceDateChanged(date) {
+	            this.props.headerDataChanged({
+	                issuanceDate: date
+	            });
+	        }
+	    }, {
+	        key: 'onExpirationDateChanged',
+	        value: function onExpirationDateChanged(date) {
+	            this.props.headerDataChanged({
+	                expirationDate: date
+	            });
+	        }
+	    }, {
+	        key: 'onFieldChanged',
+	        value: function onFieldChanged(name, e) {
+	            var value = e.target.value;
+	            this.props.headerDataChanged(_defineProperty({}, name, (0, _Immutable.fromJS)(value)));
+	        }
+	    }, {
+	        key: 'refreshTestSelection',
+	        value: function refreshTestSelection(params) {
+	            var self = this;
 
-	      //const GcTypeInputDiv = classnames('col-xs-8', {
-	      //    'has-error': headerData.get('GcTypeIsEmpty')
-	      //})
+	            if (isNaN(params.targetLab)) {
+	                params.targetLab = 0;
+	            }
 
-	      //const creatorInputDiv = classnames('col-xs-8', {        
-	      //    'has-error': headerData.get('creatorIsEmpty')
-	      //})
+	            if (isNaN(params.deviceType)) {
+	                params.deviceType = 0;
+	            }
 
-	      var submitButtonClasses = (0, _classnames2.default)('btn', 'btn-primary', {
-	        'disabled': giftCert.get('isSubmitting')
-	      });
+	            api.getTestSelection(params, function (data) {
+	                self.props.testSelectionLoaded(data);
+	            });
+	        }
+	    }, {
+	        key: 'onTargetLabChanged',
+	        value: function onTargetLabChanged(e) {
+	            var targetLab = parseInt($(e.target).val());
 
-	      var submitLoadingIndicator = (0, _classnames2.default)('fa', {
-	        'fa-spinner fa-spin': giftCert.get('isSavingDraft') === false && giftCert.get('isSubmitting')
-	      });
+	            this.props.headerDataChanged({
+	                targetLab: (0, _Immutable.fromJS)({
+	                    id: targetLab,
+	                    name: $('option:selected', e.target).text()
+	                })
+	            });
 
-	      var headerData = giftCert.get('headerData');
+	            this.refreshTestSelection({
+	                targetLab: targetLab,
+	                deviceType: this.props.giftCert.get('headerData').get('deviceType').get('id')
+	            });
+	        }
+	    }, {
+	        key: 'onGcTypeChanged',
+	        value: function onGcTypeChanged(e) {
+	            var gcType = parseInt($(e.target).val());
 
-	      var headerElem = _react2.default.createElement(
-	        'form',
-	        { ref: 'form', className: 'form-horizontal', method: 'POST', style: style.form },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group col-xs-6' },
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'col-xs-4 control-label' },
-	              'Certificate No'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-xs-8' },
-	              _react2.default.createElement('input', { type: 'text', className: 'form-control', value: headerData.get('giftCertNo'),
-	                tabIndex: '2', onChange: _lodash2.default.partial(this.onFieldChanged, 'giftCertNo') })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group col-xs-6' },
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'col-xs-4 control-label' },
-	              'Status'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-xs-8' },
-	              _react2.default.createElement('input', { type: 'text', className: 'form-control', value: this.formatStatusForDisplay(headerData.get('status')),
-	                readOnly: true })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group col-xs-6' },
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'col-xs-4 control-label' },
-	              'DTI Permit No'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-xs-8' },
-	              _react2.default.createElement('input', { type: 'text', className: 'form-control', value: headerData.get('dtiPermitNo'),
-	                tabIndex: '2', onChange: _lodash2.default.partial(this.onFieldChanged, 'dtiPermitNo') })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group col-xs-6' },
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'col-xs-4 control-label' },
-	              'Issuance Date'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-xs-8' },
-	              _react2.default.createElement('input', { type: 'text', className: 'form-control', value: headerData.get('issuanceDate'),
-	                readOnly: true })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group col-xs-6' },
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'col-xs-4 control-label' },
-	              'QR Code'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-xs-8' },
-	              _react2.default.createElement('input', { type: 'text', className: 'form-control', value: headerData.get('qrCode'),
-	                tabIndex: '2', onChange: _lodash2.default.partial(this.onFieldChanged, 'qrCode') })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group col-xs-6' },
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'col-xs-4 control-label' },
-	              'Expiration Date'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-xs-8' },
-	              _react2.default.createElement('input', { type: 'text', className: 'form-control', value: headerData.get('giftCertNo')
-	              })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group col-xs-6' },
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'col-xs-4 control-label' },
-	              'GC Type'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-xs-8' },
-	              _react2.default.createElement('input', { type: 'text', className: 'form-control', value: headerData.get('giftCertNo')
-	              })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group col-xs-6' },
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'col-xs-4 control-label' },
-	              'Creator'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-xs-8' },
-	              _react2.default.createElement('input', { type: 'text', className: 'form-control', value: headerData.get('giftCertNo'),
-	                tabIndex: '2', onChange: _lodash2.default.partial(this.onFieldChanged, 'giftCertNo') })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group col-xs-6' },
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'col-xs-4 control-label' },
-	              'Value'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-xs-8' },
-	              _react2.default.createElement('input', { type: 'text', className: 'form-control', value: headerData.get('value'),
-	                tabIndex: '2', onChange: _lodash2.default.partial(this.onFieldChanged, 'value') })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group col-xs-6' },
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'col-xs-4 control-label' },
-	              'Date Modified'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-xs-8' },
-	              _react2.default.createElement('input', { type: 'text', className: 'form-control', value: headerData.get('giftCertNo'),
-	                readOnly: true })
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row', style: style.singleColumnRow },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group col-xs-12' },
-	            _react2.default.createElement(
-	              'label',
-	              { className: 'col-xs-2 control-label' },
-	              'Note'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-xs-10' },
-	              _react2.default.createElement('textarea', { className: 'form-control',
-	                tabIndex: '17', value: headerData.get('note'), onChange: _lodash2.default.partial(this.onFieldChanged, 'note') })
-	            )
-	          )
-	        )
-	      );
+	            this.props.headerDataChanged({
+	                gcType: (0, _Immutable.fromJS)({
+	                    id: gcType,
+	                    name: $('option:selected', e.target).text()
+	                })
+	            });
 
-	      //const isUserAdmin = testRequest.get('isUserAdmin');
+	            this.refreshTestSelection({
+	                targetLab: this.props.giftCert.get('headerData').get('targetLab').get('id'),
+	                deviceType: deviceType
+	            });
+	        }
+	    }, {
+	        key: 'formatStatusForDisplay',
+	        value: function formatStatusForDisplay(data) {
+	            return _GiftCertStatusEnum.statusList.filter(function (item) {
+	                return item.id == data;
+	            })[0].name;
+	        }
+	    }, {
+	        key: 'onWatcherSelectAndUnselect',
+	        value: function onWatcherSelectAndUnselect(e) {
+	            var data = $(e.target).select2('data');
 
-	      return _react2.default.createElement(
-	        'div',
-	        { style: style.container },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel panel-default' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-heading' },
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              'Header Data'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-body' },
-	            headerElem
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel panel-default' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-heading' },
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              'Services'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-body' },
-	            '...'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel panel-default' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-heading' },
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              'Outlets'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'panel-body' },
-	            '...'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row', style: style.buttonActionRow },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group col-xs-12' },
-	            _react2.default.createElement(
-	              'button',
-	              { type: 'submit', className: submitButtonClasses, style: style.submitStyle,
-	                onClick: function onClick(e) {
-	                  return _this2.onSubmitClicked(e, false);
+	            var watchers = [];
+	            data.forEach(function (item) {
+	                return watchers.push({
+	                    id: item.id,
+	                    name: item.text
+	                });
+	            });
+
+	            this.props.headerDataChanged({
+	                watchers: (0, _Immutable.fromJS)(watchers)
+	            });
+	        }
+	    }, {
+	        key: 'onDivisionChanged',
+	        value: function onDivisionChanged(e) {
+	            var id = parseInt($(e.target).val());
+	            id = isNaN(id) ? 0 : id;
+	            this.props.headerDataChanged({
+	                division: (0, _Immutable.fromJS)({
+	                    id: id,
+	                    name: $('option:selected', e.target).text()
+	                }),
+	                businessLine: (0, _Immutable.fromJS)({ id: 0 }),
+	                productLine: (0, _Immutable.fromJS)({ id: 0 }),
+	                segment: (0, _Immutable.fromJS)({ id: 0 })
+	            });
+	        }
+	    }, {
+	        key: 'onBusinessLineChanged',
+	        value: function onBusinessLineChanged(e) {
+	            var id = parseInt($(e.target).val());
+	            id = isNaN(id) ? 0 : id;
+	            this.props.headerDataChanged({
+	                businessLine: (0, _Immutable.fromJS)({
+	                    id: id,
+	                    name: $('option:selected', e.target).text()
+	                }),
+	                productLine: (0, _Immutable.fromJS)({ id: 0 }),
+	                segment: (0, _Immutable.fromJS)({ id: 0 })
+	            });
+	        }
+	    }, {
+	        key: 'onProductLineChanged',
+	        value: function onProductLineChanged(e) {
+	            var id = parseInt($(e.target).val());
+	            id = isNaN(id) ? 0 : id;
+	            this.props.headerDataChanged({
+	                productLine: (0, _Immutable.fromJS)({
+	                    id: id,
+	                    name: $('option:selected', e.target).text()
+	                }),
+	                segment: (0, _Immutable.fromJS)({ id: 0 })
+	            });
+	        }
+	    }, {
+	        key: 'onSegmentChanged',
+	        value: function onSegmentChanged(e) {
+	            var id = parseInt($(e.target).val());
+	            id = isNaN(id) ? 0 : id;
+	            this.props.headerDataChanged({
+	                segment: (0, _Immutable.fromJS)({
+	                    id: id,
+	                    name: $('option:selected', e.target).text()
+	                })
+	            });
+	        }
+	    }, {
+	        key: 'onSubRequestTypeChanged',
+	        value: function onSubRequestTypeChanged(e) {
+	            var id = parseInt($(e.target).val());
+	            id = isNaN(id) ? 0 : id;
+	            this.props.headerDataChanged({
+	                subRequestType: (0, _Immutable.fromJS)({
+	                    id: id,
+	                    name: $('option:selected', e.target).text()
+	                })
+	            });
+	        }
+	    }, {
+	        key: 'onRequestTypeChanged',
+	        value: function onRequestTypeChanged(e) {
+	            var id = parseInt($(e.target).val());
+	            id = isNaN(id) ? 0 : id;
+	            var requestType = {};
+	            if (id === 0) {
+	                requestType = (0, _Immutable.fromJS)({});
+	            } else {
+	                requestType = this.props.giftCert.get('requestTypeData').find(function (item) {
+	                    return item.get('id') === id;
+	                });
+	            }
+
+	            if (!requestType.get('showTests')) {
+	                this.props.clearTestSelection();
+	            }
+
+	            if (!requestType.get('requiresLot')) {
+	                this.props.clearLots();
+	            }
+
+	            this.props.headerDataChanged({
+	                subRequestType: { id: 0, name: '' },
+	                requestType: requestType
+	            });
+	        }
+	    }, {
+	        key: 'onRequesterSelectAndUnselect',
+	        value: function onRequesterSelectAndUnselect(e) {
+	            var value = $(e.target).val();
+	            this.props.headerDataChanged({
+	                requester: (0, _Immutable.fromJS)({
+	                    id: value,
+	                    name: $('option:selected', e.target).text()
+	                })
+	            });
+	        }
+	    }, {
+	        key: 'onProjectManagerChanged',
+	        value: function onProjectManagerChanged(e) {
+	            var value = $(e.target).val();
+	            this.props.headerDataChanged({
+	                projectManager: (0, _Immutable.fromJS)({
+	                    id: value,
+	                    name: $('option:selected', e.target).text()
+	                })
+	            });
+	        }
+	    }, {
+	        key: 'onProjectOwnerChanged',
+	        value: function onProjectOwnerChanged(e) {
+	            var value = $(e.target).val();
+	            this.props.headerDataChanged({
+	                projectOwner: (0, _Immutable.fromJS)({
+	                    id: value,
+	                    name: $('option:selected', e.target).text()
+	                })
+	            });
+	        }
+	    }, {
+	        key: 'isAnyBusinessLinesActive',
+	        value: function isAnyBusinessLinesActive(businessLines) {
+	            var _this2 = this;
+
+	            var active = false;
+	            businessLines.forEach(function (item) {
+	                if (item.get('active')) {
+	                    active = _this2.isAnyProductLineActive(item.get('productLines'));
+	                    return;
+	                }
+	            });
+
+	            return active;
+	        }
+	    }, {
+	        key: 'isAnyProductLineActive',
+	        value: function isAnyProductLineActive(productLines) {
+	            var _this3 = this;
+
+	            var active = false;
+	            productLines.forEach(function (item) {
+	                if (item.get('active')) {
+	                    active = _this3.isAnySegmentActive(item.get('segments'));
+	                    return;
+	                }
+	            });
+
+	            return active;
+	        }
+	    }, {
+	        key: 'isAnySegmentActive',
+	        value: function isAnySegmentActive(segments) {
+	            var active = false;
+	            segments.forEach(function (item) {
+	                if (item.get('active')) {
+	                    active = item.get('active');
+	                    return;
+	                }
+	            });
+
+	            return active;
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this4 = this;
+
+	            if (this.props.giftCert.get('isLoading')) {
+	                return _react2.default.createElement('div', null);
+	            }
+
+	            var style = {
+	                container: {
+	                    padding: '15px'
 	                },
-	                name: 'submit', value: 'submit' },
-	              _react2.default.createElement('i', { className: submitLoadingIndicator }),
-	              ' Submit'
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
+	                form: {
+	                    marginTop: '10px',
+	                    marginLeft: '20px',
+	                    marginRight: '20px',
+	                    marginBottom: '10px'
+	                },
+	                singleColumnRow: {
+	                    marginRight: '15px'
+	                },
+	                userSelector: {
+	                    width: '100%'
+	                },
+	                watchers: {
+	                    width: '100%'
+	                },
+	                buttonActionRow: {
+	                    marginRight: '30px'
+	                },
+	                saveAsDraftStyle: {
+	                    marginRight: '10px',
+	                    width: '150px'
+	                },
+	                submitStyle: {
+	                    width: '150px'
+	                },
+	                hiddenSubmitStyle: {
+	                    display: 'none'
+	                },
+	                dualColumnDiv: {
+	                    padding: '0'
+	                }
+	            };
 
-	  return GiftCertForm;
+	            var giftCert = this.props.giftCert;
+
+	            var submitButtonClasses = (0, _classnames2.default)('btn', 'btn-primary', {
+	                'disabled': giftCert.get('isSubmitting')
+	            });
+
+	            var draftLoadingIndicator = (0, _classnames2.default)('fa', {
+	                'fa-spinner fa-spin': giftCert.get('isSavingDraft') && giftCert.get('isSubmitting')
+	            });
+
+	            var submitLoadingIndicator = (0, _classnames2.default)('fa', {
+	                'fa-spinner fa-spin': giftCert.get('isSavingDraft') === false && giftCert.get('isSubmitting')
+	            });
+
+	            var saveAsDraftClass = (0, _classnames2.default)('btn', 'btn-default', {
+	                'disabled': giftCert.get('isSubmitting')
+	            });
+
+	            var headerData = giftCert.get('headerData');
+	            debugger;
+
+	            var requsterInputDiv = (0, _classnames2.default)('col-xs-8', {
+	                'has-error': headerData.get('requesterIsEmpty')
+	            });
+
+	            var creatorInputDiv = (0, _classnames2.default)('col-xs-8', {
+	                'has-error': headerData.get('creatorIsEmpty')
+	            });
+
+	            var gcTypeInputDiv = (0, _classnames2.default)('col-xs-8', {
+	                'has-error': headerData.get('gcType')
+	            });
+
+	            //const divisionInputDiv = classnames('col-xs-8', {
+	            //    'has-error': headerData.get('divisionIsEmpty')
+	            //})
+
+	            //const businessLineInputDiv = classnames('col-xs-8', {
+	            //    'has-error': headerData.get('businessLineIsEmpty')
+	            //})
+
+	            //const productLineInputDiv = classnames('col-xs-8', {
+	            //    'has-error': headerData.get('productLineIsEmpty')
+	            //})
+
+	            //const segmentInputDiv = classnames('col-xs-8', {
+	            //    'has-error': headerData.get('segmentIsEmpty')
+	            //})
+
+	            //const requestTypeInputDiv = classnames('col-xs-8', {
+	            //    'has-error': headerData.get('requestTypeIsEmpty')
+	            //})
+
+	            //const subRequestTypeInputDiv = classnames('col-xs-8', {
+	            //    'has-error': headerData.get('subRequestTypeIsEmpty')
+	            //})
+
+	            //const targetLabInputDiv = classnames('col-xs-8', {
+	            //    'has-error': headerData.get('targetLabIsEmpty')
+	            //})
+
+	            //const projectManagerInputDiv = classnames('col-xs-8', {
+	            //    'has-error': headerData.get('projectManagerIsEmpty')
+	            //})
+
+	            //const projectOwnerInputDiv = classnames('col-xs-8', {
+	            //    'has-error': headerData.get('projectOwnerIsEmpty')
+	            //})
+
+	            if (headerData.get('status') != 1) {
+	                style.saveAsDraftStyle.display = 'none';
+	            }
+
+	            //const requestType = headerData.get('requestType');
+	            //let disableSubRequestType = false;
+	            //if (requestType != undefined)
+	            //{
+	            //  const closeDateType = requestType.get('closeDateType');
+	            //  if(closeDateType === 2 && !giftCert.get('isUserAdmin'))
+	            //  {
+	            //    disableSubRequestType = true;
+	            //  }
+	            //}
+	            //const subRequestDisabledAttr  = {
+	            //  disabled: disableSubRequestType
+	            //}
+
+	            var headerElem = _react2.default.createElement(
+	                'form',
+	                { ref: 'form', className: 'form-horizontal', method: 'POST', style: style.form },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group col-xs-6' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-xs-4 control-label' },
+	                            'GC Number'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-8' },
+	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', value: headerData.get('giftCertNo'),
+	                                tabIndex: '1', onChange: _lodash2.default.partial(this.onFieldChanged, 'giftCertNo') })
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group col-xs-6' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-xs-4 control-label' },
+	                            'Status'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-8' },
+	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', value: this.formatStatusForDisplay(headerData.get('status')),
+	                                readOnly: true })
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group col-xs-6' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-xs-4 control-label' },
+	                            'GC Type ',
+	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'lmd-required' },
+	                                '*'
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: gcTypeInputDiv },
+	                            _react2.default.createElement(
+	                                'select',
+	                                { className: 'form-control', onChange: this.onGcTypeChanged,
+	                                    value: headerData.get('gcType').get('id'),
+	                                    tabIndex: '2' },
+	                                _react2.default.createElement(
+	                                    'option',
+	                                    { key: '', value: '' },
+	                                    'Please select a gc type'
+	                                ),
+	                                giftCert.get('gcTypesData').filter(function (item) {
+	                                    return item.get('active');
+	                                }).map(function (item) {
+	                                    return _react2.default.createElement(
+	                                        'option',
+	                                        { key: item.get('id'), value: item.get('id') },
+	                                        item.get('name')
+	                                    );
+	                                })
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group col-xs-6' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-xs-4 control-label' },
+	                            'Creator ',
+	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'lmd-required' },
+	                                '*'
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: creatorInputDiv },
+	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', disabled: true })
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group col-xs-6' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-xs-4 control-label' },
+	                            'DTI Permit No'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-8' },
+	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', value: headerData.get('dtiPermitNo'),
+	                                tabIndex: '3', onChange: _lodash2.default.partial(this.onFieldChanged, 'dtiPermitNo') })
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group col-xs-6' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-xs-4 control-label' },
+	                            'QR Code'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-8' },
+	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', value: headerData.get('qrCode'), readOnly: true })
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group col-xs-6' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-xs-4 control-label' },
+	                            'Issuance Date'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-8' },
+	                            _react2.default.createElement(_DateTimePicker2.default, {
+	                                tabIndex: '4',
+	                                value: headerData.get('issuanceDate'),
+	                                onChange: this.onIssuanceDateChanged })
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group col-xs-6' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-xs-4 control-label' },
+	                            'Expiration Date'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-8' },
+	                            _react2.default.createElement(_DateTimePicker2.default, {
+	                                tabIndex: '7',
+	                                value: headerData.get('expirationDate'),
+	                                onChange: this.onExpirationDateChanged })
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group col-xs-6' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-xs-4 control-label' },
+	                            'Value'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-8' },
+	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', value: headerData.get('value'),
+	                                tabIndex: '5', onChange: _lodash2.default.partial(this.onFieldChanged, 'value') })
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row', style: style.singleColumnRow },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group col-xs-12' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-xs-2 control-label' },
+	                            'Note'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-10' },
+	                            _react2.default.createElement('textarea', { className: 'form-control',
+	                                tabIndex: '6', value: headerData.get('note'), onChange: _lodash2.default.partial(this.onFieldChanged, 'note') })
+	                        )
+	                    )
+	                )
+	            );
+
+	            var isUserAdmin = giftCert.get('isUserAdmin');
+
+	            return _react2.default.createElement(
+	                'div',
+	                { style: style.container },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'panel panel-default' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'panel-heading' },
+	                        _react2.default.createElement(
+	                            'h4',
+	                            null,
+	                            'Header Data'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'panel-body' },
+	                        headerElem
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'panel panel-default' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'panel-heading' },
+	                        _react2.default.createElement(
+	                            'h4',
+	                            null,
+	                            'Services'
+	                        )
+	                    ),
+	                    _react2.default.createElement('div', { className: 'panel-body' })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'panel panel-default' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'panel-heading' },
+	                        _react2.default.createElement(
+	                            'h4',
+	                            null,
+	                            'Outlet'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'row', style: style.buttonActionRow },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group col-xs-12' },
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'submit', className: saveAsDraftClass, style: style.saveAsDraftStyle,
+	                                onClick: function onClick(e) {
+	                                    return _this4.onSubmitClicked(e, true);
+	                                },
+	                                name: 'submit', value: 'saveAsDraft' },
+	                            _react2.default.createElement('i', { className: draftLoadingIndicator }),
+	                            ' Save As Draft'
+	                        ),
+	                        _react2.default.createElement(
+	                            'button',
+	                            { type: 'submit', className: submitButtonClasses, style: style.submitStyle,
+	                                onClick: function onClick(e) {
+	                                    return _this4.onSubmitClicked(e, false);
+	                                },
+	                                name: 'submit', value: 'submit' },
+	                            _react2.default.createElement('i', { className: submitLoadingIndicator }),
+	                            ' Submit'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return GiftCertForm;
 	}(_react2.default.Component);
 
 	function mapStateToProps(_ref) {
-	  var giftCert = _ref.giftCert;
+	    var giftCert = _ref.giftCert;
 
-	  return {
-	    giftCert: giftCert
-	  };
+	    return {
+	        giftCert: giftCert
+	    };
 	}
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)(actions, dispatch);
+	    return (0, _redux.bindActionCreators)(actions, dispatch);
 	}
 
 	var GiftCertFormContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(GiftCertForm);
 
 	var rootReducers = (0, _redux.combineReducers)({
-	  giftCert: _Reducer2.default,
-	  toastr: _reactReduxToastr.reducer
+	    giftCert: _Reducer2.default,
+	    //  addDeviceModal: addDeviceModalReducer,
+	    //  addLotModal: addLotModalReducer,
+	    // removeDeviceModal: removeDeviceModalReducer,
+	    // removeLotModal: removeLotModalReducer,
+	    toastr: _reactReduxToastr.reducer
 	});
 
 	var store = (0, _redux.createStore)(rootReducers, (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default), window.devToolsExtension ? window.devToolsExtension() : function (f) {
-	  return f;
+	    return f;
 	}));
 
 	_reactDom2.default.render(_react2.default.createElement(
-	  _reactRedux.Provider,
-	  { store: store },
-	  _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(GiftCertFormContainer, null),
-	    _react2.default.createElement(_reactReduxToastr2.default, null)
-	  )
+	    _reactRedux.Provider,
+	    { store: store },
+	    _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(GiftCertFormContainer, null),
+	        _react2.default.createElement(_reactReduxToastr2.default, null)
+	    )
 	), document.getElementById('content'));
 
 /***/ }),
@@ -2744,12 +3160,12 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	exports.updateOutlet = exports.addNewOutlet = exports.updateGcType = exports.addNewGcType = exports.updateServiceType = exports.addNewServiceType = undefined;
 	exports.checkPartNumber = checkPartNumber;
 	exports.getSubRequestType = getSubRequestType;
-	exports.getDeviceType = getDeviceType;
+	exports.getGcType = getGcType;
 	exports.getChannels = getChannels;
 	exports.getPackageType = getPackageType;
 	exports.getPackageTypeGroup = getPackageTypeGroup;
@@ -2767,6 +3183,7 @@
 	exports.deactivateUser = deactivateUser;
 	exports.getTestSelection = getTestSelection;
 	exports.queryMyRequests = queryMyRequests;
+	exports.queryGiftCerts = queryGiftCerts;
 	exports.getRequestsToAccept = getRequestsToAccept;
 	exports.updateTestRequestForMultipleReview = updateTestRequestForMultipleReview;
 	exports.setPartReceived = setPartReceived;
@@ -2860,478 +3277,482 @@
 
 	// Service Type
 	var addNewServiceType = exports.addNewServiceType = function addNewServiceType(serviceType, callback) {
-	  return _axios2.default.post('/api/ServiceType', serviceType).then(callback);
+	    return _axios2.default.post('/api/ServiceType', serviceType).then(callback);
 	};
 
 	var updateServiceType = exports.updateServiceType = function updateServiceType(serviceType, callback) {
-	  return _axios2.default.put('/api/ServiceType/' + serviceType.id, serviceType).then(callback);
+	    return _axios2.default.put('/api/ServiceType/' + serviceType.id, serviceType).then(callback);
 	};
 
 	// GC Type
 	var addNewGcType = exports.addNewGcType = function addNewGcType(GcType, callback) {
-	  return _axios2.default.post('/api/GcType', GcType).then(callback);
+	    return _axios2.default.post('/api/GcType', GcType).then(callback);
 	};
 
 	var updateGcType = exports.updateGcType = function updateGcType(GcType, callback) {
-	  return _axios2.default.put('/api/GcType/' + GcType.id, GcType).then(callback);
+	    return _axios2.default.put('/api/GcType/' + GcType.id, GcType).then(callback);
 	};
 
 	// Outlet
 	var addNewOutlet = exports.addNewOutlet = function addNewOutlet(outlet, callback) {
-	  return _axios2.default.post('/api/Outlet', outlet).then(callback);
+	    return _axios2.default.post('/api/Outlet', outlet).then(callback);
 	};
 
 	var updateOutlet = exports.updateOutlet = function updateOutlet(outlet, callback) {
-	  return _axios2.default.put('/api/Outlet/' + outlet.id, outlet).then(callback);
+	    return _axios2.default.put('/api/Outlet/' + outlet.id, outlet).then(callback);
 	};
 
 	function checkPartNumber(partNumber, callback) {
-	  $.post('partNumber/check', { partNumber: partNumber }).done(callback);
+	    $.post('partNumber/check', { partNumber: partNumber }).done(callback);
 	}
 
 	function getSubRequestType(callback) {
-	  $.get('subRequestType/get').done(function (data) {
-	    callback(data);
-	  });
+	    $.get('subRequestType/get').done(function (data) {
+	        callback(data);
+	    });
 	}
 
-	function getDeviceType(callback) {
-	  $.get('deviceType/get').done(function (data) {
-	    callback(data);
-	  });
+	function getGcType(callback) {
+	    return _axios2.default.get('/api/GcType').then(callback).catch(function (error) {
+	        console.log(error);
+	    });
 	}
 
 	function getChannels(callback) {
-	  $.get('channel/get').done(function (data) {
-	    callback(data);
-	  });
+	    $.get('channel/get').done(function (data) {
+	        callback(data);
+	    });
 	}
 
 	function getPackageType(callback) {
-	  $.get('packageType/get').done(function (data) {
-	    callback(data);
-	  });
+	    $.get('packageType/get').done(function (data) {
+	        callback(data);
+	    });
 	}
 
 	function getPackageTypeGroup(callback) {
-	  $.get('packageTypeGroup/get').done(function (data) {
-	    callback(data);
-	  });
+	    $.get('packageTypeGroup/get').done(function (data) {
+	        callback(data);
+	    });
 	}
 
 	function getDivisions(callback) {
-	  $.get('divisions/get').done(callback);
+	    $.get('divisions/get').done(callback);
 	}
 
 	function getTargetLabs(callback) {
-	  $.get('targetlabs/get').done(callback);
+	    $.get('targetlabs/get').done(callback);
 	}
 
 	function getTestRequestTypes(callback) {
-	  $.get('testRequestTypes/get').done(callback);
+	    $.get('testRequestTypes/get').done(callback);
 	}
 
 	function addTestRequest(testRequest, callback) {
-	  $.post('testRequestForm/add', testRequest).done(callback);
+	    $.post('testRequestForm/add', testRequest).done(callback);
 	}
 
 	function deleteRole(id, callback) {
-	  $.post('role/delete', { id: id }).done(callback);
+	    $.post('role/delete', { id: id }).done(callback);
 	}
 
 	function addRole(role, callback) {
-	  $.post('role/add', role).done(callback);
+	    $.post('role/add', role).done(callback);
 	}
 
 	function editRole(role, callback) {
-	  $.post('role/update', role).done(callback);
+	    $.post('role/update', role).done(callback);
 	}
 
 	function searchUserAInAd(query, callback) {
-	  $.post('user/searchAd', { q: query }).done(callback);
+	    $.post('user/searchAd', { q: query }).done(callback);
 	}
 
 	function editUser(user, callback) {
-	  $.post('user/edit', user).done(callback);
+	    $.post('user/edit', user).done(callback);
 	}
 
 	function addUser(user, callback) {
-	  $.post('user/add', user).done(callback);
+	    $.post('user/add', user).done(callback);
 	}
 
 	function activateUser(id, callback) {
-	  $.post('user/activate', { id: id }).done(callback);
+	    $.post('user/activate', { id: id }).done(callback);
 	}
 
 	function deactivateUser(id, callback) {
-	  $.post('user/deactivate', { id: id }).done(callback);
+	    $.post('user/deactivate', { id: id }).done(callback);
 	}
 
 	function getTestSelection(params, callback) {
-	  $.post('testSelection/get', params).done(callback);
+	    $.post('testSelection/get', params).done(callback);
 	}
 
 	function queryMyRequests(params, callback) {
-	  $.post('myRequests/post', params).done(callback);
+	    $.post('myRequests/post', params).done(callback);
+	}
+
+	function queryGiftCerts(params, callback) {
+	    return _axios2.default.post('/api/GiftCert/PostGiftCertByFilter', params).then(callback);
 	}
 
 	function getRequestsToAccept(statusFilter, callback) {
-	  $.post('requestsToAccept/Get', { statusFilter: statusFilter }).done(callback);
+	    $.post('requestsToAccept/Get', { statusFilter: statusFilter }).done(callback);
 	}
 
 	function updateTestRequestForMultipleReview(params, callback) {
-	  $.post('requestsToAccept/MultipleDataReviews/' + params.id, { isAllowed: params.isAllowed }).done(callback);
+	    $.post('requestsToAccept/MultipleDataReviews/' + params.id, { isAllowed: params.isAllowed }).done(callback);
 	}
 
 	function setPartReceived(id, callback) {
-	  $.post('requestsToAccept/PartsReceived/' + id).done(callback);
+	    $.post('requestsToAccept/PartsReceived/' + id).done(callback);
 	}
 
 	function setManagerAccept(param, callback) {
-	  $.post('requestsToAccept/ManagerAccepted/' + param.id, { subRequestType: param.subRequestType }).done(callback);
+	    $.post('requestsToAccept/ManagerAccepted/' + param.id, { subRequestType: param.subRequestType }).done(callback);
 	}
 
 	function setReleaseToLab(id, callback) {
-	  $.post('requestsToAccept/ReleasedToLab/' + id).done(callback);
+	    $.post('requestsToAccept/ReleasedToLab/' + id).done(callback);
 	}
 
 	function rejectRequestToRequester(params, callback) {
-	  $.post('requestsToAccept/RejectedToRequester/' + params.id, { adminSupportNotes: params.reason }).done(callback);
+	    $.post('requestsToAccept/RejectedToRequester/' + params.id, { adminSupportNotes: params.reason }).done(callback);
 	}
 
 	function setPriority(params, callback) {
-	  $.post('requestsToAccept/Priority/' + params.id, { priority: params.priority }).done(callback);
+	    $.post('requestsToAccept/Priority/' + params.id, { priority: params.priority }).done(callback);
 	}
 
 	function setFastTrack(params, callback) {
-	  $.post('requestsToAccept/FastTrack/' + params.id, { fastTrack: params.fastTrack }).done(callback);
+	    $.post('requestsToAccept/FastTrack/' + params.id, { fastTrack: params.fastTrack }).done(callback);
 	}
 	function resubmitRequest(id, callback) {
-	  $.post('myRequests/ReSubmit/' + id).done(callback);
+	    $.post('myRequests/ReSubmit/' + id).done(callback);
 	}
 
 	function deleteRequest(id, callback) {
-	  $.post('myRequests/DeleteRequest/' + id).done(callback);
+	    $.post('myRequests/DeleteRequest/' + id).done(callback);
 	}
 
 	function createNewFormAndHandle(params, callback) {
-	  $.post('myRequests/CreateNew/' + params.id, { keepTests: params.keepTests }).done(callback);
+	    $.post('myRequests/CreateNew/' + params.id, { keepTests: params.keepTests }).done(callback);
 	}
 
 	function createNewFormAndHandleAllProjects(params, callback) {
-	  $.post('home/CreateNew/' + params.id, { keepTests: params.keepTests }).done(callback);
+	    $.post('home/CreateNew/' + params.id, { keepTests: params.keepTests }).done(callback);
 	}
 
 	function setStartTest(id, callback) {
-	  $.post('myTests/Start/' + id).done(callback);
+	    $.post('myTests/Start/' + id).done(callback);
 	}
 
 	function setStoptTest(params, callback) {
-	  $.post('myTests/Stop/' + params.id, { wipStation: params.note }).done(callback);
+	    $.post('myTests/Stop/' + params.id, { wipStation: params.note }).done(callback);
 	}
 
 	function setPauseTest(id, callback) {
-	  $.post('myTests/Pause/' + id).done(callback);
+	    $.post('myTests/Pause/' + id).done(callback);
 	}
 
 	function setOnHoldTest(params, callback) {
-	  $.post('myTests/OnHold/' + params.id, { techNotes: params.reason }).done(callback);
+	    $.post('myTests/OnHold/' + params.id, { techNotes: params.reason }).done(callback);
 	}
 
 	function setResumeTest(id, callback) {
-	  $.post('myTests/Resume/' + id).done(callback);
+	    $.post('myTests/Resume/' + id).done(callback);
 	}
 
 	function filterProjects(filter, callback) {
-	  $.post('Home/GetRequests', { request: filter }).done(callback);
+	    $.post('Home/GetRequests', { request: filter }).done(callback);
 	}
 
 	function prepareAllProjectsExport(filter, callback) {
-	  $.post('Home/PrepareExport', { request: filter }).done(callback);
+	    $.post('Home/PrepareExport', { request: filter }).done(callback);
 	}
 
 	function setTestPriority(data, callback) {
-	  $.post('TestAssignment/TestPriority/' + data.id, { priority: data.priority }).done(callback);
+	    $.post('TestAssignment/TestPriority/' + data.id, { priority: data.priority }).done(callback);
 	}
 
 	function setTestTechnician(data, callback) {
-	  $.post('TestAssignment/Technician/' + data.id, { technicianId: data.technician.id }).done(callback);
+	    $.post('TestAssignment/Technician/' + data.id, { technicianId: data.technician.id }).done(callback);
 	}
 
 	function setProjectToOnHold(id, callback) {
-	  $.post('Home/OnHold/' + id).done(callback);
+	    $.post('Home/OnHold/' + id).done(callback);
 	}
 
 	function setProjectToResume(id, callback) {
-	  $.post('Home/Resume/' + id).done(callback);
+	    $.post('Home/Resume/' + id).done(callback);
 	}
 
 	function setProjectToCancel(id, callback) {
-	  $.post('Home/Cancel/' + id).done(callback);
+	    $.post('Home/Cancel/' + id).done(callback);
 	}
 
 	function setProjectToClosed(id, callback) {
-	  $.post('Home/Close/' + id).done(callback);
+	    $.post('Home/Close/' + id).done(callback);
 	}
 
 	function setToWebDateFromAllProjects(id, callback) {
-	  $.post('Home/ToWeb/' + id).done(callback);
+	    $.post('Home/ToWeb/' + id).done(callback);
 	}
 
 	function rejectTestRequest(params, callback) {
-	  $.post('DatasheetProcessing/Reject/' + params.id, {
-	    comments: params.comments,
-	    testDataIds: params.testDataIds
-	  }).done(callback);
+	    $.post('DatasheetProcessing/Reject/' + params.id, {
+	        comments: params.comments,
+	        testDataIds: params.testDataIds
+	    }).done(callback);
 	}
 
 	function reviewTestRequest(params, callback) {
-	  $.post('DatasheetProcessing/ToReview/' + params.id).done(callback);
+	    $.post('DatasheetProcessing/ToReview/' + params.id).done(callback);
 	}
 
 	function setTestRequestReviewLink(params, callback) {
-	  $.post('DatasheetProcessing/SetReviewLink/' + params.id, {
-	    reviewLink: params.reviewLink
-	  }).done(callback);
+	    $.post('DatasheetProcessing/SetReviewLink/' + params.id, {
+	        reviewLink: params.reviewLink
+	    }).done(callback);
 	}
 
 	function setTestRequestToWeb(params, callback) {
-	  $.post('DatasheetProcessing/ToWeb/' + params.id).done(callback);
+	    $.post('DatasheetProcessing/ToWeb/' + params.id).done(callback);
 	}
 
 	function setTestRequestToApprove(params, callback) {
-	  $.post('DatasheetProcessing/Approve/' + params.id).done(callback);
+	    $.post('DatasheetProcessing/Approve/' + params.id).done(callback);
 	}
 
 	function setTestRequestToClosed(params, callback) {
-	  $.post('DatasheetProcessing/Close/' + params.id).done(callback);
+	    $.post('DatasheetProcessing/Close/' + params.id).done(callback);
 	}
 
 	function setProjectTestForReTest(params, callback) {
-	  $.post('ProjectTests/SetReTest/' + params.id, { isReTest: params.isReTest }).done(callback);
+	    $.post('ProjectTests/SetReTest/' + params.id, { isReTest: params.isReTest }).done(callback);
 	}
 
 	function addReTestToProjectTest(params, callback) {
-	  $.post('ProjectTests/AddReTest/' + params.id, { testRequestId: params.testRequestId }).done(callback);
+	    $.post('ProjectTests/AddReTest/' + params.id, { testRequestId: params.testRequestId }).done(callback);
 	}
 
 	function startProjectTest(id, callback) {
-	  $.post('ProjectTests/Start/' + id).done(callback);
+	    $.post('ProjectTests/Start/' + id).done(callback);
 	}
 
 	function stopProjectTest(params, callback) {
-	  $.post('ProjectTests/Stop/' + params.id, { wipStation: params.note }).done(callback);
+	    $.post('ProjectTests/Stop/' + params.id, { wipStation: params.note }).done(callback);
 	}
 
 	function pauseProjecteTest(id, callback) {
-	  $.post('ProjectTests/Pause/' + id).done(callback);
+	    $.post('ProjectTests/Pause/' + id).done(callback);
 	}
 
 	function setOnHoldProjectTest(params, callback) {
-	  $.post('ProjectTests/OnHold/' + params.id, { techNotes: params.reason }).done(callback);
+	    $.post('ProjectTests/OnHold/' + params.id, { techNotes: params.reason }).done(callback);
 	}
 
 	function setResumeProjectTest(id, callback) {
-	  $.post('ProjectTests/Resume/' + id).done(callback);
+	    $.post('ProjectTests/Resume/' + id).done(callback);
 	}
 
 	function deleteProjectTest(id, callback) {
-	  $.post('ProjectTests/Delete/' + id).done(callback);
+	    $.post('ProjectTests/Delete/' + id).done(callback);
 	}
 
 	function getWiP(param, callback) {
-	  var postData = {};
-	  postData.groupType = param.groupType;
-	  if (postData.groupType == 3) {
-	    postData.groupType = 1;
-	    postData.id = param.testGroupFilterValue.get('id');
-	  }
+	    var postData = {};
+	    postData.groupType = param.groupType;
+	    if (postData.groupType == 3) {
+	        postData.groupType = 1;
+	        postData.id = param.testGroupFilterValue.get('id');
+	    }
 
-	  if (postData.groupType == 4) {
-	    postData.groupType = 2;
-	    postData.id = param.techFilterValue.get('id');
-	  }
+	    if (postData.groupType == 4) {
+	        postData.groupType = 2;
+	        postData.id = param.techFilterValue.get('id');
+	    }
 
-	  $.post('WipProjects/Get', postData).done(callback);
+	    $.post('WipProjects/Get', postData).done(callback);
 	}
 
 	function changeTestTechnician(params, callback) {
-	  $.post('WipProjects/Technician/' + params.id, { technicianId: params.technician.id }).done(callback);
+	    $.post('WipProjects/Technician/' + params.id, { technicianId: params.technician.id }).done(callback);
 	}
 
 	function acceptDatasheet(id, callback) {
-	  $.post('DatasheetAcceptance/Accept/' + id).done(callback);
+	    $.post('DatasheetAcceptance/Accept/' + id).done(callback);
 	}
 
 	function acceptQualtiyReview(id, callback) {
-	  $.post('QualityAcceptance/Accept/' + id).done(callback);
+	    $.post('QualityAcceptance/Accept/' + id).done(callback);
 	}
 
 	function startReview(id, callback) {
-	  $.post('QualityReview/StartReview/' + id).done(callback);
+	    $.post('QualityReview/StartReview/' + id).done(callback);
 	}
 
 	function reviewOut(id, callback) {
-	  $.post('QualityReview/ReviewOut/' + id).done(callback);
+	    $.post('QualityReview/ReviewOut/' + id).done(callback);
 	}
 
 	function multipleReviewOut(params, callback) {
-	  $.post('QualityReview/MultiReviewOut/' + params.id, { testDataIds: params.testDataIds }).done(callback);
+	    $.post('QualityReview/MultiReviewOut/' + params.id, { testDataIds: params.testDataIds }).done(callback);
 	}
 
 	function rejectReview(params, callback) {
-	  $.post('QualityReview/RejectTests/' + params.id, { reviewerComments: params.reason, testDataIds: params.testDataIds }).done(callback);
+	    $.post('QualityReview/RejectTests/' + params.id, { reviewerComments: params.reason, testDataIds: params.testDataIds }).done(callback);
 	}
 
 	function saveTestCondition(condition, callback) {
-	  $.post('TestConditionAdmin/Save', { data: condition }).done(callback);
+	    $.post('TestConditionAdmin/Save', { data: condition }).done(callback);
 	}
 
 	function saveTest(test, callback) {
-	  $.post('TestAdmin/Save/', { data: test }).done(callback);
+	    $.post('TestAdmin/Save/', { data: test }).done(callback);
 	}
 
 	function setDatasheetToCancel(id, callback) {
-	  $.post('DatasheetAcceptance/Cancel/' + id).done(callback);
+	    $.post('DatasheetAcceptance/Cancel/' + id).done(callback);
 	}
 
 	function setDatasheetToOnHold(id, callback) {
-	  $.post('DatasheetAcceptance/OnHold/' + id).done(callback);
+	    $.post('DatasheetAcceptance/OnHold/' + id).done(callback);
 	}
 
 	function setDatasheetToReject(data, callback) {
-	  $.post('DatasheetAcceptance/RejectTests/' + data.id, { reviewerComments: data.reason, testDataIds: data.testDataIds }).done(callback);
+	    $.post('DatasheetAcceptance/RejectTests/' + data.id, { reviewerComments: data.reason, testDataIds: data.testDataIds }).done(callback);
 	}
 
 	function setQualityReviewToCancel(id, callback) {
-	  $.post('QualityAcceptance/Cancel/' + id).done(callback);
+	    $.post('QualityAcceptance/Cancel/' + id).done(callback);
 	}
 
 	function setQualityReviewToOnHold(id, callback) {
-	  $.post('QualityAcceptance/OnHold/' + id).done(callback);
+	    $.post('QualityAcceptance/OnHold/' + id).done(callback);
 	}
 
 	function setQualityRejectReview(data, callback) {
-	  $.post('QualityAcceptance/RejectTests/' + data.id, { reviewerComments: data.reason, testDataIds: data.testDataIds }).done(callback);
+	    $.post('QualityAcceptance/RejectTests/' + data.id, { reviewerComments: data.reason, testDataIds: data.testDataIds }).done(callback);
 	}
 
 	function updateTechnicianSchedule(data, callback) {
-	  $.post('TechSchedule/Save/', { date: data }).done(callback);
+	    $.post('TechSchedule/Save/', { date: data }).done(callback);
 	}
 
 	function updateEquipmentCapacity(data, callback) {
-	  $.post('EquipmentCapacity/Save/', { date: data }).done(callback);
+	    $.post('EquipmentCapacity/Save/', { date: data }).done(callback);
 	}
 
 	function getDataSheetProcessingList(viewType, callback) {
-	  $.get('DatasheetProcessing/GetList?viewType=' + viewType).done(callback);
+	    $.get('DatasheetProcessing/GetList?viewType=' + viewType).done(callback);
 	}
 
 	function modifySubType(subType, callback) {
-	  $.post('SubTypeTable/Save', { data: subType }).done(callback);
+	    $.post('SubTypeTable/Save', { data: subType }).done(callback);
 	}
 
 	function saveDeviceCharacteristic(device, callback) {
-	  $.post('DeviceCharacteristicAdmin/Save', { device: device }).done(callback);
+	    $.post('DeviceCharacteristicAdmin/Save', { device: device }).done(callback);
 	}
 
 	function deleteDevice(id, callback) {
-	  $.post('DeviceCharacteristicAdmin/delete/' + id).done(callback);
+	    $.post('DeviceCharacteristicAdmin/delete/' + id).done(callback);
 	}
 
 	function addNewDivision(division, callback) {
-	  $.post('DivisionAdmin/InsertDivision', { division: division }).done(callback);
+	    $.post('DivisionAdmin/InsertDivision', { division: division }).done(callback);
 	}
 
 	function addNewBusinessLine(postData, callback) {
-	  $.post('DivisionAdmin/InsertBusinessLine', {
-	    businessLine: postData.businessLine,
-	    divisionId: postData.divisionId
-	  }).done(callback);
+	    $.post('DivisionAdmin/InsertBusinessLine', {
+	        businessLine: postData.businessLine,
+	        divisionId: postData.divisionId
+	    }).done(callback);
 	}
 
 	function addNewProductLine(postData, callback) {
-	  $.post('DivisionAdmin/InsertProductLine', {
-	    productLine: postData.productLine,
-	    businessLineId: postData.businessLineId
-	  }).done(callback);
+	    $.post('DivisionAdmin/InsertProductLine', {
+	        productLine: postData.productLine,
+	        businessLineId: postData.businessLineId
+	    }).done(callback);
 	}
 
 	function addNewSegment(postData, callback) {
-	  $.post('DivisionAdmin/InsertSegment', {
-	    segment: postData.segment,
-	    productLineId: postData.productLineId
-	  }).done(callback);
+	    $.post('DivisionAdmin/InsertSegment', {
+	        segment: postData.segment,
+	        productLineId: postData.productLineId
+	    }).done(callback);
 	}
 
 	function updateDivision(division, callback) {
-	  $.post('DivisionAdmin/updateDivision', { division: division }).done(callback);
+	    $.post('DivisionAdmin/updateDivision', { division: division }).done(callback);
 	}
 
 	function updateBusinessLine(businessLine, callback) {
-	  $.post('DivisionAdmin/UpdateBusinessLine', { businessLine: businessLine }).done(callback);
+	    $.post('DivisionAdmin/UpdateBusinessLine', { businessLine: businessLine }).done(callback);
 	}
 
 	function updateProductLine(productLine, callback) {
-	  $.post('DivisionAdmin/UpdateProductLine', { productLine: productLine }).done(callback);
+	    $.post('DivisionAdmin/UpdateProductLine', { productLine: productLine }).done(callback);
 	}
 
 	function updateSegment(segment, callback) {
-	  $.post('DivisionAdmin/UpdateSegment', { segment: segment }).done(callback);
+	    $.post('DivisionAdmin/UpdateSegment', { segment: segment }).done(callback);
 	}
 
 	function addNewRequestType(requestType, callback) {
-	  $.post('RequestTypeAdmin/AddNewRequestType', { requestType: requestType }).done(callback);
+	    $.post('RequestTypeAdmin/AddNewRequestType', { requestType: requestType }).done(callback);
 	}
 
 	function addNewSubRequestType(subRequestType, callback) {
-	  $.post('RequestTypeAdmin/AddNewSubRequestType', { subRequestType: subRequestType }).done(callback);
+	    $.post('RequestTypeAdmin/AddNewSubRequestType', { subRequestType: subRequestType }).done(callback);
 	}
 
 	function updateRequestType(requestType, callback) {
-	  $.post('RequestTypeAdmin/UpdateRequestType', { requestType: requestType }).done(callback);
+	    $.post('RequestTypeAdmin/UpdateRequestType', { requestType: requestType }).done(callback);
 	}
 
 	function updateSubRequestType(subRequestType, callback) {
-	  $.post('RequestTypeAdmin/UpdateSubRequestType', { subRequestType: subRequestType }).done(callback);
+	    $.post('RequestTypeAdmin/UpdateSubRequestType', { subRequestType: subRequestType }).done(callback);
 	}
 
 	function addNewTargetLab(targetLab, callback) {
-	  $.post('TargetLabAdmin/Insert', { targetLab: targetLab }).done(callback);
+	    $.post('TargetLabAdmin/Insert', { targetLab: targetLab }).done(callback);
 	}
 
 	function updateTargetLab(targetLab, callback) {
-	  $.post('TargetLabAdmin/Update', { targetLab: targetLab }).done(callback);
+	    $.post('TargetLabAdmin/Update', { targetLab: targetLab }).done(callback);
 	}
 
 	function getMyTestInfo(id, callback) {
-	  $.get('MyTests/GetTestInfo/' + id).done(callback);
+	    $.get('MyTests/GetTestInfo/' + id).done(callback);
 	}
 
 	function copyTest(test, callback) {
-	  $.post('MyTests/copyTest', { test: test }).done(callback);
+	    $.post('MyTests/copyTest', { test: test }).done(callback);
 	}
 	function addNewChannel(channel, callback) {
-	  $.post('ChannelsAdministration/Insert', { channel: channel }).done(callback);
+	    $.post('ChannelsAdministration/Insert', { channel: channel }).done(callback);
 	}
 
 	function updateChannel(channel, callback) {
-	  $.post('ChannelsAdministration/Update', { channel: channel }).done(callback);
+	    $.post('ChannelsAdministration/Update', { channel: channel }).done(callback);
 	}
 	function addPackageTypeGroup(packageTypeGroup, callback) {
-	  $.post('PackageTypeAdmin/InsertPackageTypeGroup', { packageTypeGroup: packageTypeGroup }).done(callback);
+	    $.post('PackageTypeAdmin/InsertPackageTypeGroup', { packageTypeGroup: packageTypeGroup }).done(callback);
 	}
 
 	function updatePackageTypeGroup(packageTypeGroup, callback) {
-	  $.post('PackageTypeAdmin/UpdatePackageTypeGroup', { packageTypeGroup: packageTypeGroup }).done(callback);
+	    $.post('PackageTypeAdmin/UpdatePackageTypeGroup', { packageTypeGroup: packageTypeGroup }).done(callback);
 	}
 
 	function addPackageType(packageType, callback) {
-	  $.post('PackageTypeAdmin/InsertPackageType', { packageType: packageType }).done(callback);
+	    $.post('PackageTypeAdmin/InsertPackageType', { packageType: packageType }).done(callback);
 	}
 
 	function updatePackageType(packageType, callback) {
-	  $.post('PackageTypeAdmin/UpdatePackageType', { packageType: packageType }).done(callback);
+	    $.post('PackageTypeAdmin/UpdatePackageType', { packageType: packageType }).done(callback);
 	}
 
 /***/ }),
@@ -29342,9 +29763,639 @@
 /***/ }),
 /* 270 */,
 /* 271 */,
-/* 272 */,
-/* 273 */,
-/* 274 */,
+/* 272 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	var formatRegExp = /%[sdj%]/g;
+	exports.format = function(f) {
+	  if (!isString(f)) {
+	    var objects = [];
+	    for (var i = 0; i < arguments.length; i++) {
+	      objects.push(inspect(arguments[i]));
+	    }
+	    return objects.join(' ');
+	  }
+
+	  var i = 1;
+	  var args = arguments;
+	  var len = args.length;
+	  var str = String(f).replace(formatRegExp, function(x) {
+	    if (x === '%%') return '%';
+	    if (i >= len) return x;
+	    switch (x) {
+	      case '%s': return String(args[i++]);
+	      case '%d': return Number(args[i++]);
+	      case '%j':
+	        try {
+	          return JSON.stringify(args[i++]);
+	        } catch (_) {
+	          return '[Circular]';
+	        }
+	      default:
+	        return x;
+	    }
+	  });
+	  for (var x = args[i]; i < len; x = args[++i]) {
+	    if (isNull(x) || !isObject(x)) {
+	      str += ' ' + x;
+	    } else {
+	      str += ' ' + inspect(x);
+	    }
+	  }
+	  return str;
+	};
+
+
+	// Mark that a method should not be used.
+	// Returns a modified function which warns once by default.
+	// If --no-deprecation is set, then it is a no-op.
+	exports.deprecate = function(fn, msg) {
+	  // Allow for deprecating things in the process of starting up.
+	  if (isUndefined(global.process)) {
+	    return function() {
+	      return exports.deprecate(fn, msg).apply(this, arguments);
+	    };
+	  }
+
+	  if (process.noDeprecation === true) {
+	    return fn;
+	  }
+
+	  var warned = false;
+	  function deprecated() {
+	    if (!warned) {
+	      if (process.throwDeprecation) {
+	        throw new Error(msg);
+	      } else if (process.traceDeprecation) {
+	        console.trace(msg);
+	      } else {
+	        console.error(msg);
+	      }
+	      warned = true;
+	    }
+	    return fn.apply(this, arguments);
+	  }
+
+	  return deprecated;
+	};
+
+
+	var debugs = {};
+	var debugEnviron;
+	exports.debuglog = function(set) {
+	  if (isUndefined(debugEnviron))
+	    debugEnviron = process.env.NODE_DEBUG || '';
+	  set = set.toUpperCase();
+	  if (!debugs[set]) {
+	    if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
+	      var pid = process.pid;
+	      debugs[set] = function() {
+	        var msg = exports.format.apply(exports, arguments);
+	        console.error('%s %d: %s', set, pid, msg);
+	      };
+	    } else {
+	      debugs[set] = function() {};
+	    }
+	  }
+	  return debugs[set];
+	};
+
+
+	/**
+	 * Echos the value of a value. Trys to print the value out
+	 * in the best way possible given the different types.
+	 *
+	 * @param {Object} obj The object to print out.
+	 * @param {Object} opts Optional options object that alters the output.
+	 */
+	/* legacy: obj, showHidden, depth, colors*/
+	function inspect(obj, opts) {
+	  // default options
+	  var ctx = {
+	    seen: [],
+	    stylize: stylizeNoColor
+	  };
+	  // legacy...
+	  if (arguments.length >= 3) ctx.depth = arguments[2];
+	  if (arguments.length >= 4) ctx.colors = arguments[3];
+	  if (isBoolean(opts)) {
+	    // legacy...
+	    ctx.showHidden = opts;
+	  } else if (opts) {
+	    // got an "options" object
+	    exports._extend(ctx, opts);
+	  }
+	  // set default options
+	  if (isUndefined(ctx.showHidden)) ctx.showHidden = false;
+	  if (isUndefined(ctx.depth)) ctx.depth = 2;
+	  if (isUndefined(ctx.colors)) ctx.colors = false;
+	  if (isUndefined(ctx.customInspect)) ctx.customInspect = true;
+	  if (ctx.colors) ctx.stylize = stylizeWithColor;
+	  return formatValue(ctx, obj, ctx.depth);
+	}
+	exports.inspect = inspect;
+
+
+	// http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
+	inspect.colors = {
+	  'bold' : [1, 22],
+	  'italic' : [3, 23],
+	  'underline' : [4, 24],
+	  'inverse' : [7, 27],
+	  'white' : [37, 39],
+	  'grey' : [90, 39],
+	  'black' : [30, 39],
+	  'blue' : [34, 39],
+	  'cyan' : [36, 39],
+	  'green' : [32, 39],
+	  'magenta' : [35, 39],
+	  'red' : [31, 39],
+	  'yellow' : [33, 39]
+	};
+
+	// Don't use 'blue' not visible on cmd.exe
+	inspect.styles = {
+	  'special': 'cyan',
+	  'number': 'yellow',
+	  'boolean': 'yellow',
+	  'undefined': 'grey',
+	  'null': 'bold',
+	  'string': 'green',
+	  'date': 'magenta',
+	  // "name": intentionally not styling
+	  'regexp': 'red'
+	};
+
+
+	function stylizeWithColor(str, styleType) {
+	  var style = inspect.styles[styleType];
+
+	  if (style) {
+	    return '\u001b[' + inspect.colors[style][0] + 'm' + str +
+	           '\u001b[' + inspect.colors[style][1] + 'm';
+	  } else {
+	    return str;
+	  }
+	}
+
+
+	function stylizeNoColor(str, styleType) {
+	  return str;
+	}
+
+
+	function arrayToHash(array) {
+	  var hash = {};
+
+	  array.forEach(function(val, idx) {
+	    hash[val] = true;
+	  });
+
+	  return hash;
+	}
+
+
+	function formatValue(ctx, value, recurseTimes) {
+	  // Provide a hook for user-specified inspect functions.
+	  // Check that value is an object with an inspect function on it
+	  if (ctx.customInspect &&
+	      value &&
+	      isFunction(value.inspect) &&
+	      // Filter out the util module, it's inspect function is special
+	      value.inspect !== exports.inspect &&
+	      // Also filter out any prototype objects using the circular check.
+	      !(value.constructor && value.constructor.prototype === value)) {
+	    var ret = value.inspect(recurseTimes, ctx);
+	    if (!isString(ret)) {
+	      ret = formatValue(ctx, ret, recurseTimes);
+	    }
+	    return ret;
+	  }
+
+	  // Primitive types cannot have properties
+	  var primitive = formatPrimitive(ctx, value);
+	  if (primitive) {
+	    return primitive;
+	  }
+
+	  // Look up the keys of the object.
+	  var keys = Object.keys(value);
+	  var visibleKeys = arrayToHash(keys);
+
+	  if (ctx.showHidden) {
+	    keys = Object.getOwnPropertyNames(value);
+	  }
+
+	  // IE doesn't make error fields non-enumerable
+	  // http://msdn.microsoft.com/en-us/library/ie/dww52sbt(v=vs.94).aspx
+	  if (isError(value)
+	      && (keys.indexOf('message') >= 0 || keys.indexOf('description') >= 0)) {
+	    return formatError(value);
+	  }
+
+	  // Some type of object without properties can be shortcutted.
+	  if (keys.length === 0) {
+	    if (isFunction(value)) {
+	      var name = value.name ? ': ' + value.name : '';
+	      return ctx.stylize('[Function' + name + ']', 'special');
+	    }
+	    if (isRegExp(value)) {
+	      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
+	    }
+	    if (isDate(value)) {
+	      return ctx.stylize(Date.prototype.toString.call(value), 'date');
+	    }
+	    if (isError(value)) {
+	      return formatError(value);
+	    }
+	  }
+
+	  var base = '', array = false, braces = ['{', '}'];
+
+	  // Make Array say that they are Array
+	  if (isArray(value)) {
+	    array = true;
+	    braces = ['[', ']'];
+	  }
+
+	  // Make functions say that they are functions
+	  if (isFunction(value)) {
+	    var n = value.name ? ': ' + value.name : '';
+	    base = ' [Function' + n + ']';
+	  }
+
+	  // Make RegExps say that they are RegExps
+	  if (isRegExp(value)) {
+	    base = ' ' + RegExp.prototype.toString.call(value);
+	  }
+
+	  // Make dates with properties first say the date
+	  if (isDate(value)) {
+	    base = ' ' + Date.prototype.toUTCString.call(value);
+	  }
+
+	  // Make error with message first say the error
+	  if (isError(value)) {
+	    base = ' ' + formatError(value);
+	  }
+
+	  if (keys.length === 0 && (!array || value.length == 0)) {
+	    return braces[0] + base + braces[1];
+	  }
+
+	  if (recurseTimes < 0) {
+	    if (isRegExp(value)) {
+	      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
+	    } else {
+	      return ctx.stylize('[Object]', 'special');
+	    }
+	  }
+
+	  ctx.seen.push(value);
+
+	  var output;
+	  if (array) {
+	    output = formatArray(ctx, value, recurseTimes, visibleKeys, keys);
+	  } else {
+	    output = keys.map(function(key) {
+	      return formatProperty(ctx, value, recurseTimes, visibleKeys, key, array);
+	    });
+	  }
+
+	  ctx.seen.pop();
+
+	  return reduceToSingleString(output, base, braces);
+	}
+
+
+	function formatPrimitive(ctx, value) {
+	  if (isUndefined(value))
+	    return ctx.stylize('undefined', 'undefined');
+	  if (isString(value)) {
+	    var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
+	                                             .replace(/'/g, "\\'")
+	                                             .replace(/\\"/g, '"') + '\'';
+	    return ctx.stylize(simple, 'string');
+	  }
+	  if (isNumber(value))
+	    return ctx.stylize('' + value, 'number');
+	  if (isBoolean(value))
+	    return ctx.stylize('' + value, 'boolean');
+	  // For some reason typeof null is "object", so special case here.
+	  if (isNull(value))
+	    return ctx.stylize('null', 'null');
+	}
+
+
+	function formatError(value) {
+	  return '[' + Error.prototype.toString.call(value) + ']';
+	}
+
+
+	function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
+	  var output = [];
+	  for (var i = 0, l = value.length; i < l; ++i) {
+	    if (hasOwnProperty(value, String(i))) {
+	      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
+	          String(i), true));
+	    } else {
+	      output.push('');
+	    }
+	  }
+	  keys.forEach(function(key) {
+	    if (!key.match(/^\d+$/)) {
+	      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
+	          key, true));
+	    }
+	  });
+	  return output;
+	}
+
+
+	function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
+	  var name, str, desc;
+	  desc = Object.getOwnPropertyDescriptor(value, key) || { value: value[key] };
+	  if (desc.get) {
+	    if (desc.set) {
+	      str = ctx.stylize('[Getter/Setter]', 'special');
+	    } else {
+	      str = ctx.stylize('[Getter]', 'special');
+	    }
+	  } else {
+	    if (desc.set) {
+	      str = ctx.stylize('[Setter]', 'special');
+	    }
+	  }
+	  if (!hasOwnProperty(visibleKeys, key)) {
+	    name = '[' + key + ']';
+	  }
+	  if (!str) {
+	    if (ctx.seen.indexOf(desc.value) < 0) {
+	      if (isNull(recurseTimes)) {
+	        str = formatValue(ctx, desc.value, null);
+	      } else {
+	        str = formatValue(ctx, desc.value, recurseTimes - 1);
+	      }
+	      if (str.indexOf('\n') > -1) {
+	        if (array) {
+	          str = str.split('\n').map(function(line) {
+	            return '  ' + line;
+	          }).join('\n').substr(2);
+	        } else {
+	          str = '\n' + str.split('\n').map(function(line) {
+	            return '   ' + line;
+	          }).join('\n');
+	        }
+	      }
+	    } else {
+	      str = ctx.stylize('[Circular]', 'special');
+	    }
+	  }
+	  if (isUndefined(name)) {
+	    if (array && key.match(/^\d+$/)) {
+	      return str;
+	    }
+	    name = JSON.stringify('' + key);
+	    if (name.match(/^"([a-zA-Z_][a-zA-Z_0-9]*)"$/)) {
+	      name = name.substr(1, name.length - 2);
+	      name = ctx.stylize(name, 'name');
+	    } else {
+	      name = name.replace(/'/g, "\\'")
+	                 .replace(/\\"/g, '"')
+	                 .replace(/(^"|"$)/g, "'");
+	      name = ctx.stylize(name, 'string');
+	    }
+	  }
+
+	  return name + ': ' + str;
+	}
+
+
+	function reduceToSingleString(output, base, braces) {
+	  var numLinesEst = 0;
+	  var length = output.reduce(function(prev, cur) {
+	    numLinesEst++;
+	    if (cur.indexOf('\n') >= 0) numLinesEst++;
+	    return prev + cur.replace(/\u001b\[\d\d?m/g, '').length + 1;
+	  }, 0);
+
+	  if (length > 60) {
+	    return braces[0] +
+	           (base === '' ? '' : base + '\n ') +
+	           ' ' +
+	           output.join(',\n  ') +
+	           ' ' +
+	           braces[1];
+	  }
+
+	  return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
+	}
+
+
+	// NOTE: These type checking functions intentionally don't use `instanceof`
+	// because it is fragile and can be easily faked with `Object.create()`.
+	function isArray(ar) {
+	  return Array.isArray(ar);
+	}
+	exports.isArray = isArray;
+
+	function isBoolean(arg) {
+	  return typeof arg === 'boolean';
+	}
+	exports.isBoolean = isBoolean;
+
+	function isNull(arg) {
+	  return arg === null;
+	}
+	exports.isNull = isNull;
+
+	function isNullOrUndefined(arg) {
+	  return arg == null;
+	}
+	exports.isNullOrUndefined = isNullOrUndefined;
+
+	function isNumber(arg) {
+	  return typeof arg === 'number';
+	}
+	exports.isNumber = isNumber;
+
+	function isString(arg) {
+	  return typeof arg === 'string';
+	}
+	exports.isString = isString;
+
+	function isSymbol(arg) {
+	  return typeof arg === 'symbol';
+	}
+	exports.isSymbol = isSymbol;
+
+	function isUndefined(arg) {
+	  return arg === void 0;
+	}
+	exports.isUndefined = isUndefined;
+
+	function isRegExp(re) {
+	  return isObject(re) && objectToString(re) === '[object RegExp]';
+	}
+	exports.isRegExp = isRegExp;
+
+	function isObject(arg) {
+	  return typeof arg === 'object' && arg !== null;
+	}
+	exports.isObject = isObject;
+
+	function isDate(d) {
+	  return isObject(d) && objectToString(d) === '[object Date]';
+	}
+	exports.isDate = isDate;
+
+	function isError(e) {
+	  return isObject(e) &&
+	      (objectToString(e) === '[object Error]' || e instanceof Error);
+	}
+	exports.isError = isError;
+
+	function isFunction(arg) {
+	  return typeof arg === 'function';
+	}
+	exports.isFunction = isFunction;
+
+	function isPrimitive(arg) {
+	  return arg === null ||
+	         typeof arg === 'boolean' ||
+	         typeof arg === 'number' ||
+	         typeof arg === 'string' ||
+	         typeof arg === 'symbol' ||  // ES6 symbol
+	         typeof arg === 'undefined';
+	}
+	exports.isPrimitive = isPrimitive;
+
+	exports.isBuffer = __webpack_require__(273);
+
+	function objectToString(o) {
+	  return Object.prototype.toString.call(o);
+	}
+
+
+	function pad(n) {
+	  return n < 10 ? '0' + n.toString(10) : n.toString(10);
+	}
+
+
+	var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+	              'Oct', 'Nov', 'Dec'];
+
+	// 26 Feb 16:19:34
+	function timestamp() {
+	  var d = new Date();
+	  var time = [pad(d.getHours()),
+	              pad(d.getMinutes()),
+	              pad(d.getSeconds())].join(':');
+	  return [d.getDate(), months[d.getMonth()], time].join(' ');
+	}
+
+
+	// log is just a thin wrapper to console.log that prepends a timestamp
+	exports.log = function() {
+	  console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
+	};
+
+
+	/**
+	 * Inherit the prototype methods from one constructor into another.
+	 *
+	 * The Function.prototype.inherits from lang.js rewritten as a standalone
+	 * function (not on Function.prototype). NOTE: If this file is to be loaded
+	 * during bootstrapping this function needs to be rewritten using some native
+	 * functions as prototype setup using normal JavaScript does not work as
+	 * expected during bootstrapping (see mirror.js in r114903).
+	 *
+	 * @param {function} ctor Constructor function which needs to inherit the
+	 *     prototype.
+	 * @param {function} superCtor Constructor function to inherit prototype from.
+	 */
+	exports.inherits = __webpack_require__(274);
+
+	exports._extend = function(origin, add) {
+	  // Don't do anything if add isn't an object
+	  if (!add || !isObject(add)) return origin;
+
+	  var keys = Object.keys(add);
+	  var i = keys.length;
+	  while (i--) {
+	    origin[keys[i]] = add[keys[i]];
+	  }
+	  return origin;
+	};
+
+	function hasOwnProperty(obj, prop) {
+	  return Object.prototype.hasOwnProperty.call(obj, prop);
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(12)))
+
+/***/ }),
+/* 273 */
+/***/ (function(module, exports) {
+
+	module.exports = function isBuffer(arg) {
+	  return arg && typeof arg === 'object'
+	    && typeof arg.copy === 'function'
+	    && typeof arg.fill === 'function'
+	    && typeof arg.readUInt8 === 'function';
+	}
+
+/***/ }),
+/* 274 */
+/***/ (function(module, exports) {
+
+	if (typeof Object.create === 'function') {
+	  // implementation from standard node.js 'util' module
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    ctor.prototype = Object.create(superCtor.prototype, {
+	      constructor: {
+	        value: ctor,
+	        enumerable: false,
+	        writable: true,
+	        configurable: true
+	      }
+	    });
+	  };
+	} else {
+	  // old school shim for old browsers
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    var TempCtor = function () {}
+	    TempCtor.prototype = superCtor.prototype
+	    ctor.prototype = new TempCtor()
+	    ctor.prototype.constructor = ctor
+	  }
+	}
+
+
+/***/ }),
 /* 275 */,
 /* 276 */,
 /* 277 */,
@@ -29573,7 +30624,10 @@
 /* 500 */,
 /* 501 */,
 /* 502 */,
-/* 503 */
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29582,334 +30636,693 @@
 	  value: true
 	});
 
-	exports.default = function () {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	  var action = arguments[1];
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	  switch (action.type) {
-	    case _ActionTypes.SET_ADMIN_STATE:
-	      return state.set('isUserAdmin', true);
-	    case _ActionTypes.COMMENTS_CHANGED:
-	      return state.set('comments', state.get('comments').merge((0, _Immutable.fromJS)(action.changes)));
-	    case _ActionTypes.ACTION_DATA_CHANGED:
-	      {
-	        return state.set('actions', state.get('actions').merge((0, _Immutable.fromJS)(action.changes)));
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(2);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var UserSelector = function (_Component) {
+	  _inherits(UserSelector, _Component);
+
+	  function UserSelector() {
+	    _classCallCheck(this, UserSelector);
+
+	    var _this = _possibleConstructorReturn(this, (UserSelector.__proto__ || Object.getPrototypeOf(UserSelector)).call(this));
+
+	    _this.state = {
+	      list: []
+	    };
+
+	    _this.el = null;
+	    return _this;
+	  }
+
+	  _createClass(UserSelector, [{
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      if (!this.el) {
+	        return;
 	      }
-	    case _ActionTypes.SET_INITIAL_DATA:
-	      var giftCert = action.data;
-	      var defaultHeaderData = initialState.get('headerData');
-	      var defaultActions = initialState.get('actions');
 
-	      var _newHeaderData = {
-	        id: giftCert.id || 0,
-	        status: giftCert.status,
-	        creator: giftCert.lastModifiedBy || defaultHeaderData.get('lastModifiedBy'),
-	        GcType: giftCert.GcType || defaultHeaderData.get('GcType'),
-	        qrCode: giftCert.qrCode || defaultHeaderData.get('qrCode'),
-	        dtiPermitNo: giftCert.dtiPermitNo || defaultHeaderData.get('dtiPermitNo'),
-	        value: giftCert.value || defaultHeaderData.get('value'),
-	        issuanceDate: convertDateToMoment(giftCert.issuanceDate),
-	        expirationDate: convertDateToMoment(giftCert.expirationDate),
-	        modifiedDate: convertDateToMoment(giftCert.modifiedDate)
+	      this.el.select2('destroy');
+	      this.el = null;
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var el = $(_reactDom2.default.findDOMNode(this));
+	      this.el = el;
+	      el.select2({
+	        ajax: {
+	          url: 'user/findUser',
+	          type: 'post',
+	          dataType: 'json',
+	          delay: 250,
+	          data: function data(params) {
+	            return {
+	              q: params.term
+	            };
+	          },
+	          processResults: function processResults(data, params) {
+	            return {
+	              results: data.map(function (d) {
+	                return {
+	                  id: d.Id,
+	                  text: d.FullName
+	                };
+	              }),
+	              id: 'id',
+	              text: 'text',
+	              pagination: {
+	                more: false
+	              }
+	            };
+	          },
+	          cache: true
+	        },
+	        escapeMarkup: function escapeMarkup(markup) {
+	          return markup;
+	        }, // let our custom formatter work
+	        minimumInputLength: 1,
+	        templateResult: function templateResult(user) {
+	          if (user.loading) return name.text;
+	          var markup = "<div class='select2-result clearfix' id=" + user.id + ">" + user.text + "</div>";
+	          return markup;
+	        }
+	      });
+
+	      el.on('select2:select', this.props.onSelect);
+	      el.on('select2:unselect', this.props.onUnselect);
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var selections = [];
+	      var defaultVal = this.props.defaultValue;
+
+	      if (defaultVal !== undefined) {
+	        if (defaultVal.constructor === Array) {
+	          defaultVal.forEach(function (item) {
+	            selections.push(item);
+	          });
+	        } else {
+	          selections.push(defaultVal);
+	        }
+	      }
+
+	      this.setState(_extends({}, this.state, {
+	        list: selections
+	      }));
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var params = {};
+
+	      if (this.props.multiple) {
+	        params.multiple = 'multiple';
+	      }
+
+	      if (this.props.tabIndex) {
+	        params.tabIndex = this.props.tabIndex;
+	      }
+
+	      if (this.state.list.length > 0) {
+	        if (this.props.multiple) {
+	          params.defaultValue = this.state.list.map(function (item) {
+	            return item.id;
+	          });
+	        } else {
+	          params.defaultValue = this.state.list[0].id;
+	        }
+	      }
+
+	      var selections = [];
+	      this.state.list.forEach(function (item) {
+	        selections.push(_react2.default.createElement(
+	          'option',
+	          { key: item.id, value: item.id },
+	          item.fullName
+	        ));
+	      });
+
+	      return _react2.default.createElement(
+	        'select',
+	        _extends({ style: this.props.style }, params),
+	        selections
+	      );
+	    }
+	  }]);
+
+	  return UserSelector;
+	}(_react.Component);
+
+	exports.default = UserSelector;
+
+
+	UserSelector.propTypes = {
+	  defaultValue: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.array]),
+	  style: _react.PropTypes.object,
+	  multiple: _react.PropTypes.string,
+	  onSelect: _react.PropTypes.func,
+	  onUnselect: _react.PropTypes.func
+	};
+
+/***/ }),
+/* 507 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(2);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _DataUtils = __webpack_require__(122);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DateTimePicker = function (_Component) {
+	  _inherits(DateTimePicker, _Component);
+
+	  function DateTimePicker() {
+	    _classCallCheck(this, DateTimePicker);
+
+	    var _this = _possibleConstructorReturn(this, (DateTimePicker.__proto__ || Object.getPrototypeOf(DateTimePicker)).call(this));
+
+	    _this.formatDate = _this.formatDate.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(DateTimePicker, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      var dateInputOpts = {
+	        format: this.props.showTime ? _DataUtils.DATETIME_FORMAT : _DataUtils.DATE_FORMAT,
+	        showClear: this.props.notAllowClear ? false : true,
+	        showClose: true
 	      };
 
-	      return state.merge({
-	        isLoading: false,
-	        headerData: (0, _Immutable.fromJS)(_newHeaderData),
-	        actions: {}
-	      });
-	    case _ActionTypes.SUB_REQUEST_TYPE_LOADED:
-	      return state.set('subRequestTypeData', (0, _Immutable.fromJS)(action.subRequestTypes));
-	    case _ActionTypes.CHANNEL_LOADED:
-	      return state.set('channelsData', (0, _Immutable.fromJS)(action.channels));
-	    case _ActionTypes.TARGET_LABS_LOADED:
-	      {
-	        var headerData = state.get('headerData');
-	        // Based On -	CTT-45 - The target lab
-	        // Target Lab should default to ELS-EVL1,
-	        // but since we allow user to add more target lab.. we fixed to the first one
-	        return state.merge({
-	          headerData: headerData.set('targetLab', (0, _Immutable.fromJS)(action.targetLabs[0])),
-	          targetLabsData: (0, _Immutable.fromJS)(action.targetLabs)
-	        });
-	      }
-	    case _ActionTypes.CLEAR_LOTS:
-	      {
-	        var _devices = state.get('devices');
-	        for (var _idx2 = 0; _idx2 < _devices.count(); _idx2++) {
-	          _devices = _devices.setIn([_idx2, 'lots'], (0, _Immutable.fromJS)([]));
+	      $(this.refs.dateControl).datetimepicker(dateInputOpts).on('dp.change', function (e) {
+
+	        var date = e.date;
+
+	        if (date === false) {
+	          date = undefined;
 	        }
 
-	        return state.merge({
-	          devices: _devices
-	        });
-	      }
-	    case _ActionTypes.DIVISIONS_LOADED:
-	      return state.set('divisionsData', (0, _Immutable.fromJS)(action.divisions));
-	    case _ActionTypes.REQUEST_TYPE_LOADED:
-	      return state.set('requestTypeData', (0, _Immutable.fromJS)(action.requestTypes));
-	    case _ActionTypes.DEVICE_TYPE_LOADED:
-	      return state.set('deviceTypesData', (0, _Immutable.fromJS)(action.deviceTypes));
-	    case _ActionTypes.FORM_DATA_CHANGED:
-	      return state.merge(action.changes);
-	    case _ActionTypes.HEADER_DATA_CHANGES:
-	      var headerData = state.get('headerData');
-	      var _newHeaderData = headerData.merge(action.changes);
-	      return state.set('headerData', _newHeaderData);
-	    case _ActionTypes.ADD_DEVICE:
-	      {
-	        var device = action.device.set('lots', (0, _Immutable.fromJS)([]));
-
-	        var _idx = state.get('devices').findIndex(function (item) {
-	          return item.get('partNumber') === device.get('partNumber');
-	        });
-
-	        if (_idx >= 0) {
-	          return state;
-	        }
-
-	        var channel = device.get('channel');
-	        if (channel === undefined || channel === null) {
-	          device = device.set('channel', (0, _Immutable.fromJS)({}));
-	        }
-
-	        if (!state.get('headerData').get('requestType').get('isCharacteristicsMandatory') && !device.get('isReadOnly')) {
-	          var na = 'N/A';
-	          device = device.merge({
-	            channel: {
-	              id: 0,
-	              name: na
-	            },
-	            vgsMax: na,
-	            numBondWires: na,
-	            dieDimension: na,
-	            vsd: na,
-	            idssMax125: na,
-	            isReadOnly: false,
-	            idssMax25: na,
-	            rdsVceMax: na,
-	            tjMax: na,
-	            vgsThMax: na,
-	            rgMax: na,
-	            bvdss: na,
-	            rthPcbMount: na,
-	            internalRg: na,
-	            activeArea: na,
-	            igssMaxVgsMinus: na,
-	            dieThickness: na,
-	            bondWireDiameter: na,
-	            igssMaxVgsPlus: na,
-	            generation: na,
-	            rdsVceTypical: na,
-	            vgsThTypical: na,
-	            rgTypical: na,
-	            vgsThMin: na,
-	            hexSize: na,
-	            gateOxideThickness: na
-	          });
-	        }
-
-	        var newList = state.get('devices').push(device);
-
-	        return state.merge({
-	          devices: newList
-	        });
-	      }
-	    case _ActionTypes.ADD_LOT:
-	      var devices = state.get('devices');
-
-	      var _idx = devices.findIndex(function (item) {
-	        return item.get('partNumber') === action.device.get('partNumber');
+	        _this2.props.onChange(date);
 	      });
-
-	      var currentDevice = devices.get(_idx);
-	      var newLots = currentDevice.get('lots').push(action.lot);
-	      var newDevice = currentDevice.set('lots', newLots);
-
-	      return state.merge({
-	        devices: devices.set(_idx, newDevice)
-	      });
-	    case _ActionTypes.REMOVE_DEVICE:
-	      var deviceListAfterRemove = state.get('devices').filter(function (item) {
-	        return item.get('partNumber') !== action.device.get('partNumber');
-	      });
-
-	      return state.merge({
-	        devices: deviceListAfterRemove
-	      });
-	    case _ActionTypes.REMOVE_LOT:
-	      {
-	        var _devices2 = state.get('devices');
-
-	        var _idx3 = _devices2.findIndex(function (item) {
-	          return item.get('partNumber') === action.device.get('partNumber');
-	        });
-
-	        var _currentDevice = _devices2.get(_idx3);
-	        var _newLots = _currentDevice.get('lots').filter(function (item) {
-	          return item !== action.lot;
-	        });
-
-	        var _newDevice = _currentDevice.set('lots', _newLots);
-
-	        return state.merge({
-	          devices: _devices2.set(_idx3, _newDevice)
-	        });
+	    }
+	  }, {
+	    key: 'formatDate',
+	    value: function formatDate(date) {
+	      if (date) {
+	        return date.format(this.props.showTime ? _DataUtils.DATETIME_FORMAT : _DataUtils.DATE_FORMAT);
 	      }
-	    case _ActionTypes.CHARACTERISTIC_CHANGED:
-	      {
-	        var _devices3 = state.get('devices');
 
-	        var _idx4 = _devices3.findIndex(function (item) {
-	          return item.get('partNumber') === action.partNumber;
-	        });
+	      return '';
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var attrs = {};
 
-	        var _currentDevice2 = _devices3.get(_idx4);
-
-	        return state.merge({
-	          devices: _devices3.set(_idx4, _currentDevice2.merge(action.changes))
-	        });
+	      if (this.props.disabled) {
+	        attrs.disabled = 'disabled';
 	      }
-	    case _ActionTypes.TEST_SELECTION_LOADED:
-	      {
-	        // remove tests that are not in testSelections
-	        var validTests = (0, _Immutable.List)([]);
 
-	        var tests = state.get('tests');
+	      if (this.props.tabIndex) {
+	        attrs.tabIndex = this.props.tabIndex;
+	      }
 
-	        tests.forEach(function (test) {
-	          action.testSelections.forEach(function (selection) {
-	            if (test.get('testSelection').get('id') === selection.id) {
-	              validTests = validTests.push(test);
+	      return _react2.default.createElement('input', _extends({ type: 'text', className: 'form-control lmd-date-input', ref: 'dateControl',
+	        value: this.formatDate(this.props.value) }, attrs));
+	    }
+	  }]);
+
+	  return DateTimePicker;
+	}(_react.Component);
+
+	exports.default = DateTimePicker;
+
+
+	DateTimePicker.propTypes = {
+	  value: _react.PropTypes.object,
+	  onChange: _react.PropTypes.func
+	};
+
+/***/ }),
+/* 508 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function () {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case _ActionTypes.SET_ADMIN_STATE:
+	            return state.set('isUserAdmin', true);
+	        case _ActionTypes.COMMENTS_CHANGED:
+	            return state.set('comments', state.get('comments').merge((0, _Immutable.fromJS)(action.changes)));
+	        case _ActionTypes.ACTION_DATA_CHANGED:
+	            {
+	                return state.set('actions', state.get('actions').merge((0, _Immutable.fromJS)(action.changes)));
 	            }
-	          });
-	        });
+	        case _ActionTypes.SET_INITIAL_DATA:
+	            var request = action.data;
+	            debugger;
+	            var defaultHeaderData = initialState.get('headerData');
+	            var defaultActions = initialState.get('actions');
 
-	        return state.merge({
-	          tests: validTests,
-	          testSelectionData: action.testSelections
-	        });
-	      }
-	    case _ActionTypes.ADD_TEST_SELECTION:
-	      {
-	        var _tests = state.get('tests');
+	            //let watchers = []
 
-	        var conditionSelections = [];
+	            //request.watchers.forEach((watcher) => {
+	            //  watchers.push(watcher)
+	            //})
 
-	        action.test.get('conditions').forEach(function (condition) {
-	          conditionSelections.push({
-	            condition: condition
-	          });
-	        });
+	            var _newHeaderData = {
+	                id: request.id || 0,
 
-	        var test = (0, _Immutable.fromJS)({
-	          testSelection: action.test,
-	          conditionSelections: conditionSelections,
-	          uuid: _uuid2.default.v4()
-	        });
+	                giftCertNo: request.giftCertNo || defaultHeaderData.get('giftCertNo'),
+	                status: request.status,
+	                gcType: request.gcType || defaultHeaderData.get('gcType'),
+	                creator: request.creator,
+	                dtiPermitNo: request.giftCertNo || defaultHeaderData.get('dtiPermitNo'),
+	                issuanceDate: convertDateToMoment(request.issuanceDate),
+	                expirationDate: convertDateToMoment(request.expirationDate),
+	                value: request.giftCertNo || defaultHeaderData.get('value'),
+	                note: request.note || defaultHeaderData.get('note')
 
-	        if (_tests.has(test)) {
-	          return state;
-	        }
+	                //requester: request.requester,                                             
+	                //division: request.division || defaultHeaderData.get('division'),
+	                //businessLine: request.businessLine || defaultHeaderData.get('businessLine'),
+	                //productLine: request.productLine || defaultHeaderData.get('productLine'),
+	                //segment: request.segment || defaultHeaderData.get('segment'),
+	                //requestType: request.requestType || defaultHeaderData.get('requestType'),
+	                //subRequestType: request.subRequestType || defaultHeaderData.get('subRequestType'),
+	                //targetLab: request.targetLab || defaultHeaderData.get('targetLab'),
 
-	        return state.merge({
-	          tests: _tests.push(test)
-	        });
-	      }
-	    case _ActionTypes.COPY_TEST_SELECTION:
-	      {
-	        var source = action.test.toJS();
+	                //priority: request.priority || defaultHeaderData.get('priority'),
+	                //projectManager: request.projectManager || defaultHeaderData.get('projectManager'),
+	                //projectOwner: request.projectOwner || defaultHeaderData.get('projectOwner'),
+	                //requesterComments: request.requesterComments || defaultHeaderData.get('requesterComments'),
+	                //projectCode: request.projectCode || defaultHeaderData.get('projectCode'),
+	                //referenceProjectCode: request.referenceProjectCode || defaultHeaderData.get('referenceProjectCode'),
+	                //  watchers: watchers,
+	                //  requestDate: request.requestDate || defaultHeaderData.get('requestDate'),
+	            };
 
-	        var _newTest = {
-	          testSelection: source.testSelection,
-	          conditionSelections: [],
-	          numTemperatures: source.numTemperatures,
-	          temperature: source.temperature,
-	          numOfDevices: source.numOfDevices,
-	          comments: source.comments
-	        };
+	            var newDevices = request.devices || initialState.get('devices');
+	            var deviceConfidentiality = request.deviceConfidentiality || initialState.get('deviceConfidentiality');
+	            var newTests = request.testSelection || initialState.get('tests');
 
-	        source.conditionSelections.forEach(function (item) {
-	          var newConditionSelection = {
-	            condition: item.condition,
-	            value: item.value
-	          };
+	            for (var _idx2 = 0; _idx2 < newDevices.length; _idx2++) {
+	                var device = newDevices[_idx2];
 
-	          if (item.condition.stepApplicable) {
-	            newConditionSelection.stepFrom = item.stepFrom;
-	            newConditionSelection.stepTo = item.stepTo;
-	            newConditionSelection.stepping = item.stepping;
-	          }
+	                if (device.channel == null) {
+	                    device.channel = { id: 0 };
+	                }
+	            }
 
-	          _newTest.conditionSelections.push(newConditionSelection);
-	        });
+	            return state.merge({
+	                isLoading: false,
+	                headerData: (0, _Immutable.fromJS)(_newHeaderData),
+	                devices: (0, _Immutable.fromJS)(newDevices),
+	                deviceConfidentiality: (0, _Immutable.fromJS)(deviceConfidentiality),
+	                tests: (0, _Immutable.fromJS)(newTests.map(function (item) {
+	                    item.uuid = _uuid2.default.v4();
+	                    return item;
+	                })),
+	                comments: (0, _Immutable.fromJS)({
+	                    adminSupportComments: request.adminSupportComments,
+	                    reviewerComments: request.reviewerComments,
+	                    datasheetProcessorComments: request.datasheetProcessorComments
+	                }),
+	                actions: {
+	                    requestDate: convertDateToMoment(request.requestDate),
+	                    requestedBy: request.requester || defaultActions.get('requestedBy'),
+	                    partsReceivedDate: convertDateToMoment(request.partsReceivedDate),
+	                    partsReceivedBy: request.partsReceivedBy || defaultActions.get('partsReceivedBy'),
+	                    managerAcceptedDate: convertDateToMoment(request.managerAcceptedDate),
+	                    managerAcceptedBy: request.managerAcceptedBy || defaultActions.get('managerAcceptedBy'),
+	                    releasedToLabDate: convertDateToMoment(request.releasedToLabDate),
+	                    releasedToLabBy: request.releasedToLabBy || defaultActions.get('releasedToLabBy'),
+	                    rejectedToRequesterDate: convertDateToMoment(request.rejectedToRequesterDate),
+	                    rejectedToRequesterBy: request.rejectedToRequesterBy || defaultActions.get('rejectedToRequesterBy'),
+	                    dataAcceptedDate: convertDateToMoment(request.dataAcceptedDate),
+	                    dataAcceptedBy: request.dataAcceptedBy || defaultActions.get('dataAcceptedBy'),
+	                    datasheetAcceptedDate: convertDateToMoment(request.datasheetAcceptedDate),
+	                    datasheetAcceptedBy: request.datasheetAcceptedBy || defaultActions.get('datasheetAcceptedBy'),
+	                    dataSheetApprovalDate: convertDateToMoment(request.dataSheetApprovalDate),
+	                    dataSheetApprovalBy: request.dataSheetApprovalBy || defaultActions.get('dataSheetApprovalBy'),
+	                    datasheetRejectedDate: convertDateToMoment(request.datasheetRejectedDate),
+	                    datasheetRejectedBy: request.datasheetRejectedBy || defaultActions.get('datasheetRejectedBy'),
+	                    firstReviewDate: convertDateToMoment(request.firstReviewDate),
+	                    firstReviewBy: request.firstReviewBy || defaultActions.get('firstReviewBy'),
+	                    nthReviewDate: convertDateToMoment(request.nthReviewDate),
+	                    nthReviewBy: request.nthReviewBy || defaultActions.get('nthReviewBy'),
+	                    toWebDate: convertDateToMoment(request.toWebDate),
+	                    toWebBy: request.toWebBy || defaultActions.get('toWebBy'),
+	                    canceledDate: convertDateToMoment(request.canceledDate),
+	                    canceledBy: request.canceledBy || defaultActions.get('canceledBy'),
+	                    closedDate: convertDateToMoment(request.closedDate),
+	                    closedBy: request.closedBy || defaultActions.get('closedBy')
+	                }
+	            });
+	        case _ActionTypes.SUB_REQUEST_TYPE_LOADED:
+	            return state.set('subRequestTypeData', (0, _Immutable.fromJS)(action.subRequestTypes));
+	        case _ActionTypes.CHANNEL_LOADED:
+	            return state.set('channelsData', (0, _Immutable.fromJS)(action.channels));
+	        case _ActionTypes.TARGET_LABS_LOADED:
+	            {
+	                var headerData = state.get('headerData');
+	                // Based On -	CTT-45 - The target lab
+	                // Target Lab should default to ELS-EVL1,
+	                // but since we allow user to add more target lab.. we fixed to the first one
+	                return state.merge({
+	                    headerData: headerData.set('targetLab', (0, _Immutable.fromJS)(action.targetLabs[0])),
+	                    targetLabsData: (0, _Immutable.fromJS)(action.targetLabs)
+	                });
+	            }
+	        case _ActionTypes.CLEAR_LOTS:
+	            {
+	                var _devices = state.get('devices');
+	                for (var _idx3 = 0; _idx3 < _devices.count(); _idx3++) {
+	                    _devices = _devices.setIn([_idx3, 'lots'], (0, _Immutable.fromJS)([]));
+	                }
 
-	        return state.merge({
-	          tests: state.get('tests').push((0, _Immutable.fromJS)(_newTest))
-	        });
+	                return state.merge({
+	                    devices: _devices
+	                });
+	            }
+	        case _ActionTypes.DIVISIONS_LOADED:
+	            return state.set('divisionsData', (0, _Immutable.fromJS)(action.divisions));
+	        case _ActionTypes.REQUEST_TYPE_LOADED:
+	            return state.set('requestTypeData', (0, _Immutable.fromJS)(action.requestTypes));
+	        case _ActionTypes.GC_TYPE_LOADED:
+	            return state.set('gcTypesData', (0, _Immutable.fromJS)(action.gcTypes));
+	        case _ActionTypes.FORM_DATA_CHANGED:
+	            return state.merge(action.changes);
+	        case _ActionTypes.HEADER_DATA_CHANGES:
+	            var headerData = state.get('headerData');
+	            var _newHeaderData = headerData.merge(action.changes);
+	            return state.set('headerData', _newHeaderData);
+	        case _ActionTypes.ADD_DEVICE:
+	            {
+	                var _device = action.device.set('lots', (0, _Immutable.fromJS)([]));
 
-	        return state;
-	      }
-	    case _ActionTypes.REMOVE_TEST_SELECTION:
-	      {
-	        var testsAfterRemove = state.get('tests').filter(function (item) {
-	          return item.get('uuid') !== action.test.get('uuid');
-	        });
+	                var _idx = state.get('devices').findIndex(function (item) {
+	                    return item.get('partNumber') === _device.get('partNumber');
+	                });
 
-	        return state.merge({
-	          tests: testsAfterRemove
-	        });
-	      }
-	    case _ActionTypes.TEST_MODIFIED:
-	      {
-	        var payload = action.payload;
-	        var currentTest = payload.test;
+	                if (_idx >= 0) {
+	                    return state;
+	                }
 
-	        var _idx5 = state.get('tests').findIndex(function (item) {
-	          return item.get('uuid') === currentTest.get('uuid');
-	        });
+	                var channel = _device.get('channel');
+	                if (channel === undefined || channel === null) {
+	                    _device = _device.set('channel', (0, _Immutable.fromJS)({}));
+	                }
 
-	        var _test = state.get('tests').get(_idx5);
-	        var newTest = _test.merge(payload.changes);
+	                if (!state.get('headerData').get('requestType').get('isCharacteristicsMandatory') && !_device.get('isReadOnly')) {
+	                    var na = 'N/A';
+	                    _device = _device.merge({
+	                        channel: {
+	                            id: 0,
+	                            name: na
+	                        },
+	                        vgsMax: na,
+	                        numBondWires: na,
+	                        dieDimension: na,
+	                        vsd: na,
+	                        idssMax125: na,
+	                        isReadOnly: false,
+	                        idssMax25: na,
+	                        rdsVceMax: na,
+	                        tjMax: na,
+	                        vgsThMax: na,
+	                        rgMax: na,
+	                        bvdss: na,
+	                        rthPcbMount: na,
+	                        internalRg: na,
+	                        activeArea: na,
+	                        igssMaxVgsMinus: na,
+	                        dieThickness: na,
+	                        bondWireDiameter: na,
+	                        igssMaxVgsPlus: na,
+	                        generation: na,
+	                        rdsVceTypical: na,
+	                        vgsThTypical: na,
+	                        rgTypical: na,
+	                        vgsThMin: na,
+	                        hexSize: na,
+	                        gateOxideThickness: na
+	                    });
+	                }
 
-	        return state.merge({
-	          tests: state.get('tests').set(_idx5, newTest)
-	        });
-	      }
-	    case _ActionTypes.CONDITION_MODIFIED:
-	      {
-	        var _payload = action.payload;
+	                var newList = state.get('devices').push(_device);
 
-	        var testIdx = state.get('tests').findIndex(function (item) {
-	          return item.get('uuid') == _payload.test.get('uuid');
-	        });
+	                return state.merge({
+	                    devices: newList
+	                });
+	            }
+	        case _ActionTypes.ADD_LOT:
+	            var devices = state.get('devices');
 
-	        var _test2 = state.get('tests').get(testIdx);
+	            var _idx = devices.findIndex(function (item) {
+	                return item.get('partNumber') === action.device.get('partNumber');
+	            });
 
-	        var conditionIdx = _test2.get('conditionSelections').findIndex(function (item) {
-	          return item.get('condition') == _payload.condition;
-	        });
+	            var currentDevice = devices.get(_idx);
+	            var newLots = currentDevice.get('lots').push(action.lot);
+	            var newDevice = currentDevice.set('lots', newLots);
 
-	        var conditionSelection = _test2.get('conditionSelections').get(conditionIdx);
-	        var newConditionSelection = conditionSelection.merge(_payload.changes);
+	            return state.merge({
+	                devices: devices.set(_idx, newDevice)
+	            });
+	        case _ActionTypes.REMOVE_DEVICE:
+	            var deviceListAfterRemove = state.get('devices').filter(function (item) {
+	                return item.get('partNumber') !== action.device.get('partNumber');
+	            });
 
-	        var newConditionList = _test2.get('conditionSelections').set(conditionIdx, newConditionSelection);
+	            return state.merge({
+	                devices: deviceListAfterRemove
+	            });
+	        case _ActionTypes.REMOVE_LOT:
+	            {
+	                var _devices2 = state.get('devices');
 
-	        var _newTest2 = _test2.set('conditionSelections', newConditionList);
+	                var _idx4 = _devices2.findIndex(function (item) {
+	                    return item.get('partNumber') === action.device.get('partNumber');
+	                });
 
-	        return state.merge({
-	          tests: state.get('tests').set(testIdx, _newTest2)
-	        });
-	      }
-	    case _ActionTypes.CLEAR_TEST_SELECTION:
-	      {
-	        return state.merge({
-	          tests: (0, _Immutable.fromJS)([])
-	        });
-	      }
-	    default:
-	      return state;
-	  }
+	                var _currentDevice = _devices2.get(_idx4);
+	                var _newLots = _currentDevice.get('lots').filter(function (item) {
+	                    return item !== action.lot;
+	                });
+
+	                var _newDevice = _currentDevice.set('lots', _newLots);
+
+	                return state.merge({
+	                    devices: _devices2.set(_idx4, _newDevice)
+	                });
+	            }
+	        case _ActionTypes.CHARACTERISTIC_CHANGED:
+	            {
+	                var _devices3 = state.get('devices');
+
+	                var _idx5 = _devices3.findIndex(function (item) {
+	                    return item.get('partNumber') === action.partNumber;
+	                });
+
+	                var _currentDevice2 = _devices3.get(_idx5);
+
+	                return state.merge({
+	                    devices: _devices3.set(_idx5, _currentDevice2.merge(action.changes))
+	                });
+	            }
+	        case _ActionTypes.TEST_SELECTION_LOADED:
+	            {
+	                // remove tests that are not in testSelections
+	                var validTests = (0, _Immutable.List)([]);
+
+	                var tests = state.get('tests');
+
+	                tests.forEach(function (test) {
+	                    action.testSelections.forEach(function (selection) {
+	                        if (test.get('testSelection').get('id') === selection.id) {
+	                            validTests = validTests.push(test);
+	                        }
+	                    });
+	                });
+
+	                return state.merge({
+	                    tests: validTests,
+	                    testSelectionData: action.testSelections
+	                });
+	            }
+	        case _ActionTypes.ADD_TEST_SELECTION:
+	            {
+	                var _tests = state.get('tests');
+
+	                var conditionSelections = [];
+
+	                action.test.get('conditions').forEach(function (condition) {
+	                    conditionSelections.push({
+	                        condition: condition
+	                    });
+	                });
+
+	                var test = (0, _Immutable.fromJS)({
+	                    testSelection: action.test,
+	                    conditionSelections: conditionSelections,
+	                    uuid: _uuid2.default.v4()
+	                });
+
+	                if (_tests.has(test)) {
+	                    return state;
+	                }
+
+	                return state.merge({
+	                    tests: _tests.push(test)
+	                });
+	            }
+	        case _ActionTypes.COPY_TEST_SELECTION:
+	            {
+	                var source = action.test.toJS();
+
+	                var _newTest = {
+	                    testSelection: source.testSelection,
+	                    conditionSelections: [],
+	                    numTemperatures: source.numTemperatures,
+	                    temperature: source.temperature,
+	                    numOfDevices: source.numOfDevices,
+	                    comments: source.comments
+	                };
+
+	                source.conditionSelections.forEach(function (item) {
+	                    var newConditionSelection = {
+	                        condition: item.condition,
+	                        value: item.value
+	                    };
+
+	                    if (item.condition.stepApplicable) {
+	                        newConditionSelection.stepFrom = item.stepFrom;
+	                        newConditionSelection.stepTo = item.stepTo;
+	                        newConditionSelection.stepping = item.stepping;
+	                    }
+
+	                    _newTest.conditionSelections.push(newConditionSelection);
+	                });
+
+	                return state.merge({
+	                    tests: state.get('tests').push((0, _Immutable.fromJS)(_newTest))
+	                });
+
+	                return state;
+	            }
+	        case _ActionTypes.REMOVE_TEST_SELECTION:
+	            {
+	                var testsAfterRemove = state.get('tests').filter(function (item) {
+	                    return item.get('uuid') !== action.test.get('uuid');
+	                });
+
+	                return state.merge({
+	                    tests: testsAfterRemove
+	                });
+	            }
+	        case _ActionTypes.TEST_MODIFIED:
+	            {
+	                var payload = action.payload;
+	                var currentTest = payload.test;
+
+	                var _idx6 = state.get('tests').findIndex(function (item) {
+	                    return item.get('uuid') === currentTest.get('uuid');
+	                });
+
+	                var _test = state.get('tests').get(_idx6);
+	                var newTest = _test.merge(payload.changes);
+
+	                return state.merge({
+	                    tests: state.get('tests').set(_idx6, newTest)
+	                });
+	            }
+	        case _ActionTypes.CONDITION_MODIFIED:
+	            {
+	                var _payload = action.payload;
+
+	                var testIdx = state.get('tests').findIndex(function (item) {
+	                    return item.get('uuid') == _payload.test.get('uuid');
+	                });
+
+	                var _test2 = state.get('tests').get(testIdx);
+
+	                var conditionIdx = _test2.get('conditionSelections').findIndex(function (item) {
+	                    return item.get('condition') == _payload.condition;
+	                });
+
+	                var conditionSelection = _test2.get('conditionSelections').get(conditionIdx);
+	                var newConditionSelection = conditionSelection.merge(_payload.changes);
+
+	                var newConditionList = _test2.get('conditionSelections').set(conditionIdx, newConditionSelection);
+
+	                var _newTest2 = _test2.set('conditionSelections', newConditionList);
+
+	                return state.merge({
+	                    tests: state.get('tests').set(testIdx, _newTest2)
+	                });
+	            }
+	        case _ActionTypes.CLEAR_TEST_SELECTION:
+	            {
+	                return state.merge({
+	                    tests: (0, _Immutable.fromJS)([])
+	                });
+	            }
+	        default:
+	            return state;
+	    }
 	};
 
 	var _Immutable = __webpack_require__(6);
@@ -29918,44 +31331,102 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
-	var _uuid = __webpack_require__(504);
+	var _uuid = __webpack_require__(509);
 
 	var _uuid2 = _interopRequireDefault(_uuid);
 
-	var _ActionTypes = __webpack_require__(506);
+	var _ActionTypes = __webpack_require__(511);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var initialState = (0, _Immutable.fromJS)({
-	  isUserAdmin: false,
-	  isLoading: true,
-	  isSavingDraft: false,
-	  isSubmitting: false,
-	  headerData: {
-	    creator: { id: 0, name: '' },
-	    GcType: { id: 0, name: '' },
-	    qrCode: '',
-	    giftCertNo: '',
-	    dtiPermitNo: '',
-	    value: '',
-	    note: '',
-	    issuanceDate: undefined,
-	    expirationDate: undefined,
-	    modifiedDate: undefined
-	  },
-	  actions: {}
+	    isUserAdmin: false,
+	    isLoading: true,
+	    isSavingDraft: false,
+	    isSubmitting: false,
+	    headerData: {
+	        // requester: { id: 0, name: '' },
+	        creator: { id: 0, name: '' },
+	        gcType: { id: 0, name: '' },
+	        giftCertNo: '',
+	        dtiPermitNo: '',
+	        qrCode: '',
+	        issuanceDate: undefined,
+	        expirationDate: undefined,
+	        value: ''
+
+	        //division: { id: 0, name: '' },
+	        //businessLine: { id: 0, name: '' },
+	        //productLine: { id: 0, name: '' },
+	        //segment: { id: 0, name: '' },
+	        //requestType: { id: 0, name: '', limitDevices: true, closeDateType: 1  } ,
+	        //subRequestType: { id: 0, name: '' } ,
+	        //targetLab: { id: 0, name: '' },
+	        //priority: 0,
+	        //projectManager: { id: 0, name: '' },
+	        //projectOwner: { id: 0, name: '' },
+
+	        //referenceProjectCode: '',
+	        //watchers: [],
+	        //requestDate: null
+	    },
+	    divisionsData: [],
+	    requestTypeData: [],
+	    subRequestTypeData: [],
+	    targetLabsData: [],
+	    gcTypesData: [],
+	    channelsData: [],
+	    devices: [],
+	    deviceConfidentiality: '',
+	    tests: [],
+	    testSelectionData: [],
+	    comments: {
+	        adminSupportComments: '',
+	        reviewerComments: '',
+	        datasheetProcessorComments: ''
+	    },
+	    actions: {
+	        requestDate: undefined,
+	        requestedBy: { id: 0, fullName: '' },
+	        partsReceivedDate: undefined,
+	        partsReceivedBy: { id: 0, fullName: '' },
+	        managerAcceptedDate: undefined,
+	        managerAcceptedBy: { id: 0, fullName: '' },
+	        releasedToLabDate: undefined,
+	        releasedToLabBy: { id: 0, fullName: '' },
+	        rejectedToRequesterDate: undefined,
+	        rejectedToRequesterBy: { id: 0, fullName: '' },
+	        dataAcceptedDate: undefined,
+	        dataAcceptedBy: { id: 0, fullName: '' },
+	        datasheetAcceptedDate: undefined,
+	        datasheetAcceptedBy: { id: 0, fullName: '' },
+	        dataSheetApprovalDate: undefined,
+	        dataSheetApprovalBy: { id: 0, fullName: '' },
+	        datasheetRejectedDate: undefined,
+	        datasheetRejectedBy: { id: 0, fullName: '' },
+	        firstReviewDate: undefined,
+	        firstReviewBy: { id: 0, fullName: '' },
+	        nthReviewDate: undefined,
+	        nthReviewBy: { id: 0, fullName: '' },
+	        toWebDate: undefined,
+	        toWebBy: { id: 0, fullName: '' },
+	        canceledDate: undefined,
+	        canceledBy: { id: 0, fullName: '' },
+	        closedDate: undefined,
+	        closedBy: { id: 0, fullName: '' }
+	    }
 	});
 
 	function convertDateToMoment(date) {
-	  if (date != null) {
-	    return (0, _moment2.default)(date);
-	  }
+	    if (date != null) {
+	        return (0, _moment2.default)(date);
+	    }
 
-	  return undefined;
+	    return undefined;
 	}
 
 /***/ }),
-/* 504 */
+/* 509 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//     uuid.js
@@ -29966,7 +31437,7 @@
 	// Unique ID creation requires a high quality random # generator.  We feature
 	// detect to determine the best RNG source, normalizing to a function that
 	// returns 128-bits of randomness, since that's what's usually required
-	var _rng = __webpack_require__(505);
+	var _rng = __webpack_require__(510);
 
 	// Maps for number <-> hex string conversion
 	var _byteToHex = [];
@@ -30144,7 +31615,7 @@
 
 
 /***/ }),
-/* 505 */
+/* 510 */
 /***/ (function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
@@ -30183,7 +31654,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 506 */
+/* 511 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -30191,19 +31662,40 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	var DIVISIONS_LOADED = exports.DIVISIONS_LOADED = 'GiftCertForm/DIVISIONS_LOADED';
+	var REQUEST_TYPE_LOADED = exports.REQUEST_TYPE_LOADED = 'GiftCertForm/REQUEST_TYPE_LOADED';
 	var SET_INITIAL_DATA = exports.SET_INITIAL_DATA = 'GiftCertForm/SET_INITIAL_DATA';
 	var HEADER_DATA_CHANGES = exports.HEADER_DATA_CHANGES = 'GiftCertForm/HEADER_DATA_CHANGES';
+	var TARGET_LABS_LOADED = exports.TARGET_LABS_LOADED = 'GiftCertForm/TARGET_LABS_LOADED';
+	var ADD_DEVICE = exports.ADD_DEVICE = 'GiftCertForm/ADD_DEVICE';
+	var ADD_LOT = exports.ADD_LOT = 'GiftCertForm/ADD_LOT';
+	var REMOVE_DEVICE = exports.REMOVE_DEVICE = 'GiftCertForm/REMOVE_DEVICE';
+	var REMOVE_LOT = exports.REMOVE_LOT = 'GiftCertForm/REMOVE_LOT';
+	var CHARACTERISTIC_CHANGED = exports.CHARACTERISTIC_CHANGED = 'GiftCertForm/CHARACTERISTIC_CHANGED';
+	var TEST_SELECTION_LOADED = exports.TEST_SELECTION_LOADED = 'GiftCertForm/TEST_SELECTION_LOADED';
+	var ADD_TEST_SELECTION = exports.ADD_TEST_SELECTION = 'GiftCertForm/ADD_TEST_SELECTION';
+	var REMOVE_TEST_SELECTION = exports.REMOVE_TEST_SELECTION = 'GiftCertForm/REMOVE_TEST_SELECTION';
+	var TEST_MODIFIED = exports.TEST_MODIFIED = 'GiftCertForm/TEST_MODIFIED';
+	var CONDITION_MODIFIED = exports.CONDITION_MODIFIED = 'GiftCertForm/CONDITION_MODIFIED';
+	var GC_TYPE_LOADED = exports.GC_TYPE_LOADED = 'GiftCertForm/GC_TYPE_LOADED';
 	var FORM_DATA_CHANGED = exports.FORM_DATA_CHANGED = 'GiftCertForm/FORM_DATA_CHANGED';
+	var CHANNEL_LOADED = exports.CHANNEL_LOADED = 'GiftCertForm/CHANNEL_LOADED';
+	var CLEAR_TEST_SELECTION = exports.CLEAR_TEST_SELECTION = 'GiftCertForm/CLEAR_TEST_SELECTION';
+	var COPY_TEST_SELECTION = exports.COPY_TEST_SELECTION = 'GiftCertForm/COPY_TEST_SELECTION';
+	var SET_ADMIN_STATE = exports.SET_ADMIN_STATE = 'GiftCertForm/SET_ADMIN_STATE';
+	var COMMENTS_CHANGED = exports.COMMENTS_CHANGED = 'GiftCertForm/COMMENTS_CHANGED';
 	var ACTION_DATA_CHANGED = exports.ACTION_DATA_CHANGED = 'GiftCertForm/ACTION_DATA_CHANGED';
+	var SUB_REQUEST_TYPE_LOADED = exports.SUB_REQUEST_TYPE_LOADED = 'GiftCertForm/SUB_REQUEST_TYPE_LOADED';
+	var CLEAR_LOTS = exports.CLEAR_LOTS = 'GiftCertForm/CLEAR_LOTS';
 
 /***/ }),
-/* 507 */
+/* 512 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -30212,7 +31704,10 @@
 	exports.commentsChanged = commentsChanged;
 	exports.setAdminState = setAdminState;
 	exports.subRequestTypesLoaded = subRequestTypesLoaded;
+	exports.divisionsLoaded = divisionsLoaded;
+	exports.gcTypesLoaded = gcTypesLoaded;
 	exports.setInitialDataAndHandle = setInitialDataAndHandle;
+	exports.requestTypeLoaded = requestTypeLoaded;
 	exports.headerDataChanged = headerDataChanged;
 	exports.targetlabsLoaded = targetlabsLoaded;
 	exports.addDevice = addDevice;
@@ -30232,7 +31727,7 @@
 	exports.channelLoaded = channelLoaded;
 	exports.addTestRequest = addTestRequest;
 
-	var _ActionTypes = __webpack_require__(506);
+	var _ActionTypes = __webpack_require__(511);
 
 	var _reactReduxToastr = __webpack_require__(7);
 
@@ -30248,537 +31743,594 @@
 
 	var api = _interopRequireWildcard(_Api);
 
-	var _TestValidationUtils = __webpack_require__(508);
+	var _TestValidationUtils = __webpack_require__(513);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function clearLots() {
-	  return {
-	    type: _ActionTypes.CLEAR_LOTS
-	  };
+	    return {
+	        type: _ActionTypes.CLEAR_LOTS
+	    };
 	}
 
 	function commentsChanged(changes) {
-	  return {
-	    type: _ActionTypes.COMMENTS_CHANGED,
-	    changes: changes
-	  };
+	    return {
+	        type: _ActionTypes.COMMENTS_CHANGED,
+	        changes: changes
+	    };
 	}
 
 	function setAdminState() {
-	  return {
-	    type: _ActionTypes.SET_ADMIN_STATE
-	  };
+	    return {
+	        type: _ActionTypes.SET_ADMIN_STATE
+	    };
 	}
 
 	function subRequestTypesLoaded(subRequestTypes) {
-	  return {
-	    type: _ActionTypes.SUB_REQUEST_TYPE_LOADED,
-	    subRequestTypes: subRequestTypes
-	  };
+	    return {
+	        type: _ActionTypes.SUB_REQUEST_TYPE_LOADED,
+	        subRequestTypes: subRequestTypes
+	    };
+	}
+
+	function divisionsLoaded(divisions) {
+	    return {
+	        type: _ActionTypes.DIVISIONS_LOADED,
+	        divisions: divisions
+	    };
+	}
+
+	function gcTypesLoaded(gcTypes) {
+	    return {
+	        type: _ActionTypes.GC_TYPE_LOADED,
+	        gcTypes: gcTypes
+	    };
 	}
 
 	function setInitialDataAndHandle(data) {
-	  return function (dispatch) {
-	    var i = dispatch(setInitialData(data));
-	  };
+	    return function (dispatch) {
+	        var i = dispatch(setInitialData(data));
+
+	        var testSelectionReqParam = {};
+
+	        if (data.targetLab != null) {
+	            testSelectionReqParam.targetLab = data.targetLab.id;
+	        }
+
+	        if (data.deviceType != null) {
+	            testSelectionReqParam.deviceType = data.deviceType.id;
+	        }
+
+	        if (testSelectionReqParam.targetLab && testSelectionReqParam.deviceType) {
+	            api.getTestSelection(testSelectionReqParam, function (data) {
+	                dispatch(testSelectionLoaded(data));
+	            });
+	        }
+	    };
 	}
 
 	function setInitialData(data) {
-	  return {
-	    type: _ActionTypes.SET_INITIAL_DATA,
-	    data: data
-	  };
+	    return {
+	        type: _ActionTypes.SET_INITIAL_DATA,
+	        data: data
+	    };
+	}
+
+	function requestTypeLoaded(requestTypes) {
+	    return {
+	        type: _ActionTypes.REQUEST_TYPE_LOADED,
+	        requestTypes: requestTypes
+	    };
 	}
 
 	function headerDataChanged(changes) {
-	  return {
-	    type: _ActionTypes.HEADER_DATA_CHANGES,
-	    changes: changes
-	  };
+	    return {
+	        type: _ActionTypes.HEADER_DATA_CHANGES,
+	        changes: changes
+	    };
 	}
 
 	function targetlabsLoaded(targetLabs) {
-	  return {
-	    type: _ActionTypes.TARGET_LABS_LOADED,
-	    targetLabs: targetLabs
-	  };
+	    return {
+	        type: _ActionTypes.TARGET_LABS_LOADED,
+	        targetLabs: targetLabs
+	    };
 	}
 
 	function addDevice(device) {
-	  return {
-	    type: _ActionTypes.ADD_DEVICE,
-	    device: device
-	  };
+	    return {
+	        type: _ActionTypes.ADD_DEVICE,
+	        device: device
+	    };
 	}
 
 	function removeDevice(device) {
-	  return {
-	    type: _ActionTypes.REMOVE_DEVICE,
-	    device: device
-	  };
+	    return {
+	        type: _ActionTypes.REMOVE_DEVICE,
+	        device: device
+	    };
 	}
 
 	function addLot(data) {
-	  return {
-	    type: _ActionTypes.ADD_LOT,
-	    lot: data.lot,
-	    device: data.device
-	  };
+	    return {
+	        type: _ActionTypes.ADD_LOT,
+	        lot: data.lot,
+	        device: data.device
+	    };
 	}
 
 	function removeLotFromDevice(data) {
-	  return {
-	    type: _ActionTypes.REMOVE_LOT,
-	    lot: data.lot,
-	    device: data.device
-	  };
+	    return {
+	        type: _ActionTypes.REMOVE_LOT,
+	        lot: data.lot,
+	        device: data.device
+	    };
 	}
 
 	function characteristicChanged(partNumber, changes) {
-	  return {
-	    type: _ActionTypes.CHARACTERISTIC_CHANGED,
-	    partNumber: partNumber,
-	    changes: changes
-	  };
+	    return {
+	        type: _ActionTypes.CHARACTERISTIC_CHANGED,
+	        partNumber: partNumber,
+	        changes: changes
+	    };
 	}
 
 	function testSelectionLoaded(testSelections) {
-	  return {
-	    type: _ActionTypes.TEST_SELECTION_LOADED,
-	    testSelections: testSelections
-	  };
+	    return {
+	        type: _ActionTypes.TEST_SELECTION_LOADED,
+	        testSelections: testSelections
+	    };
 	}
 
 	function addTest(test) {
-	  return {
-	    type: _ActionTypes.ADD_TEST_SELECTION,
-	    test: test
-	  };
+	    return {
+	        type: _ActionTypes.ADD_TEST_SELECTION,
+	        test: test
+	    };
 	}
 
 	function clearTestSelection() {
-	  return {
-	    type: _ActionTypes.CLEAR_TEST_SELECTION
-	  };
+	    return {
+	        type: _ActionTypes.CLEAR_TEST_SELECTION
+	    };
 	}
 
 	function removeTest(test) {
-	  return {
-	    type: _ActionTypes.REMOVE_TEST_SELECTION,
-	    test: test
-	  };
+	    return {
+	        type: _ActionTypes.REMOVE_TEST_SELECTION,
+	        test: test
+	    };
 	}
 
 	function copyTest(test) {
-	  return {
-	    type: _ActionTypes.COPY_TEST_SELECTION,
-	    test: test
-	  };
+	    return {
+	        type: _ActionTypes.COPY_TEST_SELECTION,
+	        test: test
+	    };
 	}
 
 	function testModified(payload) {
-	  return {
-	    type: _ActionTypes.TEST_MODIFIED,
-	    payload: payload
-	  };
+	    return {
+	        type: _ActionTypes.TEST_MODIFIED,
+	        payload: payload
+	    };
 	}
 
 	function conditionModified(payload) {
-	  return {
-	    type: _ActionTypes.CONDITION_MODIFIED,
-	    payload: payload
-	  };
+	    return {
+	        type: _ActionTypes.CONDITION_MODIFIED,
+	        payload: payload
+	    };
 	}
 
 	function formDataChanged(changes) {
-	  return {
-	    type: _ActionTypes.FORM_DATA_CHANGED,
-	    changes: changes
-	  };
+	    return {
+	        type: _ActionTypes.FORM_DATA_CHANGED,
+	        changes: changes
+	    };
 	}
 
 	function actionDataChanged(changes) {
-	  return {
-	    type: _ActionTypes.ACTION_DATA_CHANGED,
-	    changes: changes
-	  };
+	    return {
+	        type: _ActionTypes.ACTION_DATA_CHANGED,
+	        changes: changes
+	    };
 	}
 
 	function channelLoaded(channels) {
-	  return {
-	    type: _ActionTypes.CHANNEL_LOADED,
-	    channels: channels
-	  };
+	    return {
+	        type: _ActionTypes.CHANNEL_LOADED,
+	        channels: channels
+	    };
 	}
 
 	function addTestRequest(testRequest, isSavingDraft) {
-	  var _this = this;
+	    var _this = this;
 
-	  return function (dispatch) {
-	    resetDeviceCharErrorState(dispatch, testRequest);
-	    resetHeaderDataErrorState(dispatch);
+	    return function (dispatch) {
+	        resetDeviceCharErrorState(dispatch, testRequest);
+	        resetHeaderDataErrorState(dispatch);
 
-	    if (isHeaderDataValid(dispatch, testRequest, isSavingDraft) && isDeviceCountValid(dispatch, testRequest, isSavingDraft) && isTestRequestDeviceCharacteristicValid(dispatch, testRequest, isSavingDraft) && isLotRequiredAndIncluded(dispatch, testRequest, isSavingDraft) && isTestsValid(dispatch, testRequest, isSavingDraft)) {
+	        if (isHeaderDataValid(dispatch, testRequest, isSavingDraft) && isDeviceCountValid(dispatch, testRequest, isSavingDraft) && isTestRequestDeviceCharacteristicValid(dispatch, testRequest, isSavingDraft) && isLotRequiredAndIncluded(dispatch, testRequest, isSavingDraft) && isTestsValid(dispatch, testRequest, isSavingDraft)) {
 
-	      var postData = _extends({}, testRequest.get('headerData').toJS(), {
-	        devices: testRequest.get('devices').toJS(),
-	        testSelection: testRequest.get('tests').toJS(),
-	        isDraft: isSavingDraft
-	      }, testRequest.get('comments').toJS(), testRequest.get('actions').toJS());
+	            var postData = _extends({}, testRequest.get('headerData').toJS(), {
+	                devices: testRequest.get('devices').toJS(),
+	                testSelection: testRequest.get('tests').toJS(),
+	                isDraft: isSavingDraft
+	            }, testRequest.get('comments').toJS(), testRequest.get('actions').toJS());
 
-	      var requestedCompletionDate = testRequest.get('headerData').get('requestedCompletionDate');
-	      if (requestedCompletionDate) {
-	        postData.requestedCompletionDate = requestedCompletionDate.toJSON();
-	      }
+	            var requestedCompletionDate = testRequest.get('headerData').get('requestedCompletionDate');
+	            if (requestedCompletionDate) {
+	                postData.requestedCompletionDate = requestedCompletionDate.toJSON();
+	            }
 
-	      var actions = testRequest.get('actions');
+	            var actions = testRequest.get('actions');
 
-	      var requestDate = actions.get('requestDate');
-	      if (requestDate) {
-	        postData.requestDate = requestDate.toJSON();
-	      }
+	            var requestDate = actions.get('requestDate');
+	            if (requestDate) {
+	                postData.requestDate = requestDate.toJSON();
+	            }
 
-	      var partsReceivedDate = actions.get('partsReceivedDate');
-	      if (partsReceivedDate) {
-	        postData.partsReceivedDate = partsReceivedDate.toJSON();
-	      }
+	            var partsReceivedDate = actions.get('partsReceivedDate');
+	            if (partsReceivedDate) {
+	                postData.partsReceivedDate = partsReceivedDate.toJSON();
+	            }
 
-	      var managerAcceptedDate = actions.get('managerAcceptedDate');
-	      if (managerAcceptedDate) {
-	        postData.managerAcceptedDate = managerAcceptedDate.toJSON();
-	      }
+	            var managerAcceptedDate = actions.get('managerAcceptedDate');
+	            if (managerAcceptedDate) {
+	                postData.managerAcceptedDate = managerAcceptedDate.toJSON();
+	            }
 
-	      var releasedToLabDate = actions.get('releasedToLabDate');
-	      if (releasedToLabDate) {
-	        postData.releasedToLabDate = releasedToLabDate.toJSON();
-	      }
+	            var releasedToLabDate = actions.get('releasedToLabDate');
+	            if (releasedToLabDate) {
+	                postData.releasedToLabDate = releasedToLabDate.toJSON();
+	            }
 
-	      var rejectedToRequesterDate = actions.get('rejectedToRequesterDate');
-	      if (rejectedToRequesterDate) {
-	        postData.rejectedToRequesterDate = rejectedToRequesterDate.toJSON();
-	      }
+	            var rejectedToRequesterDate = actions.get('rejectedToRequesterDate');
+	            if (rejectedToRequesterDate) {
+	                postData.rejectedToRequesterDate = rejectedToRequesterDate.toJSON();
+	            }
 
-	      var dataAcceptedDate = actions.get('dataAcceptedDate');
-	      if (dataAcceptedDate) {
-	        postData.dataAcceptedDate = dataAcceptedDate.toJSON();
-	      }
+	            var dataAcceptedDate = actions.get('dataAcceptedDate');
+	            if (dataAcceptedDate) {
+	                postData.dataAcceptedDate = dataAcceptedDate.toJSON();
+	            }
 
-	      var datasheetAcceptedDate = actions.get('datasheetAcceptedDate');
-	      if (datasheetAcceptedDate) {
-	        postData.datasheetAcceptedDate = datasheetAcceptedDate.toJSON();
-	      }
+	            var datasheetAcceptedDate = actions.get('datasheetAcceptedDate');
+	            if (datasheetAcceptedDate) {
+	                postData.datasheetAcceptedDate = datasheetAcceptedDate.toJSON();
+	            }
 
-	      var dataSheetApprovalDate = actions.get('dataSheetApprovalDate');
-	      if (dataSheetApprovalDate) {
-	        postData.dataSheetApprovalDate = dataSheetApprovalDate.toJSON();
-	      }
+	            var dataSheetApprovalDate = actions.get('dataSheetApprovalDate');
+	            if (dataSheetApprovalDate) {
+	                postData.dataSheetApprovalDate = dataSheetApprovalDate.toJSON();
+	            }
 
-	      var datasheetRejectedDate = actions.get('datasheetRejectedDate');
-	      if (datasheetRejectedDate) {
-	        postData.datasheetRejectedDate = datasheetRejectedDate.toJSON();
-	      }
+	            var datasheetRejectedDate = actions.get('datasheetRejectedDate');
+	            if (datasheetRejectedDate) {
+	                postData.datasheetRejectedDate = datasheetRejectedDate.toJSON();
+	            }
 
-	      var firstReviewDate = actions.get('firstReviewDate');
-	      if (firstReviewDate) {
-	        postData.firstReviewDate = firstReviewDate.toJSON();
-	      }
+	            var firstReviewDate = actions.get('firstReviewDate');
+	            if (firstReviewDate) {
+	                postData.firstReviewDate = firstReviewDate.toJSON();
+	            }
 
-	      var nthReviewDate = actions.get('nthReviewDate');
-	      if (nthReviewDate) {
-	        postData.nthReviewDate = nthReviewDate.toJSON();
-	      }
+	            var nthReviewDate = actions.get('nthReviewDate');
+	            if (nthReviewDate) {
+	                postData.nthReviewDate = nthReviewDate.toJSON();
+	            }
 
-	      var toWebDate = actions.get('toWebDate');
-	      if (toWebDate) {
-	        postData.toWebDate = toWebDate.toJSON();
-	      }
+	            var toWebDate = actions.get('toWebDate');
+	            if (toWebDate) {
+	                postData.toWebDate = toWebDate.toJSON();
+	            }
 
-	      var canceledDate = actions.get('canceledDate');
-	      if (canceledDate) {
-	        postData.canceledDate = canceledDate.toJSON();
-	      }
+	            var canceledDate = actions.get('canceledDate');
+	            if (canceledDate) {
+	                postData.canceledDate = canceledDate.toJSON();
+	            }
 
-	      var closedDate = actions.get('closedDate');
-	      if (closedDate) {
-	        postData.closedDate = closedDate.toJSON();
-	      }
+	            var closedDate = actions.get('closedDate');
+	            if (closedDate) {
+	                postData.closedDate = closedDate.toJSON();
+	            }
 
-	      var self = _this;
+	            var self = _this;
 
-	      dispatch(formDataChanged({
-	        isSavingDraft: isSavingDraft,
-	        isSubmitting: true
-	      }));
+	            dispatch(formDataChanged({
+	                isSavingDraft: isSavingDraft,
+	                isSubmitting: true
+	            }));
 
-	      api.addTestRequest(postData, function (data) {
+	            // Disabled according to LMD-321
+	            //if (postData.devices.length > 0) {
+	            //uiUtils.showConfirmationDialogForExportControl({
+	            //  onSuccess: (checked, callback) => {
+	            sendTestRequest(postData);
+	            //  },
+	            //  onCancel: (callback) => {
+	            //    dispatch(formDataChanged({
+	            //      isSavingDraft: false,
+	            //      isSubmitting: false
+	            //    }));
+	            //    callback();
+	            //  }
+	            //})
+	            //} else {
+	            //  sendTestRequest(postData);
+	            //}
+	        }
+	    };
+	}
+
+	function sendTestRequest(postData) {
+	    api.addTestRequest(postData, function (data) {
 	        uiUtils.redirect('MyRequests/Index');
 	        dispatch(formDataChanged({
-	          isSavingDraft: false,
-	          isSubmitting: false
+	            isSavingDraft: false,
+	            isSubmitting: false
 	        }));
-	      });
-	    }
-	  };
+	    });
 	}
 
 	function resetDeviceCharErrorState(dispatch, testRequest) {
-	  testRequest.get('devices').forEach(function (device, idx) {
-	    if (device.get('isReadOnly')) {
-	      return;
-	    }
+	    testRequest.get('devices').forEach(function (device, idx) {
+	        if (device.get('isReadOnly')) {
+	            return;
+	        }
 
-	    var changes = {
-	      hexSizeIsEmpty: false,
-	      generationIsEmpty: false,
-	      dieDimensionIsEmpty: false,
-	      dieThicknessIsEmpty: false,
-	      activeAreaIsEmpty: false,
-	      gateOxideThicknessIsEmpty: false,
-	      numBondWiresIsEmpty: false,
-	      bondWireDiameterIsEmpty: false,
-	      channelIsEmpty: false,
-	      vsdIsEmpty: false,
-	      bvdssIsEmpty: false,
-	      tjMaxIsEmpty: false,
-	      rdsVceTypicalIsEmpty: false,
-	      rdsVceMaxIsEmpty: false,
-	      vgsMaxIsEmpty: false,
-	      internalRgIsEmpty: false,
-	      idssMax25IsEmpty: false,
-	      idssMax125IsEmpty: false,
-	      igssMaxVgsPlusIsEmpty: false,
-	      igssMaxVgsMinusIsEmpty: false,
-	      rgTypicalIsEmpty: false,
-	      rgMaxIsEmpty: false,
-	      vgsThMinIsEmpty: false,
-	      vgsThTypicalIsEmpty: false,
-	      vgsThMaxIsEmpty: false,
-	      rthPcbMountIsEmpty: false
-	    };
+	        var changes = {
+	            hexSizeIsEmpty: false,
+	            generationIsEmpty: false,
+	            dieDimensionIsEmpty: false,
+	            dieThicknessIsEmpty: false,
+	            activeAreaIsEmpty: false,
+	            gateOxideThicknessIsEmpty: false,
+	            numBondWiresIsEmpty: false,
+	            bondWireDiameterIsEmpty: false,
+	            channelIsEmpty: false,
+	            vsdIsEmpty: false,
+	            bvdssIsEmpty: false,
+	            tjMaxIsEmpty: false,
+	            rdsVceTypicalIsEmpty: false,
+	            rdsVceMaxIsEmpty: false,
+	            vgsMaxIsEmpty: false,
+	            internalRgIsEmpty: false,
+	            idssMax25IsEmpty: false,
+	            idssMax125IsEmpty: false,
+	            igssMaxVgsPlusIsEmpty: false,
+	            igssMaxVgsMinusIsEmpty: false,
+	            rgTypicalIsEmpty: false,
+	            rgMaxIsEmpty: false,
+	            vgsThMinIsEmpty: false,
+	            vgsThTypicalIsEmpty: false,
+	            vgsThMaxIsEmpty: false,
+	            rthPcbMountIsEmpty: false
+	        };
 
-	    dispatch(characteristicChanged(device.get('partNumber'), changes));
-	  });
+	        dispatch(characteristicChanged(device.get('partNumber'), changes));
+	    });
 	}
 
 	function resetHeaderDataErrorState(dispatch) {
-	  var changes = {
-	    requesterIsEmpty: false,
-	    creatorIsEmpty: false,
-	    deviceTypeIsEmpty: false,
-	    divisionIsEmpty: false,
-	    businessLineIsEmpty: false,
-	    productLineIsEmpty: false,
-	    segmentIsEmpty: false,
-	    requestTypeIsEmpty: false,
-	    targetLabIsEmpty: false,
-	    projectManagerIsEmpty: false,
-	    projectOwnerIsEmpty: false,
-	    subRequestTypeIsEmpty: false
-	  };
+	    var changes = {
+	        requesterIsEmpty: false,
+	        creatorIsEmpty: false,
+	        gcTypeIsEmpty: false,
+	        divisionIsEmpty: false,
+	        businessLineIsEmpty: false,
+	        productLineIsEmpty: false,
+	        segmentIsEmpty: false,
+	        requestTypeIsEmpty: false,
+	        targetLabIsEmpty: false,
+	        projectManagerIsEmpty: false,
+	        projectOwnerIsEmpty: false,
+	        subRequestTypeIsEmpty: false
+	    };
 
-	  dispatch(headerDataChanged(changes));
+	    dispatch(headerDataChanged(changes));
 	}
 
-	function isHeaderDataValid(dispatch, giftCert, isDraft) {
-	  var headerData = testRequest.get('headerData');
+	function isHeaderDataValid(dispatch, testRequest, isDraft) {
+	    var headerData = testRequest.get('headerData');
 
-	  var changes = {
-	    requesterIsEmpty: headerData.get('requester').get('id') < 1,
-	    creatorIsEmpty: headerData.get('creator').get('id') < 1
-	  };
+	    var changes = {
+	        requesterIsEmpty: headerData.get('requester').get('id') < 1,
+	        creatorIsEmpty: headerData.get('creator').get('id') < 1
+	    };
 
-	  if (!isDraft) {
-	    changes = _extends({}, changes, {
-	      deviceTypeIsEmpty: headerData.get('deviceType').get('id') < 1,
-	      divisionIsEmpty: headerData.get('division').get('id') < 1,
-	      businessLineIsEmpty: headerData.get('businessLine').get('id') < 1,
-	      productLineIsEmpty: headerData.get('productLine').get('id') < 1,
-	      segmentIsEmpty: headerData.get('segment').get('id') < 1,
-	      requestTypeIsEmpty: headerData.get('requestType').get('id') < 1,
-	      targetLabIsEmpty: headerData.get('targetLab').get('id') < 1,
-	      projectManagerIsEmpty: headerData.get('projectManager').get('id') < 1,
-	      projectOwnerIsEmpty: headerData.get('projectOwner').get('id') < 1,
-	      subRequestTypeIsEmpty: headerData.get('requestType').get('closeDateType') === 1 && headerData.get('subRequestType').get('id') < 1
-	    });
-	  }
+	    if (!isDraft) {
+	        changes = _extends({}, changes, {
+	            gcTypeIsEmpty: headerData.get('gcType').get('id') < 1,
+	            divisionIsEmpty: headerData.get('division').get('id') < 1,
+	            businessLineIsEmpty: headerData.get('businessLine').get('id') < 1,
+	            productLineIsEmpty: headerData.get('productLine').get('id') < 1,
+	            segmentIsEmpty: headerData.get('segment').get('id') < 1,
+	            requestTypeIsEmpty: headerData.get('requestType').get('id') < 1,
+	            targetLabIsEmpty: headerData.get('targetLab').get('id') < 1,
+	            projectManagerIsEmpty: headerData.get('projectManager').get('id') < 1,
+	            projectOwnerIsEmpty: headerData.get('projectOwner').get('id') < 1,
+	            subRequestTypeIsEmpty: headerData.get('requestType').get('closeDateType') === 1 && headerData.get('subRequestType').get('id') < 1
+	        });
+	    }
 
-	  dispatch(headerDataChanged(changes));
+	    dispatch(headerDataChanged(changes));
 
-	  var isValid = !dataUtils.hasTrueValue(changes);
+	    var isValid = !dataUtils.hasTrueValue(changes);
 
-	  if (!isValid) {
-	    _reactReduxToastr.toastr.error("Please complete header data.");
-	  }
+	    if (!isValid) {
+	        _reactReduxToastr.toastr.error("Please complete header data.");
+	    }
 
-	  return isValid;
+	    return isValid;
 	}
 
 	function isDeviceCountValid(dispatch, testRequest, isDraft) {
-	  if (testRequest.get('devices').count() == 0) {
-	    // by pass validation if isDraft and has no devices
+	    if (testRequest.get('devices').count() == 0) {
+	        // by pass validation if isDraft and has no devices
+	        return true;
+	    }
+
+	    if (!testRequest.get('headerData').get('requestType').get('limitDevices')) {
+	        return true;
+	    }
+
+	    if (testRequest.get('devices').count() > 1) {
+	        // at least 1 device for non draft
+	        _reactReduxToastr.toastr.error('Only 1 device is allowed for this request type');
+	        return false;
+	    }
+
 	    return true;
-	  }
-
-	  if (!testRequest.get('headerData').get('requestType').get('limitDevices')) {
-	    return true;
-	  }
-
-	  if (testRequest.get('devices').count() > 1) {
-	    // at least 1 device for non draft
-	    _reactReduxToastr.toastr.error('Only 1 device is allowed for this request type');
-	    return false;
-	  }
-
-	  return true;
 	}
 
 	function isTestRequestDeviceCharacteristicValid(dispatch, testRequest, isDraft) {
-	  if (!isDraft && testRequest.get('devices').count() == 0) {
-	    _reactReduxToastr.toastr.error('At least one device must be added');
-	    return false;
-	  }
-
-	  var headerData = testRequest.get('headerData');
-	  var requestType = headerData.get('requestType');
-
-	  if (!headerData.get('requestType').get('isCharacteristicsMandatory')) {
-	    return true;
-	  }
-
-	  var isValid = true;
-
-	  testRequest.get('devices').forEach(function (device, idx) {
-	    if (device.get('isReadOnly')) {
-	      return;
+	    if (!isDraft && testRequest.get('devices').count() == 0) {
+	        _reactReduxToastr.toastr.error('At least one device must be added');
+	        return false;
 	    }
 
-	    var changes = {
-	      hexSizeIsEmpty: dataUtils.isEmpty(device.get('hexSize')),
-	      generationIsEmpty: dataUtils.isEmpty(device.get('generation')),
-	      dieDimensionIsEmpty: dataUtils.isEmpty(device.get('dieDimension')),
-	      dieThicknessIsEmpty: dataUtils.isEmpty(device.get('dieThickness')),
-	      activeAreaIsEmpty: dataUtils.isEmpty(device.get('activeArea')),
-	      gateOxideThicknessIsEmpty: dataUtils.isEmpty(device.get('gateOxideThickness')),
-	      numBondWiresIsEmpty: dataUtils.isEmpty(device.get('numBondWires')),
-	      bondWireDiameterIsEmpty: dataUtils.isEmpty(device.get('bondWireDiameter')),
-	      channelIsEmpty: !(device.get('channel').get('id') >= 0),
-	      vsdIsEmpty: dataUtils.isEmpty(device.get('vsd')),
-	      bvdssIsEmpty: dataUtils.isEmpty(device.get('bvdss')),
-	      tjMaxIsEmpty: dataUtils.isEmpty(device.get('tjMax')),
-	      rdsVceTypicalIsEmpty: dataUtils.isEmpty(device.get('rdsVceTypical')),
-	      rdsVceMaxIsEmpty: dataUtils.isEmpty(device.get('rdsVceMax')),
-	      vgsMaxIsEmpty: dataUtils.isEmpty(device.get('vgsMax')),
-	      internalRgIsEmpty: dataUtils.isEmpty(device.get('internalRg')),
-	      idssMax25IsEmpty: dataUtils.isEmpty(device.get('idssMax25')),
-	      idssMax125IsEmpty: dataUtils.isEmpty(device.get('idssMax125')),
-	      igssMaxVgsPlusIsEmpty: dataUtils.isEmpty(device.get('igssMaxVgsPlus')),
-	      igssMaxVgsMinusIsEmpty: dataUtils.isEmpty(device.get('igssMaxVgsMinus')),
-	      rgTypicalIsEmpty: dataUtils.isEmpty(device.get('rgTypical')),
-	      rgMaxIsEmpty: dataUtils.isEmpty(device.get('rgMax')),
-	      vgsThMinIsEmpty: dataUtils.isEmpty(device.get('vgsThMin')),
-	      vgsThTypicalIsEmpty: dataUtils.isEmpty(device.get('vgsThTypical')),
-	      vgsThMaxIsEmpty: dataUtils.isEmpty(device.get('vgsThMax')),
-	      rthPcbMountIsEmpty: dataUtils.isEmpty(device.get('rthPcbMount'))
-	    };
+	    var headerData = testRequest.get('headerData');
+	    var requestType = headerData.get('requestType');
 
-	    dispatch(characteristicChanged(device.get('partNumber'), changes));
-
-	    if (dataUtils.hasTrueValue(changes)) {
-	      _reactReduxToastr.toastr.error('Incomplete device characteristics for ' + device.get('partNumber'));
-	      isValid = false;
+	    if (!headerData.get('requestType').get('isCharacteristicsMandatory')) {
+	        return true;
 	    }
-	  });
 
-	  return isValid;
+	    var isValid = true;
+
+	    testRequest.get('devices').forEach(function (device, idx) {
+	        if (device.get('isReadOnly')) {
+	            return;
+	        }
+
+	        var changes = {
+	            hexSizeIsEmpty: dataUtils.isEmpty(device.get('hexSize')),
+	            generationIsEmpty: dataUtils.isEmpty(device.get('generation')),
+	            dieDimensionIsEmpty: dataUtils.isEmpty(device.get('dieDimension')),
+	            dieThicknessIsEmpty: dataUtils.isEmpty(device.get('dieThickness')),
+	            activeAreaIsEmpty: dataUtils.isEmpty(device.get('activeArea')),
+	            gateOxideThicknessIsEmpty: dataUtils.isEmpty(device.get('gateOxideThickness')),
+	            numBondWiresIsEmpty: dataUtils.isEmpty(device.get('numBondWires')),
+	            bondWireDiameterIsEmpty: dataUtils.isEmpty(device.get('bondWireDiameter')),
+	            channelIsEmpty: !(device.get('channel').get('id') >= 0),
+	            vsdIsEmpty: dataUtils.isEmpty(device.get('vsd')),
+	            bvdssIsEmpty: dataUtils.isEmpty(device.get('bvdss')),
+	            tjMaxIsEmpty: dataUtils.isEmpty(device.get('tjMax')),
+	            rdsVceTypicalIsEmpty: dataUtils.isEmpty(device.get('rdsVceTypical')),
+	            rdsVceMaxIsEmpty: dataUtils.isEmpty(device.get('rdsVceMax')),
+	            vgsMaxIsEmpty: dataUtils.isEmpty(device.get('vgsMax')),
+	            internalRgIsEmpty: dataUtils.isEmpty(device.get('internalRg')),
+	            idssMax25IsEmpty: dataUtils.isEmpty(device.get('idssMax25')),
+	            idssMax125IsEmpty: dataUtils.isEmpty(device.get('idssMax125')),
+	            igssMaxVgsPlusIsEmpty: dataUtils.isEmpty(device.get('igssMaxVgsPlus')),
+	            igssMaxVgsMinusIsEmpty: dataUtils.isEmpty(device.get('igssMaxVgsMinus')),
+	            rgTypicalIsEmpty: dataUtils.isEmpty(device.get('rgTypical')),
+	            rgMaxIsEmpty: dataUtils.isEmpty(device.get('rgMax')),
+	            vgsThMinIsEmpty: dataUtils.isEmpty(device.get('vgsThMin')),
+	            vgsThTypicalIsEmpty: dataUtils.isEmpty(device.get('vgsThTypical')),
+	            vgsThMaxIsEmpty: dataUtils.isEmpty(device.get('vgsThMax')),
+	            rthPcbMountIsEmpty: dataUtils.isEmpty(device.get('rthPcbMount'))
+	        };
+
+	        dispatch(characteristicChanged(device.get('partNumber'), changes));
+
+	        if (dataUtils.hasTrueValue(changes)) {
+	            _reactReduxToastr.toastr.error('Incomplete device characteristics for ' + device.get('partNumber'));
+	            isValid = false;
+	        }
+	    });
+
+	    return isValid;
 	}
 
 	function isLotRequiredAndIncluded(dispatch, testRequest, isDraft) {
-	  if (isDraft) {
-	    return true;
-	  }
-
-	  var requiresLot = testRequest.getIn(['headerData', 'requestType', 'requiresLot']);
-	  if (!requiresLot) {
-	    return true;
-	  }
-
-	  var isValid = true;
-
-	  testRequest.get('devices').forEach(function (device, idx) {
-	    var changes = {
-	      isLotEmpty: device.get('lots').count() == 0
-	    };
-
-	    dispatch(characteristicChanged(device.get('partNumber'), changes));
-
-	    if (changes.isLotEmpty) {
-	      _reactReduxToastr.toastr.error('At least one lot is required for ' + device.get('partNumber'));
-	      isValid = false;
+	    if (isDraft) {
+	        return true;
 	    }
-	  });
 
-	  return isValid;
+	    var requiresLot = testRequest.getIn(['headerData', 'requestType', 'requiresLot']);
+	    if (!requiresLot) {
+	        return true;
+	    }
+
+	    var isValid = true;
+
+	    testRequest.get('devices').forEach(function (device, idx) {
+	        var changes = {
+	            isLotEmpty: device.get('lots').count() == 0
+	        };
+
+	        dispatch(characteristicChanged(device.get('partNumber'), changes));
+
+	        if (changes.isLotEmpty) {
+	            _reactReduxToastr.toastr.error('At least one lot is required for ' + device.get('partNumber'));
+	            isValid = false;
+	        }
+	    });
+
+	    return isValid;
 	}
 
 	function isTestsValid(dispatch, testRequest, isDraft) {
-	  var tests = testRequest.get('tests');
-	  var requiresTest = testRequest.getIn(['headerData', 'requestType', 'showTests']);
+	    var tests = testRequest.get('tests');
+	    var requiresTest = testRequest.getIn(['headerData', 'requestType', 'showTests']);
 
-	  var isValid = true;
+	    var isValid = true;
 
-	  if (!isDraft && requiresTest) {
-	    if (tests == undefined || tests.size == 0) {
-	      _reactReduxToastr.toastr.error('At least one test must be selected.');
-	      isValid = false;
-	    }
-	  }
-
-	  tests.forEach(function (test) {
-	    var isSectionValid = true;
-
-	    var testChanges = (0, _TestValidationUtils.testValidationState)(test);
-
-	    var testSelection = test.get('testSelection');
-	    dispatch(testModified({
-	      test: test,
-	      testSelection: testSelection,
-	      changes: testChanges
-	    }));
-
-	    if (dataUtils.hasTrueValue(testChanges)) {
-	      isSectionValid = false;
+	    if (!isDraft && requiresTest) {
+	        if (tests == undefined || tests.size == 0) {
+	            _reactReduxToastr.toastr.error('At least one test must be selected.');
+	            isValid = false;
+	        }
 	    }
 
-	    var conditionSelections = test.get('conditionSelections');
+	    tests.forEach(function (test) {
+	        var isSectionValid = true;
 
-	    conditionSelections.forEach(function (conditionSelection) {
-	      var conditionChanges = (0, _TestValidationUtils.conditionValidationState)(conditionSelection);
+	        var testChanges = (0, _TestValidationUtils.testValidationState)(test);
 
-	      if (dataUtils.hasTrueValue(conditionChanges)) {
-	        isSectionValid = false;
-	      }
+	        var testSelection = test.get('testSelection');
+	        dispatch(testModified({
+	            test: test,
+	            testSelection: testSelection,
+	            changes: testChanges
+	        }));
 
-	      var condition = conditionSelection.get('condition');
-	      dispatch(conditionModified({
-	        test: test,
-	        testSelection: testSelection,
-	        condition: condition,
-	        changes: conditionChanges
-	      }));
+	        if (dataUtils.hasTrueValue(testChanges)) {
+	            isSectionValid = false;
+	        }
+
+	        var conditionSelections = test.get('conditionSelections');
+
+	        conditionSelections.forEach(function (conditionSelection) {
+	            var conditionChanges = (0, _TestValidationUtils.conditionValidationState)(conditionSelection);
+
+	            if (dataUtils.hasTrueValue(conditionChanges)) {
+	                isSectionValid = false;
+	            }
+
+	            var condition = conditionSelection.get('condition');
+	            dispatch(conditionModified({
+	                test: test,
+	                testSelection: testSelection,
+	                condition: condition,
+	                changes: conditionChanges
+	            }));
+	        });
+
+	        if (!isSectionValid) {
+	            _reactReduxToastr.toastr.error('Incomplete or invalid test data for ' + testSelection.get('name'));
+	            isValid = false;
+	        }
 	    });
 
-	    if (!isSectionValid) {
-	      _reactReduxToastr.toastr.error('Incomplete or invalid test data for ' + testSelection.get('name'));
-	      isValid = false;
-	    }
-	  });
-
-	  return isValid;
+	    return isValid;
 	}
 
 /***/ }),
-/* 508 */
+/* 513 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

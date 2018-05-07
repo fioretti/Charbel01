@@ -17,6 +17,7 @@ import * as actions from './Actions'
 import giftCertReducer from './Reducer'
 
 import GiftCert from './Components/GiftCert'
+import { debug } from 'util';
 
 class MyGiftCert extends React.Component {
     constructor() {
@@ -97,8 +98,7 @@ class MyGiftCert extends React.Component {
     }
 
     onSearchClicked(e) {
-        e.preventDefault();
-
+        e.preventDefault();        
         const data = this.props.myGiftCert;
 
         const postData = {
@@ -156,21 +156,13 @@ class MyGiftCert extends React.Component {
                         </div>
                     </div>
                 </form>
-
-                <div className='pull-right'>
-                    <div className='checkbox'>
-                        <label>
-                            <input type='checkbox' value={this.props.myGiftCert.get('toggleDetail')} onChange={this.onToggleDetail} /> Show Detail
-            </label>
-                    </div>
-                </div>
-
+           
                 <table className='table table-striped'>
                     <thead>
                         <tr>
                             <th>GC Number</th>
                             <th>GC Type</th>
-                            <th>Value</th>                           
+                            <th>Value</th>
                             <th>DTI Permit No</th>
                             <th>Issuance Date</th>
                             <th>Expiration Date</th>
@@ -199,7 +191,7 @@ class MyGiftCert extends React.Component {
     }
 }
 
-function mapStateToProps({ myGiftCert }) {
+function mapStateToProps({ myGiftCert }) {    
     return {
         myGiftCert: myGiftCert
     }

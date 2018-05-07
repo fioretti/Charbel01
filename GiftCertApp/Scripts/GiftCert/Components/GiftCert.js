@@ -9,6 +9,7 @@ import * as uiUtils from 'Utils/UiUtils'
 import * as actions from '../Actions'
 import * as dataUtils from 'Utils/DataUtils'
 import GcType from 'Commons/GcType'
+import { debug } from 'util';
 
 class GiftCertComponent extends React.Component {
   constructor() {
@@ -77,8 +78,7 @@ class GiftCertComponent extends React.Component {
     const item = this.props.request;
 
     let menuItems = []
-    menuItems.push(<MenuItem onClick={this.onViewClicked} key='View'>View GiftCert</MenuItem>)
-
+    menuItems.push(<MenuItem onClick={this.onViewClicked} key='View'>View GiftCert</MenuItem>)      
     const requestStatus = item.get('status');
 
     const isUserAdmin = this.props.isUserAdmin
@@ -133,8 +133,7 @@ class GiftCertComponent extends React.Component {
     const expirationDate = item.get('expirationDate')
     const expirationDateString = expirationDate != null ? dataUtils.renderToLocalDateTime(expirationDate) : '-'
 
-    const toggleDetail = this.props.toggleDetail
-
+    const toggleDetail = this.props.toggleDetail      
     return (
         <tr>
         <td>{item.get('giftCertNo')}</td>

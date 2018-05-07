@@ -5,6 +5,7 @@ import { FETCHING_LIST, FETCHING_LIST_DONE, POPULATE_REQUESTS,
 
 import {toastr} from 'react-redux-toastr'
 import * as api from 'Utils/Api'
+import { debug } from 'util';
 
 export function toggleDetail() {
   return {
@@ -59,9 +60,9 @@ export function fetchRequestsAndHandle(postData) {
   return (dispatch) => {
     dispatch(setFetchingStatus())
 
-    api.queryMyRequests(postData, (data) => {
+      api.queryGiftCerts(postData, (data) => {          
       dispatch(setFetchingDone())
-      dispatch(populateRequests(data))
+      dispatch(populateRequests(data.data))
     })
   }
 }

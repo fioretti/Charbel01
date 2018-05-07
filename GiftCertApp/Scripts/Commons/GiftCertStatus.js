@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import { statusList } from 'Utils/GiftCertStatusEnum'
+import { debug } from 'util';
 
-export default function GiftCertStatus({value}){
-  return (
+export default function GiftCertStatus({value}) {    
+    return (      
     <span>
       {
         statusList.filter((item) => {

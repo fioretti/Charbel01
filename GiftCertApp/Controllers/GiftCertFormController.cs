@@ -21,17 +21,18 @@ namespace GiftCertApp.Controllers
         }
 
         // GET: GiftCert
-        public async Task<IActionResult> Index()
+        //  public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             GiftCertDto model;
             var marcoPoloGCDBContext = _context.GiftCert.Include(g => g.GcType);
             //return View(await marcoPoloGCDBContext.ToListAsync());
 
-            var giftCert = await marcoPoloGCDBContext.ToListAsync();
+            var giftCert = marcoPoloGCDBContext.ToList();
             model = new GiftCertDto
             {
                 //Requester = user,
-                //Creator = user,
+              //  Creator = user,
                 Status = GiftCertStatus.Draft
             };
 

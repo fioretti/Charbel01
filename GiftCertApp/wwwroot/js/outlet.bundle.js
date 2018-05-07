@@ -70,15 +70,15 @@
 
 	var _reactReduxToastr2 = _interopRequireDefault(_reactReduxToastr);
 
-	var _Actions = __webpack_require__(509);
+	var _Actions = __webpack_require__(514);
 
 	var actions = _interopRequireWildcard(_Actions);
 
-	var _Reducer = __webpack_require__(511);
+	var _Reducer = __webpack_require__(516);
 
 	var _Reducer2 = _interopRequireDefault(_Reducer);
 
-	var _List = __webpack_require__(512);
+	var _List = __webpack_require__(517);
 
 	var _List2 = _interopRequireDefault(_List);
 
@@ -2368,12 +2368,12 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	exports.updateOutlet = exports.addNewOutlet = exports.updateGcType = exports.addNewGcType = exports.updateServiceType = exports.addNewServiceType = undefined;
 	exports.checkPartNumber = checkPartNumber;
 	exports.getSubRequestType = getSubRequestType;
-	exports.getDeviceType = getDeviceType;
+	exports.getGcType = getGcType;
 	exports.getChannels = getChannels;
 	exports.getPackageType = getPackageType;
 	exports.getPackageTypeGroup = getPackageTypeGroup;
@@ -2391,6 +2391,7 @@
 	exports.deactivateUser = deactivateUser;
 	exports.getTestSelection = getTestSelection;
 	exports.queryMyRequests = queryMyRequests;
+	exports.queryGiftCerts = queryGiftCerts;
 	exports.getRequestsToAccept = getRequestsToAccept;
 	exports.updateTestRequestForMultipleReview = updateTestRequestForMultipleReview;
 	exports.setPartReceived = setPartReceived;
@@ -2484,478 +2485,482 @@
 
 	// Service Type
 	var addNewServiceType = exports.addNewServiceType = function addNewServiceType(serviceType, callback) {
-	  return _axios2.default.post('/api/ServiceType', serviceType).then(callback);
+	    return _axios2.default.post('/api/ServiceType', serviceType).then(callback);
 	};
 
 	var updateServiceType = exports.updateServiceType = function updateServiceType(serviceType, callback) {
-	  return _axios2.default.put('/api/ServiceType/' + serviceType.id, serviceType).then(callback);
+	    return _axios2.default.put('/api/ServiceType/' + serviceType.id, serviceType).then(callback);
 	};
 
 	// GC Type
 	var addNewGcType = exports.addNewGcType = function addNewGcType(GcType, callback) {
-	  return _axios2.default.post('/api/GcType', GcType).then(callback);
+	    return _axios2.default.post('/api/GcType', GcType).then(callback);
 	};
 
 	var updateGcType = exports.updateGcType = function updateGcType(GcType, callback) {
-	  return _axios2.default.put('/api/GcType/' + GcType.id, GcType).then(callback);
+	    return _axios2.default.put('/api/GcType/' + GcType.id, GcType).then(callback);
 	};
 
 	// Outlet
 	var addNewOutlet = exports.addNewOutlet = function addNewOutlet(outlet, callback) {
-	  return _axios2.default.post('/api/Outlet', outlet).then(callback);
+	    return _axios2.default.post('/api/Outlet', outlet).then(callback);
 	};
 
 	var updateOutlet = exports.updateOutlet = function updateOutlet(outlet, callback) {
-	  return _axios2.default.put('/api/Outlet/' + outlet.id, outlet).then(callback);
+	    return _axios2.default.put('/api/Outlet/' + outlet.id, outlet).then(callback);
 	};
 
 	function checkPartNumber(partNumber, callback) {
-	  $.post('partNumber/check', { partNumber: partNumber }).done(callback);
+	    $.post('partNumber/check', { partNumber: partNumber }).done(callback);
 	}
 
 	function getSubRequestType(callback) {
-	  $.get('subRequestType/get').done(function (data) {
-	    callback(data);
-	  });
+	    $.get('subRequestType/get').done(function (data) {
+	        callback(data);
+	    });
 	}
 
-	function getDeviceType(callback) {
-	  $.get('deviceType/get').done(function (data) {
-	    callback(data);
-	  });
+	function getGcType(callback) {
+	    return _axios2.default.get('/api/GcType').then(callback).catch(function (error) {
+	        console.log(error);
+	    });
 	}
 
 	function getChannels(callback) {
-	  $.get('channel/get').done(function (data) {
-	    callback(data);
-	  });
+	    $.get('channel/get').done(function (data) {
+	        callback(data);
+	    });
 	}
 
 	function getPackageType(callback) {
-	  $.get('packageType/get').done(function (data) {
-	    callback(data);
-	  });
+	    $.get('packageType/get').done(function (data) {
+	        callback(data);
+	    });
 	}
 
 	function getPackageTypeGroup(callback) {
-	  $.get('packageTypeGroup/get').done(function (data) {
-	    callback(data);
-	  });
+	    $.get('packageTypeGroup/get').done(function (data) {
+	        callback(data);
+	    });
 	}
 
 	function getDivisions(callback) {
-	  $.get('divisions/get').done(callback);
+	    $.get('divisions/get').done(callback);
 	}
 
 	function getTargetLabs(callback) {
-	  $.get('targetlabs/get').done(callback);
+	    $.get('targetlabs/get').done(callback);
 	}
 
 	function getTestRequestTypes(callback) {
-	  $.get('testRequestTypes/get').done(callback);
+	    $.get('testRequestTypes/get').done(callback);
 	}
 
 	function addTestRequest(testRequest, callback) {
-	  $.post('testRequestForm/add', testRequest).done(callback);
+	    $.post('testRequestForm/add', testRequest).done(callback);
 	}
 
 	function deleteRole(id, callback) {
-	  $.post('role/delete', { id: id }).done(callback);
+	    $.post('role/delete', { id: id }).done(callback);
 	}
 
 	function addRole(role, callback) {
-	  $.post('role/add', role).done(callback);
+	    $.post('role/add', role).done(callback);
 	}
 
 	function editRole(role, callback) {
-	  $.post('role/update', role).done(callback);
+	    $.post('role/update', role).done(callback);
 	}
 
 	function searchUserAInAd(query, callback) {
-	  $.post('user/searchAd', { q: query }).done(callback);
+	    $.post('user/searchAd', { q: query }).done(callback);
 	}
 
 	function editUser(user, callback) {
-	  $.post('user/edit', user).done(callback);
+	    $.post('user/edit', user).done(callback);
 	}
 
 	function addUser(user, callback) {
-	  $.post('user/add', user).done(callback);
+	    $.post('user/add', user).done(callback);
 	}
 
 	function activateUser(id, callback) {
-	  $.post('user/activate', { id: id }).done(callback);
+	    $.post('user/activate', { id: id }).done(callback);
 	}
 
 	function deactivateUser(id, callback) {
-	  $.post('user/deactivate', { id: id }).done(callback);
+	    $.post('user/deactivate', { id: id }).done(callback);
 	}
 
 	function getTestSelection(params, callback) {
-	  $.post('testSelection/get', params).done(callback);
+	    $.post('testSelection/get', params).done(callback);
 	}
 
 	function queryMyRequests(params, callback) {
-	  $.post('myRequests/post', params).done(callback);
+	    $.post('myRequests/post', params).done(callback);
+	}
+
+	function queryGiftCerts(params, callback) {
+	    return _axios2.default.post('/api/GiftCert/PostGiftCertByFilter', params).then(callback);
 	}
 
 	function getRequestsToAccept(statusFilter, callback) {
-	  $.post('requestsToAccept/Get', { statusFilter: statusFilter }).done(callback);
+	    $.post('requestsToAccept/Get', { statusFilter: statusFilter }).done(callback);
 	}
 
 	function updateTestRequestForMultipleReview(params, callback) {
-	  $.post('requestsToAccept/MultipleDataReviews/' + params.id, { isAllowed: params.isAllowed }).done(callback);
+	    $.post('requestsToAccept/MultipleDataReviews/' + params.id, { isAllowed: params.isAllowed }).done(callback);
 	}
 
 	function setPartReceived(id, callback) {
-	  $.post('requestsToAccept/PartsReceived/' + id).done(callback);
+	    $.post('requestsToAccept/PartsReceived/' + id).done(callback);
 	}
 
 	function setManagerAccept(param, callback) {
-	  $.post('requestsToAccept/ManagerAccepted/' + param.id, { subRequestType: param.subRequestType }).done(callback);
+	    $.post('requestsToAccept/ManagerAccepted/' + param.id, { subRequestType: param.subRequestType }).done(callback);
 	}
 
 	function setReleaseToLab(id, callback) {
-	  $.post('requestsToAccept/ReleasedToLab/' + id).done(callback);
+	    $.post('requestsToAccept/ReleasedToLab/' + id).done(callback);
 	}
 
 	function rejectRequestToRequester(params, callback) {
-	  $.post('requestsToAccept/RejectedToRequester/' + params.id, { adminSupportNotes: params.reason }).done(callback);
+	    $.post('requestsToAccept/RejectedToRequester/' + params.id, { adminSupportNotes: params.reason }).done(callback);
 	}
 
 	function setPriority(params, callback) {
-	  $.post('requestsToAccept/Priority/' + params.id, { priority: params.priority }).done(callback);
+	    $.post('requestsToAccept/Priority/' + params.id, { priority: params.priority }).done(callback);
 	}
 
 	function setFastTrack(params, callback) {
-	  $.post('requestsToAccept/FastTrack/' + params.id, { fastTrack: params.fastTrack }).done(callback);
+	    $.post('requestsToAccept/FastTrack/' + params.id, { fastTrack: params.fastTrack }).done(callback);
 	}
 	function resubmitRequest(id, callback) {
-	  $.post('myRequests/ReSubmit/' + id).done(callback);
+	    $.post('myRequests/ReSubmit/' + id).done(callback);
 	}
 
 	function deleteRequest(id, callback) {
-	  $.post('myRequests/DeleteRequest/' + id).done(callback);
+	    $.post('myRequests/DeleteRequest/' + id).done(callback);
 	}
 
 	function createNewFormAndHandle(params, callback) {
-	  $.post('myRequests/CreateNew/' + params.id, { keepTests: params.keepTests }).done(callback);
+	    $.post('myRequests/CreateNew/' + params.id, { keepTests: params.keepTests }).done(callback);
 	}
 
 	function createNewFormAndHandleAllProjects(params, callback) {
-	  $.post('home/CreateNew/' + params.id, { keepTests: params.keepTests }).done(callback);
+	    $.post('home/CreateNew/' + params.id, { keepTests: params.keepTests }).done(callback);
 	}
 
 	function setStartTest(id, callback) {
-	  $.post('myTests/Start/' + id).done(callback);
+	    $.post('myTests/Start/' + id).done(callback);
 	}
 
 	function setStoptTest(params, callback) {
-	  $.post('myTests/Stop/' + params.id, { wipStation: params.note }).done(callback);
+	    $.post('myTests/Stop/' + params.id, { wipStation: params.note }).done(callback);
 	}
 
 	function setPauseTest(id, callback) {
-	  $.post('myTests/Pause/' + id).done(callback);
+	    $.post('myTests/Pause/' + id).done(callback);
 	}
 
 	function setOnHoldTest(params, callback) {
-	  $.post('myTests/OnHold/' + params.id, { techNotes: params.reason }).done(callback);
+	    $.post('myTests/OnHold/' + params.id, { techNotes: params.reason }).done(callback);
 	}
 
 	function setResumeTest(id, callback) {
-	  $.post('myTests/Resume/' + id).done(callback);
+	    $.post('myTests/Resume/' + id).done(callback);
 	}
 
 	function filterProjects(filter, callback) {
-	  $.post('Home/GetRequests', { request: filter }).done(callback);
+	    $.post('Home/GetRequests', { request: filter }).done(callback);
 	}
 
 	function prepareAllProjectsExport(filter, callback) {
-	  $.post('Home/PrepareExport', { request: filter }).done(callback);
+	    $.post('Home/PrepareExport', { request: filter }).done(callback);
 	}
 
 	function setTestPriority(data, callback) {
-	  $.post('TestAssignment/TestPriority/' + data.id, { priority: data.priority }).done(callback);
+	    $.post('TestAssignment/TestPriority/' + data.id, { priority: data.priority }).done(callback);
 	}
 
 	function setTestTechnician(data, callback) {
-	  $.post('TestAssignment/Technician/' + data.id, { technicianId: data.technician.id }).done(callback);
+	    $.post('TestAssignment/Technician/' + data.id, { technicianId: data.technician.id }).done(callback);
 	}
 
 	function setProjectToOnHold(id, callback) {
-	  $.post('Home/OnHold/' + id).done(callback);
+	    $.post('Home/OnHold/' + id).done(callback);
 	}
 
 	function setProjectToResume(id, callback) {
-	  $.post('Home/Resume/' + id).done(callback);
+	    $.post('Home/Resume/' + id).done(callback);
 	}
 
 	function setProjectToCancel(id, callback) {
-	  $.post('Home/Cancel/' + id).done(callback);
+	    $.post('Home/Cancel/' + id).done(callback);
 	}
 
 	function setProjectToClosed(id, callback) {
-	  $.post('Home/Close/' + id).done(callback);
+	    $.post('Home/Close/' + id).done(callback);
 	}
 
 	function setToWebDateFromAllProjects(id, callback) {
-	  $.post('Home/ToWeb/' + id).done(callback);
+	    $.post('Home/ToWeb/' + id).done(callback);
 	}
 
 	function rejectTestRequest(params, callback) {
-	  $.post('DatasheetProcessing/Reject/' + params.id, {
-	    comments: params.comments,
-	    testDataIds: params.testDataIds
-	  }).done(callback);
+	    $.post('DatasheetProcessing/Reject/' + params.id, {
+	        comments: params.comments,
+	        testDataIds: params.testDataIds
+	    }).done(callback);
 	}
 
 	function reviewTestRequest(params, callback) {
-	  $.post('DatasheetProcessing/ToReview/' + params.id).done(callback);
+	    $.post('DatasheetProcessing/ToReview/' + params.id).done(callback);
 	}
 
 	function setTestRequestReviewLink(params, callback) {
-	  $.post('DatasheetProcessing/SetReviewLink/' + params.id, {
-	    reviewLink: params.reviewLink
-	  }).done(callback);
+	    $.post('DatasheetProcessing/SetReviewLink/' + params.id, {
+	        reviewLink: params.reviewLink
+	    }).done(callback);
 	}
 
 	function setTestRequestToWeb(params, callback) {
-	  $.post('DatasheetProcessing/ToWeb/' + params.id).done(callback);
+	    $.post('DatasheetProcessing/ToWeb/' + params.id).done(callback);
 	}
 
 	function setTestRequestToApprove(params, callback) {
-	  $.post('DatasheetProcessing/Approve/' + params.id).done(callback);
+	    $.post('DatasheetProcessing/Approve/' + params.id).done(callback);
 	}
 
 	function setTestRequestToClosed(params, callback) {
-	  $.post('DatasheetProcessing/Close/' + params.id).done(callback);
+	    $.post('DatasheetProcessing/Close/' + params.id).done(callback);
 	}
 
 	function setProjectTestForReTest(params, callback) {
-	  $.post('ProjectTests/SetReTest/' + params.id, { isReTest: params.isReTest }).done(callback);
+	    $.post('ProjectTests/SetReTest/' + params.id, { isReTest: params.isReTest }).done(callback);
 	}
 
 	function addReTestToProjectTest(params, callback) {
-	  $.post('ProjectTests/AddReTest/' + params.id, { testRequestId: params.testRequestId }).done(callback);
+	    $.post('ProjectTests/AddReTest/' + params.id, { testRequestId: params.testRequestId }).done(callback);
 	}
 
 	function startProjectTest(id, callback) {
-	  $.post('ProjectTests/Start/' + id).done(callback);
+	    $.post('ProjectTests/Start/' + id).done(callback);
 	}
 
 	function stopProjectTest(params, callback) {
-	  $.post('ProjectTests/Stop/' + params.id, { wipStation: params.note }).done(callback);
+	    $.post('ProjectTests/Stop/' + params.id, { wipStation: params.note }).done(callback);
 	}
 
 	function pauseProjecteTest(id, callback) {
-	  $.post('ProjectTests/Pause/' + id).done(callback);
+	    $.post('ProjectTests/Pause/' + id).done(callback);
 	}
 
 	function setOnHoldProjectTest(params, callback) {
-	  $.post('ProjectTests/OnHold/' + params.id, { techNotes: params.reason }).done(callback);
+	    $.post('ProjectTests/OnHold/' + params.id, { techNotes: params.reason }).done(callback);
 	}
 
 	function setResumeProjectTest(id, callback) {
-	  $.post('ProjectTests/Resume/' + id).done(callback);
+	    $.post('ProjectTests/Resume/' + id).done(callback);
 	}
 
 	function deleteProjectTest(id, callback) {
-	  $.post('ProjectTests/Delete/' + id).done(callback);
+	    $.post('ProjectTests/Delete/' + id).done(callback);
 	}
 
 	function getWiP(param, callback) {
-	  var postData = {};
-	  postData.groupType = param.groupType;
-	  if (postData.groupType == 3) {
-	    postData.groupType = 1;
-	    postData.id = param.testGroupFilterValue.get('id');
-	  }
+	    var postData = {};
+	    postData.groupType = param.groupType;
+	    if (postData.groupType == 3) {
+	        postData.groupType = 1;
+	        postData.id = param.testGroupFilterValue.get('id');
+	    }
 
-	  if (postData.groupType == 4) {
-	    postData.groupType = 2;
-	    postData.id = param.techFilterValue.get('id');
-	  }
+	    if (postData.groupType == 4) {
+	        postData.groupType = 2;
+	        postData.id = param.techFilterValue.get('id');
+	    }
 
-	  $.post('WipProjects/Get', postData).done(callback);
+	    $.post('WipProjects/Get', postData).done(callback);
 	}
 
 	function changeTestTechnician(params, callback) {
-	  $.post('WipProjects/Technician/' + params.id, { technicianId: params.technician.id }).done(callback);
+	    $.post('WipProjects/Technician/' + params.id, { technicianId: params.technician.id }).done(callback);
 	}
 
 	function acceptDatasheet(id, callback) {
-	  $.post('DatasheetAcceptance/Accept/' + id).done(callback);
+	    $.post('DatasheetAcceptance/Accept/' + id).done(callback);
 	}
 
 	function acceptQualtiyReview(id, callback) {
-	  $.post('QualityAcceptance/Accept/' + id).done(callback);
+	    $.post('QualityAcceptance/Accept/' + id).done(callback);
 	}
 
 	function startReview(id, callback) {
-	  $.post('QualityReview/StartReview/' + id).done(callback);
+	    $.post('QualityReview/StartReview/' + id).done(callback);
 	}
 
 	function reviewOut(id, callback) {
-	  $.post('QualityReview/ReviewOut/' + id).done(callback);
+	    $.post('QualityReview/ReviewOut/' + id).done(callback);
 	}
 
 	function multipleReviewOut(params, callback) {
-	  $.post('QualityReview/MultiReviewOut/' + params.id, { testDataIds: params.testDataIds }).done(callback);
+	    $.post('QualityReview/MultiReviewOut/' + params.id, { testDataIds: params.testDataIds }).done(callback);
 	}
 
 	function rejectReview(params, callback) {
-	  $.post('QualityReview/RejectTests/' + params.id, { reviewerComments: params.reason, testDataIds: params.testDataIds }).done(callback);
+	    $.post('QualityReview/RejectTests/' + params.id, { reviewerComments: params.reason, testDataIds: params.testDataIds }).done(callback);
 	}
 
 	function saveTestCondition(condition, callback) {
-	  $.post('TestConditionAdmin/Save', { data: condition }).done(callback);
+	    $.post('TestConditionAdmin/Save', { data: condition }).done(callback);
 	}
 
 	function saveTest(test, callback) {
-	  $.post('TestAdmin/Save/', { data: test }).done(callback);
+	    $.post('TestAdmin/Save/', { data: test }).done(callback);
 	}
 
 	function setDatasheetToCancel(id, callback) {
-	  $.post('DatasheetAcceptance/Cancel/' + id).done(callback);
+	    $.post('DatasheetAcceptance/Cancel/' + id).done(callback);
 	}
 
 	function setDatasheetToOnHold(id, callback) {
-	  $.post('DatasheetAcceptance/OnHold/' + id).done(callback);
+	    $.post('DatasheetAcceptance/OnHold/' + id).done(callback);
 	}
 
 	function setDatasheetToReject(data, callback) {
-	  $.post('DatasheetAcceptance/RejectTests/' + data.id, { reviewerComments: data.reason, testDataIds: data.testDataIds }).done(callback);
+	    $.post('DatasheetAcceptance/RejectTests/' + data.id, { reviewerComments: data.reason, testDataIds: data.testDataIds }).done(callback);
 	}
 
 	function setQualityReviewToCancel(id, callback) {
-	  $.post('QualityAcceptance/Cancel/' + id).done(callback);
+	    $.post('QualityAcceptance/Cancel/' + id).done(callback);
 	}
 
 	function setQualityReviewToOnHold(id, callback) {
-	  $.post('QualityAcceptance/OnHold/' + id).done(callback);
+	    $.post('QualityAcceptance/OnHold/' + id).done(callback);
 	}
 
 	function setQualityRejectReview(data, callback) {
-	  $.post('QualityAcceptance/RejectTests/' + data.id, { reviewerComments: data.reason, testDataIds: data.testDataIds }).done(callback);
+	    $.post('QualityAcceptance/RejectTests/' + data.id, { reviewerComments: data.reason, testDataIds: data.testDataIds }).done(callback);
 	}
 
 	function updateTechnicianSchedule(data, callback) {
-	  $.post('TechSchedule/Save/', { date: data }).done(callback);
+	    $.post('TechSchedule/Save/', { date: data }).done(callback);
 	}
 
 	function updateEquipmentCapacity(data, callback) {
-	  $.post('EquipmentCapacity/Save/', { date: data }).done(callback);
+	    $.post('EquipmentCapacity/Save/', { date: data }).done(callback);
 	}
 
 	function getDataSheetProcessingList(viewType, callback) {
-	  $.get('DatasheetProcessing/GetList?viewType=' + viewType).done(callback);
+	    $.get('DatasheetProcessing/GetList?viewType=' + viewType).done(callback);
 	}
 
 	function modifySubType(subType, callback) {
-	  $.post('SubTypeTable/Save', { data: subType }).done(callback);
+	    $.post('SubTypeTable/Save', { data: subType }).done(callback);
 	}
 
 	function saveDeviceCharacteristic(device, callback) {
-	  $.post('DeviceCharacteristicAdmin/Save', { device: device }).done(callback);
+	    $.post('DeviceCharacteristicAdmin/Save', { device: device }).done(callback);
 	}
 
 	function deleteDevice(id, callback) {
-	  $.post('DeviceCharacteristicAdmin/delete/' + id).done(callback);
+	    $.post('DeviceCharacteristicAdmin/delete/' + id).done(callback);
 	}
 
 	function addNewDivision(division, callback) {
-	  $.post('DivisionAdmin/InsertDivision', { division: division }).done(callback);
+	    $.post('DivisionAdmin/InsertDivision', { division: division }).done(callback);
 	}
 
 	function addNewBusinessLine(postData, callback) {
-	  $.post('DivisionAdmin/InsertBusinessLine', {
-	    businessLine: postData.businessLine,
-	    divisionId: postData.divisionId
-	  }).done(callback);
+	    $.post('DivisionAdmin/InsertBusinessLine', {
+	        businessLine: postData.businessLine,
+	        divisionId: postData.divisionId
+	    }).done(callback);
 	}
 
 	function addNewProductLine(postData, callback) {
-	  $.post('DivisionAdmin/InsertProductLine', {
-	    productLine: postData.productLine,
-	    businessLineId: postData.businessLineId
-	  }).done(callback);
+	    $.post('DivisionAdmin/InsertProductLine', {
+	        productLine: postData.productLine,
+	        businessLineId: postData.businessLineId
+	    }).done(callback);
 	}
 
 	function addNewSegment(postData, callback) {
-	  $.post('DivisionAdmin/InsertSegment', {
-	    segment: postData.segment,
-	    productLineId: postData.productLineId
-	  }).done(callback);
+	    $.post('DivisionAdmin/InsertSegment', {
+	        segment: postData.segment,
+	        productLineId: postData.productLineId
+	    }).done(callback);
 	}
 
 	function updateDivision(division, callback) {
-	  $.post('DivisionAdmin/updateDivision', { division: division }).done(callback);
+	    $.post('DivisionAdmin/updateDivision', { division: division }).done(callback);
 	}
 
 	function updateBusinessLine(businessLine, callback) {
-	  $.post('DivisionAdmin/UpdateBusinessLine', { businessLine: businessLine }).done(callback);
+	    $.post('DivisionAdmin/UpdateBusinessLine', { businessLine: businessLine }).done(callback);
 	}
 
 	function updateProductLine(productLine, callback) {
-	  $.post('DivisionAdmin/UpdateProductLine', { productLine: productLine }).done(callback);
+	    $.post('DivisionAdmin/UpdateProductLine', { productLine: productLine }).done(callback);
 	}
 
 	function updateSegment(segment, callback) {
-	  $.post('DivisionAdmin/UpdateSegment', { segment: segment }).done(callback);
+	    $.post('DivisionAdmin/UpdateSegment', { segment: segment }).done(callback);
 	}
 
 	function addNewRequestType(requestType, callback) {
-	  $.post('RequestTypeAdmin/AddNewRequestType', { requestType: requestType }).done(callback);
+	    $.post('RequestTypeAdmin/AddNewRequestType', { requestType: requestType }).done(callback);
 	}
 
 	function addNewSubRequestType(subRequestType, callback) {
-	  $.post('RequestTypeAdmin/AddNewSubRequestType', { subRequestType: subRequestType }).done(callback);
+	    $.post('RequestTypeAdmin/AddNewSubRequestType', { subRequestType: subRequestType }).done(callback);
 	}
 
 	function updateRequestType(requestType, callback) {
-	  $.post('RequestTypeAdmin/UpdateRequestType', { requestType: requestType }).done(callback);
+	    $.post('RequestTypeAdmin/UpdateRequestType', { requestType: requestType }).done(callback);
 	}
 
 	function updateSubRequestType(subRequestType, callback) {
-	  $.post('RequestTypeAdmin/UpdateSubRequestType', { subRequestType: subRequestType }).done(callback);
+	    $.post('RequestTypeAdmin/UpdateSubRequestType', { subRequestType: subRequestType }).done(callback);
 	}
 
 	function addNewTargetLab(targetLab, callback) {
-	  $.post('TargetLabAdmin/Insert', { targetLab: targetLab }).done(callback);
+	    $.post('TargetLabAdmin/Insert', { targetLab: targetLab }).done(callback);
 	}
 
 	function updateTargetLab(targetLab, callback) {
-	  $.post('TargetLabAdmin/Update', { targetLab: targetLab }).done(callback);
+	    $.post('TargetLabAdmin/Update', { targetLab: targetLab }).done(callback);
 	}
 
 	function getMyTestInfo(id, callback) {
-	  $.get('MyTests/GetTestInfo/' + id).done(callback);
+	    $.get('MyTests/GetTestInfo/' + id).done(callback);
 	}
 
 	function copyTest(test, callback) {
-	  $.post('MyTests/copyTest', { test: test }).done(callback);
+	    $.post('MyTests/copyTest', { test: test }).done(callback);
 	}
 	function addNewChannel(channel, callback) {
-	  $.post('ChannelsAdministration/Insert', { channel: channel }).done(callback);
+	    $.post('ChannelsAdministration/Insert', { channel: channel }).done(callback);
 	}
 
 	function updateChannel(channel, callback) {
-	  $.post('ChannelsAdministration/Update', { channel: channel }).done(callback);
+	    $.post('ChannelsAdministration/Update', { channel: channel }).done(callback);
 	}
 	function addPackageTypeGroup(packageTypeGroup, callback) {
-	  $.post('PackageTypeAdmin/InsertPackageTypeGroup', { packageTypeGroup: packageTypeGroup }).done(callback);
+	    $.post('PackageTypeAdmin/InsertPackageTypeGroup', { packageTypeGroup: packageTypeGroup }).done(callback);
 	}
 
 	function updatePackageTypeGroup(packageTypeGroup, callback) {
-	  $.post('PackageTypeAdmin/UpdatePackageTypeGroup', { packageTypeGroup: packageTypeGroup }).done(callback);
+	    $.post('PackageTypeAdmin/UpdatePackageTypeGroup', { packageTypeGroup: packageTypeGroup }).done(callback);
 	}
 
 	function addPackageType(packageType, callback) {
-	  $.post('PackageTypeAdmin/InsertPackageType', { packageType: packageType }).done(callback);
+	    $.post('PackageTypeAdmin/InsertPackageType', { packageType: packageType }).done(callback);
 	}
 
 	function updatePackageType(packageType, callback) {
-	  $.post('PackageTypeAdmin/UpdatePackageType', { packageType: packageType }).done(callback);
+	    $.post('PackageTypeAdmin/UpdatePackageType', { packageType: packageType }).done(callback);
 	}
 
 /***/ }),
@@ -12694,7 +12699,12 @@
 /* 506 */,
 /* 507 */,
 /* 508 */,
-/* 509 */
+/* 509 */,
+/* 510 */,
+/* 511 */,
+/* 512 */,
+/* 513 */,
+/* 514 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12706,7 +12716,7 @@
 	exports.insertNewItemAndHandle = insertNewItemAndHandle;
 	exports.modifyItemAndHandle = modifyItemAndHandle;
 
-	var _ActionTypes = __webpack_require__(510);
+	var _ActionTypes = __webpack_require__(515);
 
 	var _Api = __webpack_require__(29);
 
@@ -12771,7 +12781,7 @@
 	}
 
 /***/ }),
-/* 510 */
+/* 515 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -12784,7 +12794,7 @@
 	var UPDATE_ITEM = exports.UPDATE_ITEM = 'Outlet/UPDATE_ITEM';
 
 /***/ }),
-/* 511 */
+/* 516 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12824,7 +12834,7 @@
 	  }
 	};
 
-	var _ActionTypes = __webpack_require__(510);
+	var _ActionTypes = __webpack_require__(515);
 
 	var _Immutable = __webpack_require__(6);
 
@@ -12833,7 +12843,7 @@
 	});
 
 /***/ }),
-/* 512 */
+/* 517 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12858,11 +12868,11 @@
 
 	var uiUtils = _interopRequireWildcard(_UiUtils);
 
-	var _Actions = __webpack_require__(509);
+	var _Actions = __webpack_require__(514);
 
 	var actions = _interopRequireWildcard(_Actions);
 
-	var _Editor = __webpack_require__(513);
+	var _Editor = __webpack_require__(518);
 
 	var _Editor2 = _interopRequireDefault(_Editor);
 
@@ -13053,7 +13063,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(List);
 
 /***/ }),
-/* 513 */
+/* 518 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
